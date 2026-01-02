@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>박진 | 시스템 기획자 포트폴리오</title>
+
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!--
+    - #MAIN
+  -->
+
+  <main>
+
+    <!--
+      - #SIDEBAR
+    -->
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="./assets/images/my-avatar.png" alt="Park Jin" width="80">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name" title="Park Jin">Park Jin</h1>
+
+          <p class="title">◆ 시스템 기획자</p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+
+              <a href="/cdn-cgi/l/email-protection#a1cbd1c0d3cac2c7c4e1c6ccc0c8cd8fc2cecc" class="contact-link"><span class="__cf_email__" data-cfemail="e18b9180938a828784a1868c80888dcf828e8c">[email&#160;protected]</span></a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+
+              <a href="tel:+821035527435" class="contact-link">(010) 3552-7435</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="calendar-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Birthday</p>
+
+              <time datetime="07-04">July 4</time>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+
+              <address>Gyeonggi-do, Suwon</address>
+            </div>
+
+          </li>
+
+        </ul>
+
+        <!-- <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="#" class="social-link">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="#" class="social-link">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="#" class="social-link">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+          </li>
+
+        </ul> -->
+
+      </div>
+
+    </aside>
+
+
+
+
+
+    <!--
+      - #main-content
+    -->
+
+    <div class="main-content">
+
+      <!--
+        - #NAVBAR
+      -->
+
+      <nav class="navbar">
+
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <button class="navbar-link  active" data-nav-link>About</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Portfolio</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>게임 분석</button>
+          </li>
+
+        </ul>
+
+      </nav>
+
+
+
+
+
+      <!--
+        - #ABOUT
+      -->
+
+      <article class="about  active" data-page="about">
+
+        <header>
+          <h2 class="h2 article-title">About me</h2>
+        </header>
+
+        <section class="about-text">
+          <h3 class="slogan">
+            시스템을 설계하고, 수치로 검증하는 기획자.
+          </h3>
+
+          <div class="role-tags-small">
+            <span class="role-tag-small">#시스템설계</span>
+            <span class="role-tag-small">#데이터기반검증</span>
+            <span class="role-tag-small">#레퍼런스분석</span>
+            <span class="role-tag-small">#수치밸런싱</span>
+            <span class="role-tag-small">#논리적설득</span>
+          </div>
+
+          <p>
+            • 데이터 기반으로 성장, 보상 등의 게임 시스템을 설계합니다.
+          </p>
+
+          <p>
+            • 레퍼런스 게임을 분석하고, 설계 의도를 문서로 정리합니다.
+          </p>
+
+          <p>
+            • 기획한 시스템을 직접 구현하고, 플레이 테스트로 검증합니다.
+          </p>
+
+          <p>
+            • 팀 프로젝트에서 기획-아트-개발 간 협업 조율 및 일정 관리를 담당했습니다.
+          </p>
+
+        </section>
+
+
+        <!--
+          - service
+        -->
+
+        <section class="service">
+
+          <h3 class="h3 service-title">What i'm doing</h3>
+
+          <ul class="service-list">
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-design.svg" alt="design icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">시스템 설계</h4>
+
+                <p class="service-item-text">
+                  성장, 경제, 보상 시스템의 구조와 흐름을 설계합니다.
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">수치 밸런싱</h4>
+
+                <p class="service-item-text">
+                  플레이 테스트를 기반으로 시스템 수치를 조정하고 기록합니다.
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <ion-icon name="library-outline" style="font-size: 40px; color: #FFBC5E;"></ion-icon>
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">레퍼런스 분석</h4>
+
+                <p class="service-item-text">
+                  게임을 분석해 설계 의도와 밸런싱 근거를 정리합니다.
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <ion-icon name="game-controller-outline" style="font-size: 40px; color: #FFBC5E;"></ion-icon>
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">프로토타입 검증</h4>
+
+                <p class="service-item-text">
+                  기획한 시스템을 직접 구현해 플레이 테스트로 검증합니다.
+                </p>
+              </div>
+
+            </li>
+
+          </ul>
+
+        </section>
+
+
+        <!--
+          - Education
+        -->
+
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
+            </div>
+
+            <h3 class="h3">Education</h3>
+          </div>
+
+          <ol class="timeline-list">
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">NCA (New Content Academy) 장기과정</h4>
+
+              <span>2024.09 — 2025.12</span>
+
+              <p class="timeline-text">
+                AI 활용 콘텐츠 인재 육성 과정 수료.<br>
+                1학기 캐주얼 러닝 게임, 2~3학기 VR 힐링 게임 프로젝트 완수. 쇼케이스 전시 참여.
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">아주대학교 문화콘텐츠학과</h4>
+
+              <span>2015.03 — 2023.02 (졸업)</span>
+
+              <p class="timeline-text">
+                문화콘텐츠 기획 전공. 게임, 영상, 스토리텔링 등 콘텐츠 제작 학습.
+              </p>
+
+            </li>
+
+          </ol>
+
+        </section>
+
+
+        <!--
+          - Project Experience
+        -->
+
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="game-controller-outline"></ion-icon>
+            </div>
+
+            <h3 class="h3">Project Experience</h3>
+          </div>
+
+          <ol class="timeline-list">
+
+            <li class="timeline-item">
+              <a href="#" class="timeline-project-link" data-project-btn data-project="roguelike">
+                <div class="timeline-thumbnail">
+                  <img src="./assets/images/project-roguelike.png" alt="로그라이트 게임" loading="lazy">
+                  <div class="timeline-thumbnail-overlay">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                </div>
+                <div class="timeline-content">
+                  <h4 class="h4 timeline-item-title">로그라이트 게임 — 시스템 기획 & 밸런싱</h4>
+                  <span class="timeline-period">2025.12 | 개인 프로젝트 | Unity | AI 활용 개발</span>
+                  <p class="timeline-text">
+                    농장으로 몰려온 언데드들에게 살아남아라! 서바이벌 로그라이트 게임.<br>
+                    <strong>[기여]</strong> 레벨업/상점/클리어 보상 3경로 성장 시스템에서 어떤 경로를 선택해도 유효하도록 밸런싱 / 특수 무기 4종 차별화 / 테스트 50건 기록<br>
+                    <strong>[성과]</strong> 보상-비용 균형 조정 (총 보상 5,490G ↔ 만렙 비용 5,457G) / 조정 근거 문서화
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="timeline-item">
+              <a href="#" class="timeline-project-link" data-project-btn data-project="maeil">
+                <div class="timeline-thumbnail">
+                  <img src="./assets/images/project-maeil.png" alt="매일 보관함" loading="lazy">
+                  <div class="timeline-thumbnail-overlay">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                </div>
+                <div class="timeline-content">
+                  <h4 class="h4 timeline-item-title">매일 보관함 — 시스템 기획 & 서브 PM</h4>
+                  <span class="timeline-period">2025.03 — 2025.08 | NCA 장기과정 2기 쇼케이스 전시 | 6인 팀 | UE5</span>
+                  <p class="timeline-text">
+                    색을 잃어버린 사진 속에서, 세상의 색을 되찾다. VR 힐링 게임.<br>
+                    <strong>[기여]</strong> VR 상호작용 시스템 5종 기획 / 기획-아트-개발 간 리소스 조율<br>
+                    <strong>[성과]</strong> 제안한 상호작용 5종 구현 완료 / 목표 플레이타임 달성 (8~9분)
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="timeline-item timeline-item-multi">
+              <div class="timeline-content">
+                <h4 class="h4 timeline-item-title">AI 활용 웹게임 — 기획-구현 싸이클 학습</h4>
+                <span class="timeline-period">2025.07 — 2025.10 | 개인 프로젝트</span>
+                <p class="timeline-text">
+                  <strong>[목표]</strong> 로그라이트 프로젝트 착수 전, AI 도구를 활용한 '기획→구현→검증' 싸이클 학습<br>
+                  <strong>[성과]</strong> 3단계 학습 완료 후, 로그라이트 프로젝트에서 6일 만에 시스템 설계부터 밸런싱까지 완수
+                </p>
+
+                <div class="timeline-multi-projects">
+                  <a href="#" class="timeline-mini-project" data-project-btn data-project="kanji">
+                    <div class="timeline-mini-thumbnail">
+                      <img src="./assets/images/project-kanji.png" alt="한자 낱말 퀴즈" loading="lazy">
+                      <div class="timeline-thumbnail-overlay">
+                        <ion-icon name="eye-outline"></ion-icon>
+                      </div>
+                    </div>
+                    <div class="timeline-mini-info">
+                      <span class="timeline-mini-title">[1/3] 한자 낱말 퀴즈</span>
+                      <span class="timeline-mini-concept">기본 게임 루프 (입력→판정→피드백)</span>
+                    </div>
+                  </a>
+
+                  <a href="#" class="timeline-mini-project" data-project-btn data-project="apple">
+                    <div class="timeline-mini-thumbnail">
+                      <img src="./assets/images/project-apple.png" alt="사과 수확 게임" loading="lazy">
+                      <div class="timeline-thumbnail-overlay">
+                        <ion-icon name="eye-outline"></ion-icon>
+                      </div>
+                    </div>
+                    <div class="timeline-mini-info">
+                      <span class="timeline-mini-title">[2/3] 사과 수확 게임</span>
+                      <span class="timeline-mini-concept">실시간 요소 + 자원 밸런싱</span>
+                    </div>
+                  </a>
+
+                  <a href="#" class="timeline-mini-project" data-project-btn data-project="puzzle">
+                    <div class="timeline-mini-thumbnail">
+                      <img src="./assets/images/project-puzzle.png" alt="슬라이드 퍼즐 게임" loading="lazy">
+                      <div class="timeline-thumbnail-overlay">
+                        <ion-icon name="eye-outline"></ion-icon>
+                      </div>
+                    </div>
+                    <div class="timeline-mini-info">
+                      <span class="timeline-mini-title">[3/3] 슬라이드 퍼즐 게임</span>
+                      <span class="timeline-mini-concept">문제 해결 프로세스 (역생성 알고리즘)</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </li>
+
+            <li class="timeline-item">
+              <a href="#" class="timeline-project-link" data-project-btn data-project="babysanta">
+                <div class="timeline-thumbnail">
+                  <img src="./assets/images/project-babysanta.png" alt="Baby Santa Run" loading="lazy">
+                  <div class="timeline-thumbnail-overlay">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                </div>
+                <div class="timeline-content">
+                  <h4 class="h4 timeline-item-title">Baby Santa Run — 게임 기획 & 개발</h4>
+                  <span class="timeline-period">2024.11 — 2024.12 | NCA 장기과정 1학기 | 4인 팀 | UE5</span>
+                  <p class="timeline-text">
+                    흩어진 선물을 모아 크리스마스를 지켜라! 크리스마스 테마 캐주얼 러닝 게임.<br>
+                    <strong>[기여]</strong> 점수/아이템 시스템 기획 / 난이도 흐름 설계<br>
+                    <strong>[성과]</strong> 첫 팀 프로젝트 완수 / 기획-개발 협업 경험
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="timeline-item">
+              <a href="#" class="timeline-project-link" data-project-btn data-project="novel">
+                <div class="timeline-thumbnail">
+                  <img src="./assets/images/project-novel.png" alt="웹소설 연재" loading="lazy">
+                  <div class="timeline-thumbnail-overlay">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                </div>
+                <div class="timeline-content">
+                  <h4 class="h4 timeline-item-title">웹소설 연재 (완결) — 에피소드 기획 및 집필</h4>
+                  <span class="timeline-period">2024.10 — 2025.03 | 노벨피아</span>
+                  <p class="timeline-text">
+                    <strong>[기여]</strong> 장편 소설 126화 기획 및 집필<br>
+                    <strong>[성과]</strong> 완결까지 연재 완주 / 장기 연재 경험
+                  </p>
+                </div>
+              </a>
+            </li>
+
+          </ol>
+
+        </section>
+
+
+        <!--
+          - Tools
+        -->
+
+        <section class="tools">
+
+          <h3 class="h3 tools-title">사용 툴</h3>
+
+          <ul class="tools-list">
+
+            <li class="tools-item">
+              <img src="./assets/images/tool-word.svg" alt="Microsoft Word">
+              <span class="tools-item-name">Word</span>
+            </li>
+
+            <li class="tools-item">
+              <img src="./assets/images/tool-excel.svg" alt="Microsoft Excel">
+              <span class="tools-item-name">Excel</span>
+            </li>
+
+            <li class="tools-item">
+              <img src="./assets/images/tool-powerpoint.svg" alt="Microsoft PowerPoint">
+              <span class="tools-item-name">PowerPoint</span>
+            </li>
+
+            <li class="tools-item">
+              <img src="./assets/images/cursor-ai-code-icon.png" alt="Cursor AI">
+              <span class="tools-item-name">Cursor</span>
+            </li>
+
+            <li class="tools-item">
+              <img src="./assets/images/icons8-클로드-아이-100.png" alt="Claude Code">
+              <span class="tools-item-name">Claude Code</span>
+            </li>
+
+            <li class="tools-item">
+              <img src="./assets/images/HD Unreal Engine Logo.png" alt="Unreal Engine 5" class="invert-icon">
+              <span class="tools-item-name">UE5</span>
+            </li>
+
+            <li class="tools-item">
+              <img src="./assets/images/UnityIcon.png" alt="Unity">
+              <span class="tools-item-name">Unity</span>
+            </li>
+
+          </ul>
+
+        </section>
+
+
+        <!--
+          - Skills (Tool Proficiency)
+        -->
+
+        <section class="skill">
+
+          <h3 class="h3 skills-title">툴 숙련도</h3>
+
+          <ul class="skills-list content-card">
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Microsoft Word</h5>
+                <span class="skill-level level-mid">중</span>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Microsoft Excel</h5>
+                <span class="skill-level level-high">상</span>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Microsoft PowerPoint</h5>
+                <span class="skill-level level-mid">중</span>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Cursor</h5>
+                <span class="skill-level level-mid">중</span>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Claude Code</h5>
+                <span class="skill-level level-high">상</span>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Unreal Engine 5</h5>
+                <span class="skill-level level-mid">중</span>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Unity</h5>
+                <span class="skill-level level-mid">중</span>
+              </div>
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #PORTFOLIO
+      -->
+
+      <article class="portfolio" data-page="portfolio">
+
+        <header>
+          <h2 class="h2 article-title">Portfolio</h2>
+        </header>
+
+        <section class="projects">
+
+          <ul class="filter-list">
+
+            <li class="filter-item">
+              <button class="active" data-filter-btn>All</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Unity+AI</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Unreal Engine</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>AI Prototyping</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Scenario</button>
+            </li>
+
+          </ul>
+
+          <div class="filter-select-box">
+
+            <button class="filter-select" data-select>
+
+              <div class="select-value" data-select-value>Select category</div>
+
+              <div class="select-icon">
+                <ion-icon name="chevron-down"></ion-icon>
+              </div>
+
+            </button>
+
+            <ul class="select-list">
+
+              <li class="select-item">
+                <button data-select-item>All</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Unity+AI</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Unreal Engine</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>AI Prototyping</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Scenario</button>
+              </li>
+
+            </ul>
+
+          </div>
+
+          <ul class="project-list">
+
+            <li class="project-item active" data-filter-item data-category="unity+ai">
+              <a href="#" data-project-btn data-project="roguelike">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-roguelike.png" alt="Undead Survivor: Farmer's Fury" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Undead Survivor: Farmer's Fury</h3>
+
+                <p class="project-category">Unity+AI | 로그라이트 시스템 밸런싱</p>
+
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="unreal engine">
+              <a href="#" data-project-btn data-project="babysanta">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-babysanta.png" alt="Baby Santa Run" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Baby Santa Run</h3>
+
+                <p class="project-category">Unreal Engine 5 | 캐주얼 러닝</p>
+
+              </a>
+            </li>
+
+            <!-- 매일 보관함 -->
+            <li class="project-item active" data-filter-item data-category="unreal engine">
+              <a href="#" data-project-btn data-project="maeil">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-maeil.png" alt="매일 보관함" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">매일 보관함</h3>
+
+                <p class="project-category">Unreal Engine 5 | VR 힐링</p>
+
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="ai prototyping">
+              <a href="#" data-project-btn data-project="kanji">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-kanji.png" alt="한자 낱말 퀴즈" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">한자 낱말 퀴즈</h3>
+
+                <p class="project-category">AI Prototyping | Claude Code</p>
+
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="ai prototyping">
+              <a href="#" data-project-btn data-project="apple">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-apple.png" alt="사과 수확 게임" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">사과 수확 게임</h3>
+
+                <p class="project-category">AI Prototyping | Claude Code</p>
+
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="ai prototyping">
+              <a href="#" data-project-btn data-project="puzzle">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-puzzle.png" alt="슬라이드 퍼즐 게임" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">슬라이드 퍼즐 게임</h3>
+
+                <p class="project-category">AI Prototyping | Claude Code</p>
+
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="scenario">
+              <a href="#" data-project-btn data-project="novel">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-novel.png" alt="웹소설 연재" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">웹소설 연재(완결)</h3>
+
+                <p class="project-category">Scenario | 노벨피아</p>
+
+              </a>
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+      <!--
+        - #PROJECT MODAL
+      -->
+
+      <div class="project-modal" data-project-modal>
+        <div class="modal-overlay" data-modal-overlay></div>
+        <div class="modal-content">
+          <button class="modal-close-btn" data-modal-close>
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+
+          <div class="modal-body" data-modal-body>
+            <!-- Modal content will be dynamically inserted here -->
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <!--
+        - #ANALYSIS
+      -->
+
+      <article class="analysis" data-page="게임 분석">
+
+        <header>
+          <h2 class="h2 article-title">게임 분석</h2>
+        </header>
+
+
+        <!-- 영상 확보 후 주석 해제 예정
+        <section class="devlog">
+
+          <h3 class="h3 devlog-title">AI 시스템</h3>
+
+          <ul class="devlog-list">
+
+            <li class="devlog-item">
+              <button class="devlog-header" data-devlog-toggle>
+                <div class="devlog-header-left">
+                  <div class="devlog-icon-box">
+                    <ion-icon name="hardware-chip-outline"></ion-icon>
+                  </div>
+                  <div class="devlog-header-info">
+                    <h4 class="devlog-item-title">AI 시스템 구현</h4>
+                    <p class="devlog-subtitle">Behavior Tree 기반 적 AI 설계</p>
+                  </div>
+                </div>
+                <div class="devlog-toggle-icon">
+                  <ion-icon name="chevron-down-outline"></ion-icon>
+                </div>
+              </button>
+              <div class="devlog-content">
+                <div class="devlog-content-inner">
+
+                  <a href="#" target="_blank" class="devlog-notion-link">
+                    <ion-icon name="document-text-outline"></ion-icon>
+                    <span>전체 개발일지 보기 (Notion)</span>
+                  </a>
+
+                  <p class="devlog-text">
+                    적 AI의 상태머신(State Machine)을 Behavior Tree로 구현했습니다.
+                    Patrol, Chase, Strafe, Attack 네 가지 상태를 순환하며, 플레이어 감지 시 자연스럽게 전환됩니다.
+                  </p>
+
+                  <ul class="devlog-feature-list">
+                    <li class="devlog-feature-item">
+                      <button class="devlog-feature-header" data-feature-toggle>
+                        <div class="devlog-feature-info">
+                          <span class="devlog-feature-title">순찰 기능 (Patrol)</span>
+                          <span class="devlog-feature-desc">Spline 경로를 따라 이동하는 AI 구현</span>
+                        </div>
+                        <ion-icon name="play-circle-outline" class="devlog-feature-icon"></ion-icon>
+                      </button>
+                      <div class="devlog-feature-video" data-youtube="YOUR_VIDEO_ID_HERE">
+                      </div>
+                    </li>
+                    <li class="devlog-feature-item">
+                      <button class="devlog-feature-header" data-feature-toggle>
+                        <div class="devlog-feature-info">
+                          <span class="devlog-feature-title">추적 기능 (Chase)</span>
+                          <span class="devlog-feature-desc">AI Perception을 활용한 플레이어 감지 및 추적</span>
+                        </div>
+                        <ion-icon name="play-circle-outline" class="devlog-feature-icon"></ion-icon>
+                      </button>
+                      <div class="devlog-feature-video" data-youtube="YOUR_VIDEO_ID_HERE">
+                      </div>
+                    </li>
+                    <li class="devlog-feature-item">
+                      <button class="devlog-feature-header" data-feature-toggle>
+                        <div class="devlog-feature-info">
+                          <span class="devlog-feature-title">측면 이동 (Strafe)</span>
+                          <span class="devlog-feature-desc">플레이어를 주시하며 좌우로 이동하는 전투 준비 동작</span>
+                        </div>
+                        <ion-icon name="play-circle-outline" class="devlog-feature-icon"></ion-icon>
+                      </button>
+                      <div class="devlog-feature-video" data-youtube="YOUR_VIDEO_ID_HERE">
+                      </div>
+                    </li>
+                    <li class="devlog-feature-item">
+                      <button class="devlog-feature-header" data-feature-toggle>
+                        <div class="devlog-feature-info">
+                          <span class="devlog-feature-title">공격 기능 (Attack)</span>
+                          <span class="devlog-feature-desc">거리 기반 공격 판정 및 애니메이션 연동</span>
+                        </div>
+                        <ion-icon name="play-circle-outline" class="devlog-feature-icon"></ion-icon>
+                      </button>
+                      <div class="devlog-feature-video" data-youtube="YOUR_VIDEO_ID_HERE">
+                      </div>
+                    </li>
+                  </ul>
+
+                  <div class="devlog-tags">
+                    <span class="devlog-tag">Blueprint</span>
+                    <span class="devlog-tag">Behavior Tree</span>
+                    <span class="devlog-tag">AI Perception</span>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+
+        </section>
+        -->
+
+
+        <section class="game-analysis">
+
+          <h3 class="h3 game-analysis-title">역기획서</h3>
+
+          <ul class="game-analysis-list">
+
+            <li class="game-analysis-item">
+              <a href="./assets/docs/스텔라블레이드_역기획서_박진.pdf" target="_blank">
+                <div class="game-analysis-content">
+                  <h4 class="game-analysis-name">Stellar Blade</h4>
+                  <p class="game-analysis-desc">방어 액션 시스템 분석</p>
+                  <span class="game-analysis-tag">시스템 분석</span>
+                </div>
+                <div class="game-analysis-icon">
+                  <ion-icon name="document-text-outline"></ion-icon>
+                </div>
+              </a>
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+    </div>
+
+  </main>
+
+
+
+
+
+
+  <!--
+    - custom js link
+  -->
+  <script src="./assets/js/script.js"></script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
