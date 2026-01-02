@@ -191,6 +191,9 @@ const projectData = {
         what: "보스 등장 시 전용 BGM 재생, 레이저 공격 패턴 회피 요구, 페이즈 전환 시 공격 속도 증가로 긴장감 극대화"
       }
     ],
+    videos: [
+      { title: "플레이 영상", url: "https://youtu.be/EjU2IHN1v2o" }
+    ],
     externalLinks: [
       {
         title: "밸런싱 기록 (Notion)",
