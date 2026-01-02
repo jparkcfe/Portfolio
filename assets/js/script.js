@@ -2,6 +2,32 @@
 
 
 
+// Theme Toggle
+const themeToggleBtn = document.querySelector("[data-theme-toggle]");
+const htmlElement = document.documentElement;
+
+// Check for saved theme preference or default to dark
+const savedTheme = localStorage.getItem("theme") || "dark";
+if (savedTheme === "light") {
+  htmlElement.setAttribute("data-theme", "light");
+}
+
+// Toggle theme on button click
+themeToggleBtn.addEventListener("click", function() {
+  const currentTheme = htmlElement.getAttribute("data-theme");
+  const newTheme = currentTheme === "light" ? "dark" : "light";
+
+  if (newTheme === "light") {
+    htmlElement.setAttribute("data-theme", "light");
+  } else {
+    htmlElement.removeAttribute("data-theme");
+  }
+
+  localStorage.setItem("theme", newTheme);
+});
+
+
+
 // element toggle function
 const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
 

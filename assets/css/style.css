@@ -112,6 +112,100 @@
 }
 
 
+/*-----------------------------------*\
+  #LIGHT MODE
+\*-----------------------------------*/
+
+[data-theme="light"] {
+  --bg-gradient-onyx: linear-gradient(
+    to bottom right,
+    hsl(0, 0%, 90%) 3%,
+    hsl(0, 0%, 85%) 97%
+  );
+  --bg-gradient-jet: linear-gradient(
+    to bottom right,
+    hsla(0, 0%, 95%, 0.9) 0%,
+    hsla(0, 0%, 90%, 0.8) 100%
+  ), hsl(0, 0%, 95%);
+  --bg-gradient-yellow-2: linear-gradient(
+    135deg,
+    hsla(45, 100%, 71%, 0.251) 0%,
+    hsla(35, 100%, 68%, 0) 59.86%
+  ), hsl(0, 0%, 95%);
+  --border-gradient-onyx: linear-gradient(
+    to bottom right,
+    hsl(0, 0%, 75%) 0%,
+    hsla(0, 0%, 75%, 0) 50%
+  );
+
+  --jet: hsl(0, 0%, 85%);
+  --onyx: hsl(0, 0%, 90%);
+  --eerie-black-1: hsl(0, 0%, 95%);
+  --eerie-black-2: hsl(0, 0%, 98%);
+  --smoky-black: hsl(0, 0%, 96%);
+  --white-1: hsl(0, 0%, 15%);
+  --white-2: hsl(0, 0%, 25%);
+  --light-gray: hsl(0, 0%, 35%);
+  --light-gray-70: hsla(0, 0%, 35%, 0.7);
+  --orange-yellow-crayola: hsl(45, 100%, 45%);
+  --vegas-gold: hsl(45, 70%, 40%);
+
+  --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.08);
+  --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.08);
+  --shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.08);
+  --shadow-4: 0 25px 50px hsla(0, 0%, 0%, 0.05);
+  --shadow-5: 0 24px 80px hsla(0, 0%, 0%, 0.08);
+}
+
+
+/*-----------------------------------*\
+  #THEME TOGGLE BUTTON
+\*-----------------------------------*/
+
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--border-gradient-onyx);
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  color: var(--orange-yellow-crayola);
+  font-size: 20px;
+  cursor: pointer;
+  transition: var(--transition-1);
+  position: relative;
+  z-index: 1;
+}
+
+.theme-toggle-btn::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: var(--eerie-black-1);
+  border-radius: inherit;
+  z-index: -1;
+  transition: var(--transition-1);
+}
+
+.theme-toggle-btn:hover {
+  background: var(--bg-gradient-yellow-1);
+}
+
+.theme-toggle-btn:hover::before {
+  background: var(--bg-gradient-yellow-2);
+}
+
+/* Dark mode: show sun, hide moon */
+.theme-toggle-btn .sun-icon { display: block; }
+.theme-toggle-btn .moon-icon { display: none; }
+
+/* Light mode: show moon, hide sun */
+[data-theme="light"] .theme-toggle-btn .sun-icon { display: none; }
+[data-theme="light"] .theme-toggle-btn .moon-icon { display: block; }
+
+
 
 
 
