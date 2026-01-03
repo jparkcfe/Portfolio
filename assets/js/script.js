@@ -357,6 +357,13 @@ const projectData = {
         how: "문제 출제 → 4지선다 입력 → 정답 판정 → 결과 피드백 → 다음 문제",
         what: "정답/오답에 따른 즉각적 피드백, 연속 정답 시 콤보 보너스"
       }
+    ],
+    externalLinks: [
+      {
+        title: "게임 플레이",
+        url: "./assets/webgame/kanji-quiz.html",
+        icon: "game-controller-outline"
+      }
     ]
   },
 
@@ -385,6 +392,13 @@ const projectData = {
         how: "15x15 그리드에서 가로/세로로 연결해 합이 10이 되면 수확. 2분 제한",
         what: "콤보 시스템(연속 성공 시 보너스), 힌트 시스템(일정 시간 후 자동 표시)으로 유저 경험 설계"
       }
+    ],
+    externalLinks: [
+      {
+        title: "게임 플레이",
+        url: "./assets/webgame/apple-harvest.html",
+        icon: "game-controller-outline"
+      }
     ]
   },
 
@@ -412,6 +426,13 @@ const projectData = {
         why: "랜덤 셔플 시 50% 확률로 해결 불가능한 퍼즐이 생성되는 문제 해결",
         how: "완성 상태에서 시작 → 유효한 이동만 역으로 수행 → 항상 해결 가능 보장",
         what: "난이도별 역이동 횟수 설정 (Easy: 20회, Normal: 50회, Hard: 100회)"
+      }
+    ],
+    externalLinks: [
+      {
+        title: "게임 플레이",
+        url: "./assets/webgame/slide-puzzle-game.html",
+        icon: "game-controller-outline"
       }
     ]
   },

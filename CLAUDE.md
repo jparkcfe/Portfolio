@@ -39,6 +39,8 @@ npx serve .
 - **Portfolio**: 프로젝트 갤러리 (카테고리 필터 지원)
 - **게임 분석**: 역기획서 문서 링크
 
+페이지 전환 로직은 `script.js`의 `navigationLinks` 이벤트 핸들러에서 처리됩니다. `data-nav-link` 버튼의 텍스트와 `data-page` 속성을 매칭합니다.
+
 ### 프로젝트 모달 시스템
 
 `script.js`의 `projectData` 객체에 각 프로젝트 상세 정보가 정의되어 있습니다. 프로젝트 클릭 시 `generateModalContent()` 함수가 HTML을 동적으로 생성합니다.
@@ -47,6 +49,24 @@ npx serve .
 1. `projectData` 객체에 프로젝트 키와 데이터 추가
 2. `index.html`에 프로젝트 카드 추가 (`data-project="키"` 속성 필수)
 3. 해당 이미지 파일을 `assets/images/`에 추가
+
+`projectData` 객체 구조:
+- `title`, `tagline`, `modalImage`: 기본 정보
+- `info`: 플랫폼, 엔진, 역할, 팀 구성, 기간, 비고
+- `overview`, `concept`: 프로젝트 설명
+- `target`: 타겟 유저 분석 (who, what, why, how)
+- `systems`: 핵심 시스템 설명 배열 (title, why, how, what)
+- `teamwork`: 팀 협업 사례 배열 (title, problem, solution, result)
+- `videos`: YouTube 영상 배열 (title, url)
+- `externalLinks`: 외부 링크 배열 (title, url, icon, isDownload)
+
+### 포트폴리오 필터 시스템
+
+포트폴리오 페이지의 카테고리 필터는 두 가지 방식으로 작동합니다:
+- 모바일: `filter-select-box` 드롭다운 사용
+- 데스크탑(768px 이상): `filter-list` 버튼 리스트 사용
+
+`data-filter-item`의 `data-category` 속성 값으로 필터링됩니다.
 
 ### 반응형 디자인
 

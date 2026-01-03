@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>슬라이드 퍼즐 게임</title>
+
+    <!-- PWA 메타 태그 -->
+    <meta name="description" content="빨간 블록을 목표 지점까지 이동시키는 퍼즐 게임">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="슬라이드퍼즐">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIuysiOudvOsnbOsnbOuTnCDtjavspkAg寃뚯엫IiwKICAic2hvcnRfbmFtZSI6ICLsiqzrnbzsrnbsnbTrk5wiLAogICJkZXNjcmlwdGlvbiI6ICLinqjqsIAg67iM66W9snEkIOustO2ZnCDsp4Dssqjqtoznpbwg7J307ZWR7Iuc7YKk64qUIOuwveyqkCDqsozsepQiLAogICJzdGFydF91cmwiOiAiLi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzY2N2VlYSIsCiAgInRoZW1lX2NvbG9yIjogIiM2NjdlZWEiLAogICJjYXRlZ29yaWVzIjogWyJnYW1lcyIsICJwdXp6bGUiXSwKICAibGFuZyI6ICJrbyIsCiAgImljb25zIjogW10KfQ==">
+    <style>
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        .game-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .game-info {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .stage-info {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .difficulty-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .difficulty-btn {
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 2px solid;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: transparent;
+        }
+        
+        .difficulty-btn.easy { color: #22c55e; border-color: #22c55e; }
+        .difficulty-btn.medium { color: #f59e0b; border-color: #f59e0b; }
+        .difficulty-btn.hard { color: #ef4444; border-color: #ef4444; }
+        
+        .difficulty-btn.active.easy { background: #22c55e; color: white; }
+        .difficulty-btn.active.medium { background: #f59e0b; color: white; }
+        .difficulty-btn.active.hard { background: #ef4444; color: white; }
+        
+        .difficulty-btn:hover { transform: scale(1.05); }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: #4299e1;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #718096;
+        }
+        
+        .instructions {
+            color: #4a5568;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        
+        .game-board {
+            position: relative;
+            width: 240px;
+            height: 300px;
+            margin: 0 auto;
+            border: 3px solid #2d3748;
+            border-radius: 12px;
+            background: 
+                linear-gradient(90deg, #e2e8f0 1px, transparent 1px),
+                linear-gradient(180deg, #e2e8f0 1px, #f7fafc 1px);
+            background-size: 60px 60px;
+            overflow: hidden;
+        }
+        
+        .target-zone {
+            position: absolute;
+            left: 60px;
+            top: 180px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0.05) 100%);
+            border: 2px dashed #ef4444;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+        
+        .puzzle-piece {
+            position: absolute;
+            border: 3px solid;
+            border-radius: 8px;
+            cursor: grab;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            user-select: none;
+            font-size: 14px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            transition: box-shadow 0.2s ease;
+            z-index: 10;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            touch-action: none;
+        }
+
+        .puzzle-piece.dragging {
+            cursor: grabbing;
+            transition: none;
+        }
+        
+        .puzzle-piece:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .puzzle-piece.selected {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+            z-index: 100;
+        }
+        
+        .target-block { 
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            border-color: #b91c1c;
+        }
+        .blue-block { 
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            border-color: #1d4ed8;
+        }
+        .orange-block { 
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            border-color: #c2410c;
+        }
+        .green-block { 
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            border-color: #15803d;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-reset {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+        }
+        
+        .btn-next {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+        }
+
+        .btn-home {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .success-message {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .success-overlay.show .success-message {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .lobby-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            max-width: 500px;
+            display: none;
+        }
+
+        .lobby-container.active {
+            display: block;
+        }
+
+        .game-container.hidden {
+            display: none;
+        }
+
+        .game-title {
+            font-size: 42px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .game-subtitle {
+            font-size: 18px;
+            color: #718096;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .lobby-section {
+            margin-bottom: 35px;
+        }
+
+        .lobby-section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+
+        .lobby-difficulty {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .lobby-difficulty-btn {
+            flex: 1;
+            padding: 15px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            border: 3px solid;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .lobby-difficulty-btn.easy { color: #22c55e; border-color: #22c55e; }
+        .lobby-difficulty-btn.medium { color: #f59e0b; border-color: #f59e0b; }
+        .lobby-difficulty-btn.hard { color: #ef4444; border-color: #ef4444; }
+
+        .lobby-difficulty-btn.selected.easy { background: #22c55e; color: white; }
+        .lobby-difficulty-btn.selected.medium { background: #f59e0b; color: white; }
+        .lobby-difficulty-btn.selected.hard { background: #ef4444; color: white; }
+
+        .lobby-difficulty-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .lobby-instructions {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: left;
+            line-height: 1.8;
+            color: #4a5568;
+            font-size: 15px;
+        }
+
+        .lobby-instructions strong {
+            color: #2d3748;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .lobby-instructions ul {
+            margin: 10px 0 0 20px;
+            padding: 0;
+        }
+
+        .lobby-instructions li {
+            margin-bottom: 5px;
+        }
+
+        .btn-start {
+            width: 100%;
+            padding: 18px 32px;
+            font-size: 20px;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            margin-top: 30px;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-start:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 480px) {
+            .game-container { padding: 20px; }
+            .stats { gap: 20px; }
+            .stage-info { font-size: 24px; }
+            .lobby-container { padding: 40px 30px; }
+            .game-title { font-size: 36px; }
+            .lobby-difficulty { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="lobby-container active" id="lobby">
+        <div class="game-title">슬라이드 퍼즐</div>
+        <div class="game-subtitle">빨간 블록을 목표 지점까지 이동시키세요!</div>
+
+        <div class="lobby-section">
+            <div class="lobby-section-title">난이도 선택</div>
+            <div class="lobby-difficulty">
+                <button class="lobby-difficulty-btn easy selected" onclick="lobby.selectDifficulty('easy')">
+                    쉬움
+                </button>
+                <button class="lobby-difficulty-btn medium" onclick="lobby.selectDifficulty('medium')">
+                    보통
+                </button>
+                <button class="lobby-difficulty-btn hard" onclick="lobby.selectDifficulty('hard')">
+                    어려움
+                </button>
+            </div>
+        </div>
+
+        <div class="lobby-section">
+            <div class="lobby-instructions">
+                <strong>게임 방법</strong>
+                <ul>
+                    <li>블록을 클릭한 채로 드래그하여 이동시키세요</li>
+                    <li>빨간 블록을 하단 목표 영역(점선)으로 이동시키면 클리어!</li>
+                    <li>다른 블록들을 움직여 길을 만드세요</li>
+                    <li>스테이지가 올라갈수록 난이도가 높아집니다</li>
+                </ul>
+            </div>
+        </div>
+
+        <button class="btn-start" onclick="lobby.startGame()">
+            게임 시작
+        </button>
+    </div>
+
+    <div class="game-container">
+        <div class="game-info">
+            <div class="stage-info">스테이지 <span id="stage-display">1</span></div>
+            
+            <div class="difficulty-selector">
+                <button class="difficulty-btn easy active" onclick="game.setDifficulty('easy')">
+                    쉬움
+                </button>
+                <button class="difficulty-btn medium" onclick="game.setDifficulty('medium')">
+                    보통
+                </button>
+                <button class="difficulty-btn hard" onclick="game.setDifficulty('hard')">
+                    어려움
+                </button>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="moves-display">0</div>
+                    <div class="stat-label">이동 횟수</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="time-display">00:00</div>
+                    <div class="stat-label">시간</div>
+                </div>
+            </div>
+            <div class="instructions">
+                블록을 클릭한 채 드래그하여 상하좌우로 이동시키세요!<br>
+                <strong>목표:</strong> 빨간 블록을 하단 목표 영역으로 이동시키세요!
+            </div>
+        </div>
+        
+        <div class="game-board" id="board">
+            <div class="target-zone"></div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn btn-reset" onclick="game.reset()">초기화</button>
+            <button class="btn btn-next" onclick="game.next()">새 퍼즐</button>
+            <button class="btn btn-home" onclick="game.goToLobby()">메인으로</button>
+        </div>
+    </div>
+    
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-message">
+            <div>스테이지 클리어!</div>
+            <div style="font-size: 18px; margin-top: 15px;">축하합니다!</div>
+        </div>
+    </div>
+
+    <script>
+        'use strict';
+
+        // 로비 관리 객체
+        const lobby = {
+            selectedDifficulty: 'easy',
+
+            selectDifficulty(difficulty) {
+                this.selectedDifficulty = difficulty;
+
+                // UI 업데이트
+                document.querySelectorAll('.lobby-difficulty-btn').forEach(btn => {
+                    btn.classList.remove('selected');
+                });
+                document.querySelector(`.lobby-difficulty-btn.${difficulty}`).classList.add('selected');
+            },
+
+            startGame() {
+                // 로비 숨기기, 게임 보이기
+                document.getElementById('lobby').classList.remove('active');
+                document.querySelector('.game-container').classList.remove('hidden');
+
+                // 게임 초기화 및 시작
+                game.difficulty = this.selectedDifficulty;
+                game.stage = 1;
+                game.init();
+            },
+
+            show() {
+                // 게임 숨기기, 로비 보이기
+                document.getElementById('lobby').classList.add('active');
+                document.querySelector('.game-container').classList.add('hidden');
+
+                // 게임 타이머 정지
+                if (game.timer) {
+                    clearInterval(game.timer);
+                }
+            }
+        };
+
+        // 게임 설정 상수
+        const CONFIG = {
+            BOARD_WIDTH: 4,
+            BOARD_HEIGHT: 5,
+            CELL_SIZE: 60,
+            DRAG_THRESHOLD: 30,
+            WIN_POS: { x: 1, y: 3 },
+            DIFFICULTY: { easy: 20, medium: 30, hard: 40 },
+            COLORS: {
+                target: 'target-block',
+                '2x1': 'blue-block',
+                '1x2': 'orange-block',
+                '1x1': 'green-block'
+            },
+            DIRECTIONS: {
+                up: { dx: 0, dy: -1 },
+                down: { dx: 0, dy: 1 },
+                left: { dx: -1, dy: 0 },
+                right: { dx: 1, dy: 0 }
+            }
+        };
+
+        // 공통 유틸리티 함수
+        const Utils = {
+            // 충돌 감지 (AABB)
+            checkCollision(x1, y1, w1, h1, x2, y2, w2, h2) {
+                return x1 < x2 + w2 && x1 + w1 > x2 && y1 < y2 + h2 && y1 + h1 > y2;
+            },
+
+            // 경계 체크
+            isInBounds(x, y, width, height) {
+                return x >= 0 && y >= 0 &&
+                       x + width <= CONFIG.BOARD_WIDTH &&
+                       y + height <= CONFIG.BOARD_HEIGHT;
+            },
+
+            // 점유 위치 생성
+            getOccupiedSet(pieces) {
+                const occupied = new Set();
+                pieces.forEach(piece => {
+                    for (let y = 0; y < piece.height; y++) {
+                        for (let x = 0; x < piece.width; x++) {
+                            occupied.add(`${piece.x + x},${piece.y + y}`);
+                        }
+                    }
+                });
+                return occupied;
+            }
+        };
+        
+        // 퍼즐 생성기 - 절차적 생성
+        const PuzzleGen = {
+            // 다양한 완성 상태 템플릿 (15개)
+            solvedStates: [
+                // 패턴 1: 기본형
+                {
+                    pieces: [
+                        { id: 'target', x: 1, y: 3, width: 2, height: 2, type: 'target' },
+                        { id: 'p1', x: 0, y: 0, width: 2, height: 1, type: '2x1' },
+                        { id: 'p2', x: 3, y: 0, width: 1, height: 2, type: '1x2' },
+                        { id: 'p3', x: 0, y: 1, width: 1, height: 1, type: '1x1' },
+                        { id: 'p4', x: 1, y: 1, width: 1, height: 1, type: '1x1' }
+                    ]
+                },
+                // 패턴 2: 좌우 대칭
+                {
+                    pieces: [
+                        { id: 'target', x: 1, y: 3, width: 2, height: 2, type: 'target' },
+                        { id: 'p1', x: 0, y: 0, width: 1, height: 2, type: '1x2' },
+                        { id: 'p2', x: 3, y: 0, width: 1, height: 2, type: '1x2' },
+                        { id: 'p3', x: 1, y: 0, width: 2, height: 1, type: '2x1' },
+                        { id: 'p4', x: 1, y: 1, width: 1, height: 1, type: '1x1' },
+                        { id: 'p5', x: 2, y: 1, width: 1, height: 1, type: '1x1' }
+                    ]
+                },
+                // 패턴 3: 복잡한 배치
+                {
+                    pieces: [
+                        { id: 'target', x: 1, y: 3, width: 2, height: 2, type: 'target' },
+                        { id: 'p1', x: 0, y: 0, width: 1, height: 1, type: '1x1' },
+                        { id: 'p2', x: 1, y: 0, width: 1, height: 2, type: '1x2' },
+                        { id: 'p3', x: 2, y: 0, width: 2, height: 1, type: '2x1' },
+                        { id: 'p4', x: 0, y: 1, width: 1, height: 1, type: '1x1' },
+                        { id: 'p5', x: 2, y: 1, width: 1, height: 1, type: '1x1' },
+                        { id: 'p6', x: 3, y: 1, width: 1, height: 1, type: '1x1' }
+                    ]
+                },
+                // 패턴 4: 세로 중심
+                {
+                    pieces: [
+                        { id: 'target', x: 1, y: 3, width: 2, height: 2, type: 'target' },
+                        { id: 'p1', x: 0, y: 0, width: 1, height: 2, type: '1x2' },
+                        { id: 'p2', x: 3, y: 0, width: 1, height: 2, type: '1x2' },
+                        { id: 'p3', x: 1, y: 0, width: 1, height: 1, type: '1x1' },
+                        { id: 'p4', x: 2, y: 0, width: 1, height: 1, type: '1x1' },
+                        { id: 'p5', x: 1, y: 1, width: 2, height: 1, type: '2x1' }
+                    ]
+                },
+                // 패턴 5: 가로 중심
+                {
+                    pieces: [
+                        { id: 'target', x: 1, y: 3, width: 2, height: 2, type: 'target' },
+                        { id: 'p1', x: 0, y: 0, width: 2, height: 1, type: '2x1' },
+                        { id: 'p2', x: 2, y: 0, width: 2, height: 1, type: '2x1' },
+                        { id: 'p3', x: 0, y: 1, width: 1, height: 2, type: '1x2' },
+                        { id: 'p4', x: 1, y: 1, width: 1, height: 1, type: '1x1' },
+                        { id: 'p5', x: 2, y: 1, width: 1, height: 1, type: '1x1' }
+                    ]
+                },
+                // 패턴 6: 코너 배치
+                {
+                    pieces: [
+                        { id: 'target', x: 1, y: 3, width: 2, height: 2, type: 'target' },
+                        { id: 'p1', x: 0, y: 0, width: 1, height: 1, type: '1x1' },
+                        { id: 'p2', x: 3, y: 0, width: 1, height: 1, type: '1x1' },
+                        { id: 'p3', x: 1, y: 0, width: 2, height: 1, type: '2x1' },
+                        { id: 'p4', x: 0, y: 1, width: 1, height: 2, type: '1x2' },
+                        { id: 'p5', x: 3, y: 1, width: 1, height: 2, type: '1x2' },
+                        { id: 'p6', x: 1, y: 1, width: 1, height: 1, type: '1x1' }
+                    ]
+                },
+                // 패턴 7: 많은 1x1
+                {
+                    pieces: [
+                        { id: 'target', x: 1, y: 3, width: 2, height: 2, type: 'target' },
+                        { id: 'p1', x: 0, y: 0, width: 2, height: 1, type: '2x1' },
+                        { id: 'p2', x: 2, y: 0, width: 1, height: 2, type: '1x2' },
+                        { id: 'p3', x: 0, y: 1, width: 1, height: 1, type: '1x1' },
+                        { id: 'p4', x: 1, y: 1, width: 1, height: 1, type: '1x1' },
+                        { id: 'p5', x: 3, y: 0, width: 1, height: 1, type: '1x1' },
+                        { id: 'p6', x: 3, y: 1, width: 1, height: 1, type: '1x1' }
+                    ]
+                },
+                // 패턴 8: 복잡한 세로 배치
+                {
+                    pieces: [
+                        { id: 'target', x: 1, y: 3, width: 2, height: 2, type: 'target' },
+                        { id: 'p1', x: 0, y: 0, width: 1, height: 2, type: '1x2' },
+                        { id: 'p2', x: 1, y: 0, width: 1, height: 2, type: '1x2' },
+                        { id: 'p3', x: 2, y: 0, width: 1, height: 1, type: '1x1' },
+                        { id: 'p4', x: 3, y: 0, width: 1, height: 1, type: '1x1' },
+                        { id: 'p5', x: 2, y: 1, width: 2, height: 1, type: '2x1' }
+                    ]
+                },
+                // 패턴 9: 지그재그
+                {
+                    pieces: [
+                        { id: 'target', x: 1, y: 3, width: 2, height: 2, type: 'target' },
+                        { id: 'p1', x: 0, y: 0, width: 1, height: 1, type: '1x1' },
+                        { id: 'p2', x: 1, y: 0, width: 1, height: 2, type: '1x2' },
+                        { id: 'p3', x: 2, y: 0, width: 1, height: 1, type: '1x1' },
+                        { id: 'p4', x: 3, y: 0, width: 1, height: 2, type: '1x2' },
+                        { id: 'p5', x: 0, y: 1, width: 1, height: 1, type: '1x1' },
+                        { id: 'p6', x: 2, y: 1, width: 1, height: 1, type: '1x1' }
+                    ]
+                },
+                // 패턴 10: 혼합형
+                {
+                    pieces: [
+                        { id: 'target', x: 1, y: 3, width: 2, height: 2, type: 'target' },
+                        { id: 'p1', x: 0, y: 0, width: 2, height: 1, type: '2x1' },
+                        { id: 'p2', x: 2, y: 0, width: 1, height: 2, type: '1x2' },
+                        { id: 'p3', x: 3, y: 0, width: 1, height: 2, type: '1x2' },
+                        { id: 'p4', x: 0, y: 1, width: 1, height: 2, type: '1x2' },
+                        { id: 'p5', x: 1, y: 1, width: 1, height: 1, type: '1x1' }
+                    ]
+                },
+                // 패턴 11: 중앙 집중
+                {
+                    pieces: [
+                        { id: 'target', x: 1, y: 3, width: 2, height: 2, type: 'target' },
+                        { id: 'p1', x: 0, y: 0, width: 1, height: 1, type: '1x1' },
+                        { id: 'p2', x: 3, y: 0, width: 1, height: 1, type: '1x1' },
+                        { id: 'p3', x: 1, y: 0, width: 1, height: 2, type: '1x2' },
+                        { id: 'p4', x: 2, y: 0, width: 1, height: 2, type: '1x2' },
+                        { id: 'p5', x: 0, y: 1, width: 1, height: 1, type: '1x1' },
+                        { id: 'p6', x: 3, y: 1, width: 1, height: 1, type: '1x1' }
+                    ]
+                },
+                // 패턴 12: 비대칭
+                {
+                    pieces: [
+                        { id: 'target', x: 1, y: 3, width: 2, height: 2, type: 'target' },
+                        { id: 'p1', x: 0, y: 0, width: 1, height: 2, type: '1x2' },
+                        { id: 'p2', x: 1, y: 0, width: 2, height: 1, type: '2x1' },
+                        { id: 'p3', x: 3, y: 0, width: 1, height: 1, type: '1x1' },
+                        { id: 'p4', x: 1, y: 1, width: 1, height: 1, type: '1x1' },
+                        { id: 'p5', x: 2, y: 1, width: 1, height: 2, type: '1x2' }
+                    ]
+                },
+                // 패턴 13: 복합 배치
+                {
+                    pieces: [
+                        { id: 'target', x: 1, y: 3, width: 2, height: 2, type: 'target' },
+                        { id: 'p1', x: 0, y: 0, width: 2, height: 1, type: '2x1' },
+                        { id: 'p2', x: 2, y: 0, width: 2, height: 1, type: '2x1' },
+                        { id: 'p3', x: 0, y: 1, width: 1, height: 1, type: '1x1' },
+                        { id: 'p4', x: 1, y: 1, width: 1, height: 2, type: '1x2' },
+                        { id: 'p5', x: 2, y: 1, width: 1, height: 1, type: '1x1' },
+                        { id: 'p6', x: 3, y: 1, width: 1, height: 1, type: '1x1' }
+                    ]
+                },
+                // 패턴 14: 분산 배치
+                {
+                    pieces: [
+                        { id: 'target', x: 1, y: 3, width: 2, height: 2, type: 'target' },
+                        { id: 'p1', x: 0, y: 0, width: 1, height: 1, type: '1x1' },
+                        { id: 'p2', x: 1, y: 0, width: 1, height: 1, type: '1x1' },
+                        { id: 'p3', x: 2, y: 0, width: 1, height: 1, type: '1x1' },
+                        { id: 'p4', x: 3, y: 0, width: 1, height: 2, type: '1x2' },
+                        { id: 'p5', x: 0, y: 1, width: 2, height: 1, type: '2x1' },
+                        { id: 'p6', x: 2, y: 1, width: 1, height: 2, type: '1x2' }
+                    ]
+                },
+                // 패턴 15: 최고 난이도
+                {
+                    pieces: [
+                        { id: 'target', x: 1, y: 3, width: 2, height: 2, type: 'target' },
+                        { id: 'p1', x: 0, y: 0, width: 1, height: 2, type: '1x2' },
+                        { id: 'p2', x: 1, y: 0, width: 1, height: 1, type: '1x1' },
+                        { id: 'p3', x: 2, y: 0, width: 1, height: 1, type: '1x1' },
+                        { id: 'p4', x: 3, y: 0, width: 1, height: 2, type: '1x2' },
+                        { id: 'p5', x: 1, y: 1, width: 1, height: 1, type: '1x1' },
+                        { id: 'p6', x: 2, y: 1, width: 1, height: 1, type: '1x1' },
+                        { id: 'p7', x: 0, y: 2, width: 1, height: 1, type: '1x1' }
+                    ]
+                }
+            ],
+            
+            // 메인 생성 함수 - 스테이지별 다양한 템플릿 선택
+            generate(difficulty, stage = 1) {
+                // 스테이지에 따라 템플릿 범위 결정
+                const maxIndex = Math.min(
+                    Math.floor((stage - 1) / 2) + 4, // 2스테이지마다 1개씩 추가, 최소 4개
+                    this.solvedStates.length
+                );
+
+                // 랜덤 템플릿 선택 (스테이지가 높을수록 더 복잡한 템플릿)
+                const index = Math.floor(Math.random() * maxIndex);
+                const solved = this.solvedStates[index];
+                const state = JSON.parse(JSON.stringify(solved));
+
+                // 난이도 + 스테이지 기반으로 섞는 횟수 증가
+                const baseMoves = CONFIG.DIFFICULTY[difficulty];
+                const stageMoves = Math.floor((stage - 1) * 2); // 스테이지당 +2 이동
+                const totalMoves = baseMoves + stageMoves;
+
+                return this.shuffleFromSolved(state, totalMoves);
+            },
+            
+            // 완성 상태에서 역방향 섞기
+            shuffleFromSolved(state, moves) {
+                let lastMove = null;
+                
+                for (let i = 0; i < moves; i++) {
+                    const validMoves = this.getValidMoves(state, lastMove);
+                    if (validMoves.length === 0) break;
+                    
+                    const randomMove = validMoves[Math.floor(Math.random() * validMoves.length)];
+                    this.applyMove(state, randomMove);
+                    lastMove = randomMove;
+                }
+                
+                if (this.isValidPuzzle(state)) {
+                    return state;
+                } else {
+                    // 검증 실패시 다시 시도
+                    return this.generate('medium');
+                }
+            },
+            
+            // 유효한 이동들 찾기
+            getValidMoves(state, lastMove) {
+                const moves = [];
+                const occupied = Utils.getOccupiedSet(state.pieces);
+
+                state.pieces.forEach(piece => {
+                    Object.entries(CONFIG.DIRECTIONS).forEach(([direction, dir]) => {
+                        const newX = piece.x + dir.dx;
+                        const newY = piece.y + dir.dy;
+
+                        // 왕복 이동 방지
+                        if (lastMove && lastMove.piece === piece.id &&
+                            this.getOpposite(direction) === lastMove.direction) {
+                            return;
+                        }
+
+                        if (this.canMoveTo(piece, newX, newY, occupied)) {
+                            moves.push({
+                                piece: piece.id,
+                                direction: direction,
+                                newX: newX,
+                                newY: newY
+                            });
+                        }
+                    });
+                });
+
+                return moves;
+            },
+            
+            // 이동 적용
+            applyMove(state, move) {
+                const piece = state.pieces.find(p => p.id === move.piece);
+                if (piece) {
+                    piece.x = move.newX;
+                    piece.y = move.newY;
+                }
+            },
+
+            // 이동 가능 여부 확인 (최적화)
+            canMoveTo(piece, newX, newY, occupied) {
+                if (!Utils.isInBounds(newX, newY, piece.width, piece.height)) {
+                    return false;
+                }
+
+                // 충돌 확인
+                for (let y = 0; y < piece.height; y++) {
+                    for (let x = 0; x < piece.width; x++) {
+                        const checkPos = `${newX + x},${newY + y}`;
+                        const currentPos = `${piece.x + x},${piece.y + y}`;
+
+                        if (occupied.has(checkPos) && checkPos !== currentPos) {
+                            // 자신의 다른 부분인지 확인
+                            let isOwnPart = false;
+                            for (let cy = 0; cy < piece.height; cy++) {
+                                for (let cx = 0; cx < piece.width; cx++) {
+                                    if (`${piece.x + cx},${piece.y + cy}` === checkPos) {
+                                        isOwnPart = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (!isOwnPart) return false;
+                        }
+                    }
+                }
+
+                return true;
+            },
+            
+            // 퍼즐 유효성 검사
+            isValidPuzzle(state) {
+                const target = state.pieces.find(p => p.type === 'target');
+                
+                // 빨간 블록이 목표에 있으면 안됨
+                if (target.x === CONFIG.WIN_POS.x && target.y === CONFIG.WIN_POS.y) {
+                    return false;
+                }
+                
+                // 목표 영역과 겹치면 안됨
+                if (target.x < CONFIG.WIN_POS.x + 2 && 
+                    target.x + target.width > CONFIG.WIN_POS.x &&
+                    target.y < CONFIG.WIN_POS.y + 2 && 
+                    target.y + target.height > CONFIG.WIN_POS.y) {
+                    return false;
+                }
+                
+                return true;
+            },
+            
+            // 반대 방향 구하기
+            getOpposite(direction) {
+                const opposites = {
+                    up: 'down', down: 'up',
+                    left: 'right', right: 'left'
+                };
+                return opposites[direction];
+            }
+        };
+        
+        // AudioContext 재사용 (메모리 누수 방지)
+        let audioContext = null;
+
+        // 사운드 재생 함수
+        const playSound = (frequencies) => {
+            try {
+                if (!audioContext) {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                frequencies.forEach((freq, index) => {
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    oscillator.frequency.setValueAtTime(freq, audioContext.currentTime + index * 0.1);
+                    gainNode.gain.setValueAtTime(0.2, audioContext.currentTime + index * 0.1);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + index * 0.1 + 0.5);
+                    oscillator.start(audioContext.currentTime + index * 0.1);
+                    oscillator.stop(audioContext.currentTime + index * 0.1 + 0.5);
+                });
+            } catch (e) {
+                console.log('오디오 재생 불가');
+            }
+        };
+
+        // 메인 게임 객체
+        const game = {
+            stage: 1,
+            moves: 0,
+            pieces: [],
+            time: 0,
+            difficulty: 'easy',
+            
+            // 드래그 상태
+            selectedPiece: null,
+            isDragging: false,
+            dragElement: null,
+            startPos: { x: 0, y: 0 },
+            originalPos: { x: 0, y: 0 },
+            currentOffset: { x: 0, y: 0 },
+            
+            // DOM 요소들
+            elements: {},
+            timer: null,
+            
+            init() {
+                // DOM 요소 캐시
+                this.elements = {
+                    board: document.getElementById('board'),
+                    stage: document.getElementById('stage-display'),
+                    moves: document.getElementById('moves-display'),
+                    time: document.getElementById('time-display'),
+                    overlay: document.getElementById('successOverlay')
+                };
+                
+                this.loadPuzzle();
+                this.startTimer();
+            },
+            
+            startTimer() {
+                this.timer = setInterval(() => {
+                    this.time++;
+                    const mins = Math.floor(this.time / 60).toString().padStart(2, '0');
+                    const secs = (this.time % 60).toString().padStart(2, '0');
+                    this.elements.time.textContent = `${mins}:${secs}`;
+                }, 1000);
+            },
+            
+            setDifficulty(newDifficulty) {
+                if (this.difficulty === newDifficulty) return;
+                
+                this.difficulty = newDifficulty;
+                
+                // UI 업데이트
+                document.querySelectorAll('.difficulty-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`.difficulty-btn.${newDifficulty}`).classList.add('active');
+                
+                this.reset();
+            },
+            
+            loadPuzzle() {
+                this.clearBoard();
+                this.moves = 0;
+                this.time = 0;
+                this.pieces = [];
+                
+                const puzzleData = PuzzleGen.generate(this.difficulty, this.stage);
+                
+                puzzleData.pieces.forEach(data => {
+                    this.pieces.push({...data});
+                    this.elements.board.appendChild(this.createPiece(data));
+                });
+                
+                this.updateUI();
+            },
+            
+            clearBoard() {
+                this.elements.board.querySelectorAll('.puzzle-piece').forEach(el => el.remove());
+            },
+            
+            createPiece(data) {
+                const piece = document.createElement('div');
+                piece.className = `puzzle-piece ${CONFIG.COLORS[data.type]}`;
+                piece.id = data.id;
+                piece.textContent = `${data.width}×${data.height}`;
+                
+                this.setPiecePosition(piece, data);
+
+                // 마우스 및 터치 이벤트 모두 지원
+                piece.addEventListener('mousedown', (e) => this.handleMouseDown(e, data.id));
+                piece.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    const touch = e.touches[0];
+                    const mouseEvent = new MouseEvent('mousedown', {
+                        clientX: touch.clientX,
+                        clientY: touch.clientY
+                    });
+                    this.handleMouseDown(mouseEvent, data.id);
+                }, { passive: false });
+
+                return piece;
+            },
+            
+            setPiecePosition(element, data) {
+                const size = CONFIG.CELL_SIZE;
+                element.style.left = `${data.x * size}px`;
+                element.style.top = `${data.y * size}px`;
+                element.style.width = `${data.width * size}px`;
+                element.style.height = `${data.height * size}px`;
+            },
+            
+            handleMouseDown(e, pieceId) {
+                e.preventDefault();
+
+                const piece = this.pieces.find(p => p.id === pieceId);
+                if (!piece) return;
+
+                const element = document.getElementById(pieceId);
+                if (!element) return;
+
+                this.selectedPiece = piece;
+                this.dragElement = element;
+                this.isDragging = true;
+                this.startPos = { x: e.clientX, y: e.clientY };
+                this.originalPos = { x: piece.x, y: piece.y };
+                this.currentOffset = { x: 0, y: 0 };
+
+                element.classList.add('dragging', 'selected');
+                element.style.zIndex = '1000';
+
+                const handleMove = (e) => {
+                    const touch = e.touches ? e.touches[0] : e;
+                    const mouseEvent = e.touches ? new MouseEvent('mousemove', {
+                        clientX: touch.clientX,
+                        clientY: touch.clientY
+                    }) : e;
+                    this.handleMouseMove(mouseEvent);
+                };
+
+                const handleUp = (e) => {
+                    const touch = e.changedTouches ? e.changedTouches[0] : e;
+                    const mouseEvent = e.changedTouches ? new MouseEvent('mouseup', {
+                        clientX: touch.clientX,
+                        clientY: touch.clientY
+                    }) : e;
+                    this.handleMouseUp(mouseEvent);
+
+                    document.removeEventListener('mousemove', handleMove);
+                    document.removeEventListener('mouseup', handleUp);
+                    document.removeEventListener('touchmove', handleMove);
+                    document.removeEventListener('touchend', handleUp);
+                };
+
+                document.addEventListener('mousemove', handleMove);
+                document.addEventListener('mouseup', handleUp);
+                document.addEventListener('touchmove', handleMove, { passive: false });
+                document.addEventListener('touchend', handleUp);
+            },
+
+            handleMouseMove(e) {
+                if (!this.isDragging || !this.selectedPiece || !this.dragElement) return;
+
+                const deltaX = e.clientX - this.startPos.x;
+                const deltaY = e.clientY - this.startPos.y;
+
+                // 방향 결정 (더 큰 이동 방향으로)
+                let constrainedX = 0, constrainedY = 0;
+
+                if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                    // 가로 이동
+                    constrainedX = deltaX;
+                } else {
+                    // 세로 이동
+                    constrainedY = deltaY;
+                }
+
+                // 보드 경계 내로 제한
+                const piece = this.selectedPiece;
+                const cellSize = CONFIG.CELL_SIZE;
+
+                // 픽셀 단위로 현재 위치 계산
+                const currentPixelX = this.originalPos.x * cellSize;
+                const currentPixelY = this.originalPos.y * cellSize;
+
+                // 이동 후 위치 계산
+                let newPixelX = currentPixelX + constrainedX;
+                let newPixelY = currentPixelY + constrainedY;
+
+                // 경계 제한
+                const maxPixelX = (CONFIG.BOARD_WIDTH - piece.width) * cellSize;
+                const maxPixelY = (CONFIG.BOARD_HEIGHT - piece.height) * cellSize;
+
+                // X축 제한
+                if (newPixelX < 0) {
+                    constrainedX = -currentPixelX;
+                    newPixelX = 0;
+                } else if (newPixelX > maxPixelX) {
+                    constrainedX = maxPixelX - currentPixelX;
+                    newPixelX = maxPixelX;
+                }
+
+                // Y축 제한
+                if (newPixelY < 0) {
+                    constrainedY = -currentPixelY;
+                    newPixelY = 0;
+                } else if (newPixelY > maxPixelY) {
+                    constrainedY = maxPixelY - currentPixelY;
+                    newPixelY = maxPixelY;
+                }
+
+                // 다른 블록과의 충돌 체크 (픽셀 단위)
+                const piecePixelWidth = piece.width * cellSize;
+                const piecePixelHeight = piece.height * cellSize;
+
+                for (const otherPiece of this.pieces) {
+                    if (otherPiece.id === piece.id) continue;
+
+                    const otherPixelX = otherPiece.x * cellSize;
+                    const otherPixelY = otherPiece.y * cellSize;
+                    const otherPixelWidth = otherPiece.width * cellSize;
+                    const otherPixelHeight = otherPiece.height * cellSize;
+
+                    // AABB 충돌 감지 (픽셀 단위)
+                    const willCollide =
+                        newPixelX < otherPixelX + otherPixelWidth &&
+                        newPixelX + piecePixelWidth > otherPixelX &&
+                        newPixelY < otherPixelY + otherPixelHeight &&
+                        newPixelY + piecePixelHeight > otherPixelY;
+
+                    if (willCollide) {
+                        // 충돌 발생 - 이동 제한
+                        if (Math.abs(constrainedX) > Math.abs(constrainedY)) {
+                            // 가로 이동 중
+                            if (constrainedX > 0) {
+                                // 오른쪽 이동
+                                const maxX = otherPixelX - piecePixelWidth;
+                                if (newPixelX > maxX) {
+                                    constrainedX = maxX - currentPixelX;
+                                    newPixelX = maxX;
+                                }
+                            } else {
+                                // 왼쪽 이동
+                                const minX = otherPixelX + otherPixelWidth;
+                                if (newPixelX < minX) {
+                                    constrainedX = minX - currentPixelX;
+                                    newPixelX = minX;
+                                }
+                            }
+                        } else {
+                            // 세로 이동 중
+                            if (constrainedY > 0) {
+                                // 아래 이동
+                                const maxY = otherPixelY - piecePixelHeight;
+                                if (newPixelY > maxY) {
+                                    constrainedY = maxY - currentPixelY;
+                                    newPixelY = maxY;
+                                }
+                            } else {
+                                // 위 이동
+                                const minY = otherPixelY + otherPixelHeight;
+                                if (newPixelY < minY) {
+                                    constrainedY = minY - currentPixelY;
+                                    newPixelY = minY;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                this.currentOffset = { x: constrainedX, y: constrainedY };
+
+                // transform으로 부드럽게 이동
+                this.dragElement.style.transform = `translate(${constrainedX}px, ${constrainedY}px)`;
+            },
+
+            handleMouseUp(e) {
+                if (!this.isDragging || !this.selectedPiece || !this.dragElement) return;
+
+                const piece = this.selectedPiece;
+                const element = this.dragElement;
+
+                // 그리드 단위로 이동 계산
+                const gridMoveX = Math.round(this.currentOffset.x / CONFIG.CELL_SIZE);
+                const gridMoveY = Math.round(this.currentOffset.y / CONFIG.CELL_SIZE);
+
+                const newX = this.originalPos.x + gridMoveX;
+                const newY = this.originalPos.y + gridMoveY;
+
+                // 유효한 이동인지 확인
+                if ((gridMoveX !== 0 || gridMoveY !== 0) && this.isValidMove(piece, newX, newY)) {
+                    // 유효한 이동 - 새 위치로 확정
+                    piece.x = newX;
+                    piece.y = newY;
+
+                    element.style.transform = '';
+                    this.setPiecePosition(element, piece);
+
+                    this.moves++;
+                    this.updateUI();
+
+                    setTimeout(() => this.checkWin(), 100);
+                } else {
+                    // 유효하지 않은 이동 - 원래 위치로 복귀
+                    element.style.transform = '';
+                    this.showMoveFailedFeedback(piece.id);
+                }
+
+                // 상태 초기화
+                element.classList.remove('dragging', 'selected');
+                element.style.zIndex = '';
+
+                this.isDragging = false;
+                this.selectedPiece = null;
+                this.dragElement = null;
+            },
+            
+            updateSelection(pieceId) {
+                this.elements.board.querySelectorAll('.puzzle-piece').forEach(el => {
+                    el.classList.toggle('selected', el.id === pieceId);
+                });
+            },
+            
+            clearSelection() {
+                this.elements.board.querySelectorAll('.puzzle-piece').forEach(el => {
+                    el.classList.remove('selected');
+                });
+            },
+            
+            tryMovePiece(piece, direction) {
+                const dir = CONFIG.DIRECTIONS[direction];
+                const newX = piece.x + dir.dx;
+                const newY = piece.y + dir.dy;
+                
+                if (this.isValidMove(piece, newX, newY)) {
+                    this.movePiece(piece, newX, newY);
+                } else {
+                    this.showMoveFailedFeedback(piece.id);
+                }
+            },
+            
+            isValidMove(piece, newX, newY) {
+                if (!Utils.isInBounds(newX, newY, piece.width, piece.height)) {
+                    return false;
+                }
+
+                // 충돌 확인 (최적화)
+                return !this.pieces.some(otherPiece => {
+                    if (otherPiece.id === piece.id) return false;
+                    return Utils.checkCollision(
+                        newX, newY, piece.width, piece.height,
+                        otherPiece.x, otherPiece.y, otherPiece.width, otherPiece.height
+                    );
+                });
+            },
+            
+            movePiece(piece, newX, newY) {
+                piece.x = newX;
+                piece.y = newY;
+                
+                const element = document.getElementById(piece.id);
+                this.setPiecePosition(element, piece);
+                
+                this.moves++;
+                this.updateUI();
+                
+                setTimeout(() => this.checkWin(), 100);
+            },
+            
+            showMoveFailedFeedback(pieceId) {
+                const element = document.getElementById(pieceId);
+                element.style.filter = 'brightness(1.5)';
+                element.style.transform = 'scale(0.95)';
+                
+                setTimeout(() => {
+                    element.style.filter = '';
+                    element.style.transform = '';
+                }, 200);
+            },
+            
+            checkWin() {
+                const targetPiece = this.pieces.find(p => p.type === 'target');
+                
+                if (targetPiece && targetPiece.x === CONFIG.WIN_POS.x && targetPiece.y === CONFIG.WIN_POS.y) {
+                    this.showSuccess();
+                }
+            },
+            
+            showSuccess() {
+                clearInterval(this.timer);
+
+                // 스테이지 클리어 사운드 재생 (상승하는 멜로디)
+                playSound([523.25, 659.25, 783.99, 1046.50, 1318.51]);
+
+                this.elements.overlay.style.display = 'flex';
+                requestAnimationFrame(() => {
+                    this.elements.overlay.classList.add('show');
+                });
+
+                setTimeout(() => {
+                    this.elements.overlay.classList.remove('show');
+                    setTimeout(() => {
+                        this.elements.overlay.style.display = 'none';
+
+                        // 자동으로 다음 스테이지로 진행
+                        this.stage++;
+                        this.loadPuzzle();
+                        this.startTimer();
+                    }, 300);
+                }, 2000);
+            },
+            
+            updateUI() {
+                this.elements.stage.textContent = this.stage;
+                this.elements.moves.textContent = this.moves;
+            },
+            
+            reset() {
+                clearInterval(this.timer);
+                this.loadPuzzle();
+                this.startTimer();
+            },
+            
+            next() {
+                clearInterval(this.timer);
+                this.stage++;
+                this.loadPuzzle();
+                this.startTimer();
+            },
+
+            goToLobby() {
+                lobby.show();
+            }
+        };
+
+        // 페이지 로드 시 로비 표시 (게임은 시작 버튼을 누를 때만 시작)
+        document.addEventListener('DOMContentLoaded', () => {
+            // 게임 컨테이너 숨김 상태로 시작
+            document.querySelector('.game-container').classList.add('hidden');
+        });
+    </script>
+</body>
+</html>

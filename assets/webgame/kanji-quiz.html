@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>일본어 한자 학습 퀴즈</title>
+    
+    <!-- PWA 메타 태그 -->
+    <meta name="description" content="일본어 한자를 재미있게 학습할 수 있는 퀴즈 게임">
+    <meta name="theme-color" content="#8B5CF6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="한자퀴즈">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- PWA 아이콘들 -->
+    <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE4MCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iNDAiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MF9saW5lYXJfMV8xIiB4MT0iMCIgeTE9IjAiIHgyPSIxODAiIHkyPSIxODAiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iIzY2N0VFQSIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM3NjRCQTIiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8dGV4dCB4PSI5MCIgeT0iMTEwIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI3MiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7mub88L3RleHQ+Cjx0ZXh0IHg9IjkwIiB5PSIxNDAiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuOCkiIHRleHQtYW5jaG9yPSJtaWRkbGUiPu2VnOyekO2Tteymiujsprc8L3RleHQ+Cjwvc3ZnPg==">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0idXJsKCNncmFkaWVudDBfbGluZWFyXzFfMSkiLz4KPGRFRM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQwX2xpbmVhcl8xXzEiIHgxPSIwIiB5MT0iMCIgeDI9IjMyIiB5Mj0iMzIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iIzY2N0VFQSIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM3NjRCQTIiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8dGV4dCB4PSIxNiIgeT0iMjIiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPua5vzwvdGV4dD4KPC9zdmc+">
+    
+    <!-- PWA 매니페스트 -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIuydvOuzuOyWtCDtlZzsnpAg7ZWZ7Iq1IO2YtOyngOyngCIsCiAgInNob3J0X25hbWUiOiAi7ZWc7J6Q7Y2164W4IiwKICAiZGVzY3JpcHRpb24iOiAi7J2867O47JaE7ZWc7J6Q66W8IOyerOuvuOyeh+qyjCDtlZnsmKXtlaAg7IiYIOydgetkkkOtgbTsnojspqwg6rKM7J2EIiwKICAic3RhcnRfdXJsIjogIi4vIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAib3JpZW50YXRpb24iOiAicG9ydHJhaXQiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiM4QjVDRjYiLAogICJ0aGVtZV9jb2xvciI6ICIjOEI1Q0Y2IiwKICAiY2F0ZWdvcmllcyI6IFsiZWR1Y2F0aW9uIiwgImdhbWVzIl0sCiAgImxhbmciOiAia28iLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUIzYVdSMGFEMGlNVGd3SWlCb1pXbG5hSFE5SWpFNE1DSWdkbWxsZDBKdmVEMGlNQ0F3VERFNE1DQXhPREFpSUdacGJHdzlJbTV2Ym1VaUlIaHRiRzV6UFNKb2RIUndPaTh2ZDNkM0xuY3pMbTl5Wnk4eU1EQXdMM04yWnlJK0NqeHlaV04wSUhkcFpIUm9QU0l4T0RBaUlHaGxhV2RvZEQwaU1UZ3dJaUJ5ZUQwaU5EQWlJR1pwYkd3OUluVnliQ2dpSTJkeVlXUnBaVzUwTUY5c2FXNWxZWEpmTVY4eEtTSXZQZ285WkdWbWN6NExQR3hwYm1WaGNrZHlZV1JwWlc1MElHbGtQU0puY21Ga2FXVnVkREJmYkdsdVpXRnlYekZmTVNJZ2VERTlJakFpSUhreFBTSXdJaUI0TWowaU1UZ3dJaUIwTWowaU1UZ3dJaUJuY21Ga2FXVnVkRlZ1YVhSelBTSjFjMlZ5VTNCaFkyVlBibFZ6WlNJK0NqeHpkRzl3SUhOMGIzQXRZMjlzYjNJOUlpTTJOamRGUlVFaUx6NEtiM04wYjNBZ2IyWm1jMlYwUFNJeElpQnpkRzl3TFdOdmJHOXlQU0lqTnpZMFFrRXlJaTgrQ2p3dmJHbHVaV0Z5UjNKaFpHbGxiblErQ2p3dlpHVm1jejRMUEhSbGVIUWdlRDBpT1RBaUlIazlJakV4TUNJZ1ptOXVkQzFtWVcxcGJIazlJaTFoY0hCc1pTMXplWE4wWlcwc0lITmhibk10YzJWeWFXWWlJR1p2Ym5RdGMybDZaVDBpTnpJaUlHWnZiblF0ZDJWcFoyaDBQU0ppYjJ4a0lpQm1hV3hzUFNKM2FHbDBaU0lnZEdWNGRDMWhibU5vYjNJOUltMXBaR1JzWlNJK2EzaDhMMlJsZUhRK0NqeDBaWGgwSUhnOUlqa3dJaUI1UFNJeE5EQWlJR1p2Ym5RdFptRnRhV3g1UFNJdFlYQndiR1V0YzNsemRHVnRMQ0J6WVc1ekxYTmxjbWxtSWlCbWIyNTBMWE5wZW1VOUlqRTJJaUJtYjI1MExYZGxhV2RvZEQwaU5qQXdJaUJtYVd4c1BTSnlaM0poS0RJMU5Td3lOVFVzTWpVMUxEQXVPQ2tpSUhSbGVIUXRZVzVqYUc5eVBTSnRhV1JrYkdVaVB1Mk5xQzVTd3VLV1pDN3RsYjl5WXJjOEwzUmxlSFErQ2p3dmMzWm5QZzA9IiwKICAgICAgInNpemVzIjogIjE4MHgxODAiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiwKICAgICAgInB1cnBvc2UiOiAiYW55IG1hc2thYmxlIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUIzYVdSMGFEMGlOVEV5SWlCb1pXbG5hSFE5SWpVeE1pSWdkbWxsZDBKdmVEMGlNQ0F3TURFNE1qRWdOakUwSWlCbWFXeHNQU0p1YjI1bElpQjRiV3h1Y3owaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNQzl6ZG1jaVBnbzhjbVZqZENCM2FXUjBhRDBpTkRFeElpQm9aV2xuYUhROUlqWXhOQ0lnZUQwaU5UWWlJSGs5SWpFd01DSWdjbmc5SWpjeElpQm1hV3hzUFNKMWNtd29JMmR5WVdScFpXNTBNRjlzYVc1bFlYSmZNVjh4S1NJdlBnbzhaR1ZtY3o0TFBHeHBibVZoY2tkeVlXUnBaVzUwSUdsa1BTSm5jbUZrYVdWdWREQmZiR2x1WldGeVh6RmZNU0lnZURFOUlqQWlJSGt4UFNJd0lpQjRNajBpTkRFeElpQjVNajBpTmpFMElpQm5jbUZrYVdWdWRGVnVhWFJ6UFNKMWMyVnlVM0JoWTJWUGJsVnpaU0krQ2p4emRHOXdJSE4wYjNBdFkyOXNiM0k5SWlNNU5qQkRSamN5SWk4K0NqeHpkRzl3SUc5bVptTmxkRDBpTVNJZ2MzUnZjQzFqYjJ4dmNqMGlJMDFETm1JM01rUWlMejRLUEM5c2FXNWxZWEpIY21Ga2FXVnVkRDRLUEM5a1pXWnpQZ29MUEdsbllXZGxJR2xrUFNKdGIzUnZhR2x5WVhOb2FXNXJZU0lnZUQwaU1qQTFJaUI1UFNJek1EQWlJSGRwWkhSb1BTSXhNaklpSUdobGFXZG9kRDBpTVRJeUlpQm1hV3hzUFNKdWIyNWxJaUJ6ZEhKdmEyVTlJaUk1TmpCRFJqY3lJaUJ6ZEhKdmEyVXRkMmxrZEdnOUlqSWlQaUJOVHpkU1NVTklMZ285TDBsbllXZGxQZ29MUEhSbGVIUWdlRDBpTWpBMUlpQjVQU0l6TXpFaUlHWnZiblF0Wm1GdGFXeDVQU0k0TURBS1ptOXVkRjkzWldsbmFIUTlJak13SUFCZ1ptbHNiRDBpZDJocGRHVWlJSFJsZUhRdFlXNWphRzl5UFNKdGFXUmtiR1VpUGczaDhMM1JsZUhRK0NqeDFjMlVnZUdocGJtczZhSFIwY0NzNkwyOTFibk1sUVRCelkyVjJheTkzVFRaYWExVTRkSEpqVlc5b2FFOWhLM056WlhKaFlsVlliU1pOVDNWNGJVdGtPV3BNTWk1emRtY2dhV1JuY0RGUVpHdERVaTBsUWpSSWRuQnJUMnhuUUVodGJEODFSU001UlNJOFkyNXdRV1ozYURWUFowaHBlbVJqUmpJM1FVSTJabmczZGxNMlUwWkNhV1Z5Y1hWT05IcGhUa2Q1U1VSSWJsWmxZVmhsTEZaamNsZGxZbUZLYkdocVl6aElZakJGVEZOd1lrUm9TekJJYVd4Nk5XWnZhVGxIVUc5UVpqZGFUVzlDZEZSYVVqaDRValVKUWtKR1YyOGdSV1pqT1dOYU9GTlVWblphUWs5ME9WTnVNelJZU2xGVVpqZEVjbGcwYkhOWk1sVnlSMUExU2k5alZ6a3plR1pLSzFGaGRVTm1UbEFxWkM4OVVrYzFhV05GTWt0RlFsOTVURGhYY205VFZ6WjFOaTlJT1dacmMzQk5iV2Q0UjBwSVZFODFWekUwYjI1TlFqVnlXWEpyS2tOcGR5OVVaWGg2S2twNVlsTTFUMkZ4YlVZNGJqQjZNV1ZhWWpaSlNGTnVhM2w0TldKcGRXSnZaWGRKUjI5b05qVlNhM2QzVm5sTk1qWlRXblVrYW5Oa1lUUlFla0ZEUjNCRGVFUnFURVJyUVhKTGNrZHBjRnBMYWpoSE9GaFVTMEpUVVhKVE1UaFVTMUUzTnpZek4ycGFXbE5VZW1zeVFYUnVkM0pOWW14eFJsWlNTemhJVkV3d1NWVkJRbUU1YjA5R1VFWkZNMVV6UlZGQlJVSlliakJZUjJkWVdHZHhZbTF6WVdZeFdHNXFXVlJ5ZERkMVZIRlJaa2hrZVdKSGJXWklNM1V2TXpOek9HOTVNazlwVURaUU9IQnFZakpuUzJRd1luTTJVamx3VGs1SFpXVlBVMFJ5TkdGU05rbDBNM2xOTWtGU0swOHlhRlY0VEdsdmJWTnNOWHBtVG5SSE1teE5kblp5VldkeU56aGFSVk56Ym0xMU1uZDJNM1ZRSzBWc1dGbGlaV3h1VXpaUmNUUmFkMEYwYmtjeFoyeGlaa1ZhV1VvdlZ6bE5iRk5xZVVKUWExRkpSR0ZETlRCMVVYaE5TbUYwWTI1aVJIVjBVQzl1VlhSWVpEVkhOVVJCZWxseFJVbGFUMDE2UmxVMFNsRlhNV2REZVV0T1EycERSMFo1T0d4WFEzaFViSFEzY2pJMVVuQnZaVzl5Y1ZsaVNHTnJVR1ZEUjNOQ1RUQTFVR28xVGtkRWVITjJhR1V2YTNRNGMyVmlVemhpWWpkWGF6RlJNemxOUzBGYVZqZERVa1V4UTJKTlpEbE5jemx0YW5WRlVuZHlOWGx6WjBkSU5YVnhSRXA0YzFGbVVHUjFNbVJJYUdWUVNXaFphVUpoWjJSVlJGVktSWGx3TjA1bWJXbERUM2hZWWxGVVRGcGtkakZHVW1rNGEzTXJhRkJJYldvMVdIRjZaalJ0UTNCR0szbGlWaTlYTmt4SU5WUTNiMU5VYlV0V1VVdE5VbEJ0YWtoTmVESlliMW94U2k5a1dHdDFhR2xJWVZCRGEweDJjSHBYWkVwR1YwRlNOVWxCVjJoV1UzUklibGhZVTBobloxQTFkM0pHWjJGMGFGQjBNSFZKYlZaVlUxRXJObTVFVGpoM04zTlBWRXA0ZVZVNVpVUmlNelJxWVdkWWJqUlRPRE5pU3pocE5qaDJWVWhtVFdGSVVHZHJSREJzYWxOd2VHWTFhblEzY0dSa1YyeDVaR3h4UVUxdVRsRkhVRnAzWjJsS01HMDBVbWxuYzJ4NmVpOXlhRnAwY0hwTFRuVlRabEZYYjJOU1dYRjJNMk13YzFSVU9VaDBZa0Y2U0RGU1VYRXpNREV6U1c1SWNrVXJjbU5YWW5SU2NUQjViRmRWUzA0NGEwcE5VRkpPZGpKcE1tazVkblpoVDNwcmFYcHhNazFuVDA5R1ptZDBjbUUyVmxkM1RrRmphM2h5WlVzeVQzZDNhWGRXUm14cmNsY3lSa2hwZEVWd1kyUXdZMGxCUVVKcE5ISXlhRmd6TmpwUVJUbGtkVnAxTUhkM2J6UjBTemRHUVZCemN6VnNObUZoU0Zkb1kzSmhjRWxJVTA5UFZHazBRakF6VHkxc1pEaGlXazlhYmpaVVozVnNOVUZoUTJWRFRVOWFNV1ZEZDBOelVYcG1kUzloVWxkT2RqaDRWR1ZsY2tSM1ZFSXZNa1pJZFVGdGRIQmFOM1Z6UVZWamFFUklNMFl5YldVOVoyZE5hSE50WmpoQ09WSldNRzA0TkVWME1ERFVOMHB6VVVOTlFWTnBZMk5sVWt0Q2VqTlJWa2RPU205VmRYUm1VakJNV1c5eGJHTm9TblZNY21sSk5VSnFPSFJCYzJOa2VUSkZRMEk0UXpKSVJGSTJkemwwTUhsemJYRTFjbEZ6VFZwS2NtSm9UWFp1V0dGWGMxazNOVFZoUkROcGNrdGFTemx2WlRSeWVtZGFSRWxoUVZST1dXNXZaSGhvWTFsNFdXWmhaMFpGT1ZOaWNFOHlWR1pHUlZCRGJUTmFjbmt6TjAwNGVsWnNhbmRLTXpKeFZHbFZhbkpYU1VobmJXOWtjR00yTW05VGNEUlNhMlV2TlVocWIzUXdaVGgwZFVSdFdHUmlUbFZ6WjA1VFlXVkJNREpaV1N0c2NuVnFlVWhNWjNoelIwdDJObEZzV2pCQ1prVjFWWFZSUjBOdlVFaFNaa0l3ZFhwVGEyb3pOekIyVWpSR1EyRjJTSGxEWlVOemFWTlNjRTF5TjBOUk1tdEhlREppZDBaUWEyMHhXVkJ6TlhWdWJVNVpWa0ZLZVhKU2JrMHhkRkZVUm5obGVEWkJhM1pSZERrNGJEQmhZMDV2V0U5RVN6WnNlSEoxUVVkV1ZtUmliMVJ5Wm5semFWaHZiWE5rTUhVd0szQnFNbGRZZUVWU1NVVnFhVUZ2VGpJeWIzVlVhM1YzY1ZKS01ubzVaM2d6V2t4aFNIaEZhRGhwZFVOa2FrNXlaMUZqVmxkdlRYVXlNRzFMYVhab1pWWktObWRqZWtkSWJGRlVXamhCVGxCT1ZHVlRXbEJhZDJab1pESkVUVkJ4Tm5VM1JtWmlOVWN4V2poUWNGUkthVFo2U1ROaGVrNUpXbGd6VDBSMGNrTjNXWE54VUVOa2JFeG1WRTR2TjNabVZWVm5VbUl3T1VGbWVsaEhZMHRrY0hkMWVWRXdOVVZoUkhOS1F6WnJaM1V6VVRkdWNFOUdTVTlxUzJ0NVlVazNTMlJHYWpaWE5rVkdNM2h6TVVocmRFeElNSGRPYkRoWVkybGpNMWQxU0Vac2EwVXJXVkoxZFVwWE5HSXlVRTlTZW5KVVpITjFkMVUwUVZCSU5HVm1iM0p1VkhNNGJVMTFjM2hKTkdsTmMzaGpZMGhEWjNKV01HWXpXR3AzU1dFeWNrSXphSEJhWkVSb2NreG9hSGxTVTJWRWVrOTNNSGhyZW0xellWbHFjR2xpUlVOS1FWVllOa2gwYTB0MlNUQlVVRVF6VWtwU2EzSkNjR1ZqY1ZkME9Gb3laSGhUUVZoMk5WQlpaakpEVFdGcGJXaHRTbWxRVG5kc2QycGhkRVU0U1VwaFJsVktjbUpVUXpKNU9UbHJXWEpWVTJoVGFIWjBUR3hSSzFCU1ltaGlWamh4WVZOMWFVMXJRMmhHUkU5cFdVbHlSbE5HUkdaaFlqVlJhVTFaUzI1NGMxaHljMDVPTWpjdVVHZFVkVzlRY2tKVVdGQlpOR1p4YzNKVVRYTjRlREZyVUZCTVdHTnRiMGQzZEVvdmRrVTVObGRtWVhoelFsWTFhMjEwZGpCS1EwTyEhIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiwKICAgICAgInB1cnBvc2UiOiAiYW55IG1hc2thYmxlIgogICAgfQogIF0KfQ==">
+    
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Noto Sans KR', 'Noto Sans JP', sans-serif;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .touch-button {
+            min-height: 44px;
+            min-width: 44px;
+            touch-action: manipulation;
+        }
+        
+        .quiz-option {
+            min-height: 60px;
+            touch-action: manipulation;
+        }
+        
+        .touch-feedback:active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script>
+        const { useState, useEffect, createElement: e } = React;
+
+        function KanjiQuizGame() {
+            // ============================================================
+            // 한자 데이터 (여기에 새로운 한자를 추가할 수 있습니다)
+            // ============================================================
+            // 데이터 추가 방법:
+            // 1. 아래 배열에 새로운 객체를 추가하세요
+            // 2. 형식: { kanji: '漢', reading: 'かん', meaning: '한나라', kunReading: '없음', onReading: 'カン (칸)', level: 1-4 }
+            // 3. level: 1(기초), 2(일상), 3(중급), 4(고급)
+            // 4. 레벨별로 구분하여 추가하면 관리하기 쉽습니다
+            // ============================================================
+            const kanjiData = [
+                // 레벨 1 - 기초 한자 (30개)
+                { kanji: '水', reading: 'みず', meaning: '물', kunReading: 'みず (미즈)', onReading: 'スイ (스이)', level: 1 },
+                { kanji: '火', reading: 'ひ', meaning: '불', kunReading: 'ひ (히)', onReading: 'カ (카)', level: 1 },
+                { kanji: '木', reading: 'き', meaning: '나무', kunReading: 'き (키)', onReading: 'モク・ボク (모쿠·보쿠)', level: 1 },
+                { kanji: '金', reading: 'きん', meaning: '금', kunReading: 'かね (카네)', onReading: 'キン (킨)', level: 1 },
+                { kanji: '土', reading: 'つち', meaning: '흙', kunReading: 'つち (츠치)', onReading: 'ド・ト (도·토)', level: 1 },
+                { kanji: '日', reading: 'ひ', meaning: '날/해', kunReading: 'ひ・か (히·카)', onReading: 'ニチ・ジツ (니치·지츠)', level: 1 },
+                { kanji: '月', reading: 'つき', meaning: '달', kunReading: 'つき (츠키)', onReading: 'ゲツ・ガツ (게츠·가츠)', level: 1 },
+                { kanji: '山', reading: 'やま', meaning: '산', kunReading: 'やま (야마)', onReading: 'サン (산)', level: 1 },
+                { kanji: '川', reading: 'かわ', meaning: '강', kunReading: 'かわ (카와)', onReading: 'セン (센)', level: 1 },
+                { kanji: '人', reading: 'ひと', meaning: '사람', kunReading: 'ひと (히토)', onReading: 'ジン・ニン (진·닌)', level: 1 },
+                { kanji: '大', reading: 'おお', meaning: '크다', kunReading: 'おお (오오)', onReading: 'ダイ・タイ (다이·타이)', level: 1 },
+                { kanji: '小', reading: 'ちい', meaning: '작다', kunReading: 'ちい・こ (치이·코)', onReading: 'ショウ (쇼)', level: 1 },
+                { kanji: '上', reading: 'うえ', meaning: '위', kunReading: 'うえ・かみ (우에·카미)', onReading: 'ジョウ (조)', level: 1 },
+                { kanji: '下', reading: 'した', meaning: '아래', kunReading: 'した・もと (시타·모토)', onReading: 'カ・ゲ (카·게)', level: 1 },
+                { kanji: '中', reading: 'なか', meaning: '가운데', kunReading: 'なか (나카)', onReading: 'チュウ (츄)', level: 1 },
+                { kanji: '右', reading: 'みぎ', meaning: '오른쪽', kunReading: 'みぎ (미기)', onReading: 'ウ・ユウ (우·유)', level: 1 },
+                { kanji: '左', reading: 'ひだり', meaning: '왼쪽', kunReading: 'ひだり (히다리)', onReading: 'サ (사)', level: 1 },
+                { kanji: '手', reading: 'て', meaning: '손', kunReading: 'て (테)', onReading: 'シュ (슈)', level: 1 },
+                { kanji: '足', reading: 'あし', meaning: '발', kunReading: 'あし (아시)', onReading: 'ソク (소쿠)', level: 1 },
+                { kanji: '目', reading: 'め', meaning: '눈', kunReading: 'め (메)', onReading: 'モク・ボク (모쿠·보쿠)', level: 1 },
+                { kanji: '口', reading: 'くち', meaning: '입', kunReading: 'くち (쿠치)', onReading: 'コウ・ク (코·쿠)', level: 1 },
+                { kanji: '耳', reading: 'みみ', meaning: '귀', kunReading: 'みみ (미미)', onReading: 'ジ (지)', level: 1 },
+                { kanji: '心', reading: 'こころ', meaning: '마음', kunReading: 'こころ (코코로)', onReading: 'シン (신)', level: 1 },
+                { kanji: '本', reading: 'ほん', meaning: '책', kunReading: 'もと (모토)', onReading: 'ホン (혼)', level: 1 },
+                { kanji: '字', reading: 'じ', meaning: '글자', kunReading: 'あざ (아자)', onReading: 'ジ (지)', level: 1 },
+                { kanji: '天', reading: 'てん', meaning: '하늘', kunReading: 'あま・あめ (아마·아메)', onReading: 'テン (텐)', level: 1 },
+                { kanji: '地', reading: 'ち', meaning: '땅', kunReading: 'ち (치)', onReading: 'チ・ジ (치·지)', level: 1 },
+                { kanji: '白', reading: 'しろ', meaning: '하얗다', kunReading: 'しろ (시로)', onReading: 'ハク・ビャク (하쿠·뱌쿠)', level: 1 },
+                { kanji: '黒', reading: 'くろ', meaning: '검다', kunReading: 'くろ (쿠로)', onReading: 'コク (코쿠)', level: 1 },
+                { kanji: '赤', reading: 'あか', meaning: '빨갛다', kunReading: 'あか (아카)', onReading: 'セキ・シャク (세키·샤쿠)', level: 1 },
+
+                // ============================================================
+                // 레벨 2 - 일상 한자 (40개)
+                // ============================================================
+                { kanji: '学', reading: 'がく', meaning: '배우다', kunReading: 'まな (마나)', onReading: 'ガク (가쿠)', level: 2 },
+                { kanji: '校', reading: 'こう', meaning: '학교', kunReading: '없음', onReading: 'コウ (코)', level: 2 },
+                { kanji: '車', reading: 'くるま', meaning: '자동차', kunReading: 'くるま (쿠루마)', onReading: 'シャ (샤)', level: 2 },
+                { kanji: '家', reading: 'いえ', meaning: '집', kunReading: 'いえ・うち (이에·우치)', onReading: 'カ・ケ (카·케)', level: 2 },
+                { kanji: '店', reading: 'みせ', meaning: '가게', kunReading: 'みせ (미세)', onReading: 'テン (텐)', level: 2 },
+                { kanji: '時', reading: 'とき', meaning: '시간', kunReading: 'とき (토키)', onReading: 'ジ (지)', level: 2 },
+                { kanji: '分', reading: 'ふん', meaning: '분', kunReading: 'わ (와)', onReading: 'ブン・フン (분·훈)', level: 2 },
+                { kanji: '年', reading: 'とし', meaning: '해/년', kunReading: 'とし (토시)', onReading: 'ネン (넨)', level: 2 },
+                { kanji: '今', reading: 'いま', meaning: '지금', kunReading: 'いま (이마)', onReading: 'コン・キン (콘·킨)', level: 2 },
+                { kanji: '先', reading: 'さき', meaning: '먼저', kunReading: 'さき (사키)', onReading: 'セン (센)', level: 2 },
+                { kanji: '生', reading: 'う', meaning: '살다', kunReading: 'う・い (우·이)', onReading: 'セイ・ショウ (세이·쇼)', level: 2 },
+                { kanji: '男', reading: 'おとこ', meaning: '남자', kunReading: 'おとこ (오토코)', onReading: 'ダン・ナン (단·난)', level: 2 },
+                { kanji: '女', reading: 'おんな', meaning: '여자', kunReading: 'おんな (온나)', onReading: 'ジョ・ニョ (조·뇨)', level: 2 },
+                { kanji: '子', reading: 'こ', meaning: '아이', kunReading: 'こ (코)', onReading: 'シ・ス (시·스)', level: 2 },
+                { kanji: '母', reading: 'はは', meaning: '어머니', kunReading: 'はは (하하)', onReading: 'ボ (보)', level: 2 },
+                { kanji: '父', reading: 'ちち', meaning: '아버지', kunReading: 'ちち (치치)', onReading: 'フ (후)', level: 2 },
+                { kanji: '食', reading: 'た', meaning: '먹다', kunReading: 'た (타)', onReading: 'ショク・ジキ (쇼쿠·지키)', level: 2 },
+                { kanji: '飲', reading: 'の', meaning: '마시다', kunReading: 'の (노)', onReading: 'イン (인)', level: 2 },
+                { kanji: '見', reading: 'み', meaning: '보다', kunReading: 'み (미)', onReading: 'ケン (켄)', level: 2 },
+                { kanji: '聞', reading: 'き', meaning: '듣다', kunReading: 'き (키)', onReading: 'ブン (분)', level: 2 },
+                { kanji: '言', reading: 'い', meaning: '말하다', kunReading: 'い (이)', onReading: 'ゲン・ゴン (겐·곤)', level: 2 },
+                { kanji: '話', reading: 'はな', meaning: '이야기하다', kunReading: 'はな (하나)', onReading: 'ワ (와)', level: 2 },
+                { kanji: '読', reading: 'よ', meaning: '읽다', kunReading: 'よ (요)', onReading: 'ドク・トク (도쿠·토쿠)', level: 2 },
+                { kanji: '書', reading: 'か', meaning: '쓰다', kunReading: 'か (카)', onReading: 'ショ (쇼)', level: 2 },
+                { kanji: '来', reading: 'く', meaning: '오다', kunReading: 'く (쿠)', onReading: 'ライ (라이)', level: 2 },
+                { kanji: '行', reading: 'い', meaning: '가다', kunReading: 'い・ゆ (이·유)', onReading: 'コウ・ギョウ (코·교)', level: 2 },
+                { kanji: '帰', reading: 'かえ', meaning: '돌아가다', kunReading: 'かえ (카에)', onReading: 'キ (키)', level: 2 },
+                { kanji: '買', reading: 'か', meaning: '사다', kunReading: 'か (카)', onReading: 'バイ (바이)', level: 2 },
+                { kanji: '売', reading: 'う', meaning: '팔다', kunReading: 'う (우)', onReading: 'バイ (바이)', level: 2 },
+                { kanji: '作', reading: 'つく', meaning: '만들다', kunReading: 'つく (츠쿠)', onReading: 'サク・サ (사쿠·사)', level: 2 },
+                { kanji: '使', reading: 'つか', meaning: '사용하다', kunReading: 'つか (츠카)', onReading: 'シ (시)', level: 2 },
+                { kanji: '立', reading: 'た', meaning: '서다', kunReading: 'た (타)', onReading: 'リツ・リュウ (리츠·류)', level: 2 },
+                { kanji: '入', reading: 'はい', meaning: '들어가다', kunReading: 'はい・い (하이·이)', onReading: 'ニュウ (뉴)', level: 2 },
+                { kanji: '出', reading: 'で', meaning: '나가다', kunReading: 'で (데)', onReading: 'シュツ・スイ (슈츠·스이)', level: 2 },
+                { kanji: '切', reading: 'き', meaning: '자르다', kunReading: 'き (키)', onReading: 'セツ・サイ (세츠·사이)', level: 2 },
+                { kanji: '持', reading: 'も', meaning: '가지다', kunReading: 'も (모)', onReading: 'ジ (지)', level: 2 },
+                { kanji: '知', reading: 'し', meaning: '알다', kunReading: 'し (시)', onReading: 'チ (치)', level: 2 },
+                { kanji: '思', reading: 'おも', meaning: '생각하다', kunReading: 'おも (오모)', onReading: 'シ (시)', level: 2 },
+                { kanji: '好', reading: 'す', meaning: '좋아하다', kunReading: 'す・この (스·코노)', onReading: 'コウ (코)', level: 2 },
+                { kanji: '高', reading: 'たか', meaning: '높다', kunReading: 'たか (타카)', onReading: 'コウ (코)', level: 2 },
+
+                // ============================================================
+                // 레벨 3 - 중급 한자 (20개)
+                // ============================================================
+                { kanji: '考', reading: 'かんが', meaning: '생각하다', kunReading: 'かんが (칸가)', onReading: 'コウ (코)', level: 3 },
+                { kanji: '感', reading: 'かん', meaning: '느끼다', kunReading: '없음', onReading: 'カン (칸)', level: 3 },
+                { kanji: '意', reading: 'い', meaning: '뜻', kunReading: '없음', onReading: 'イ (이)', level: 3 },
+                { kanji: '味', reading: 'あじ', meaning: '맛', kunReading: 'あじ (아지)', onReading: 'ミ (미)', level: 3 },
+                { kanji: '理', reading: 'り', meaning: '이치', kunReading: '없음', onReading: 'リ (리)', level: 3 },
+                { kanji: '解', reading: 'と', meaning: '풀다', kunReading: 'と (토)', onReading: 'カイ・ゲ (카이·게)', level: 3 },
+                { kanji: '説', reading: 'せつ', meaning: '설명', kunReading: '없음', onReading: 'セツ・ゼイ (세츠·제이)', level: 3 },
+                { kanji: '明', reading: 'あか', meaning: '밝다', kunReading: 'あか (아카)', onReading: 'メイ・ミョウ (메이·묘)', level: 3 },
+                { kanji: '暗', reading: 'くら', meaning: '어둡다', kunReading: 'くら (쿠라)', onReading: 'アン (안)', level: 3 },
+                { kanji: '重', reading: 'おも', meaning: '무겁다', kunReading: 'おも (오모)', onReading: 'ジュウ・チョウ (주·초)', level: 3 },
+                { kanji: '軽', reading: 'かる', meaning: '가볍다', kunReading: 'かる (카루)', onReading: 'ケイ (케이)', level: 3 },
+                { kanji: '早', reading: 'はや', meaning: '빠르다', kunReading: 'はや (하야)', onReading: 'ソウ・サッ (소·삿)', level: 3 },
+                { kanji: '遅', reading: 'おそ', meaning: '늦다', kunReading: 'おそ・おく (오소·오쿠)', onReading: 'チ (치)', level: 3 },
+                { kanji: '新', reading: 'あたら', meaning: '새롭다', kunReading: 'あたら (아타라)', onReading: 'シン (신)', level: 3 },
+                { kanji: '古', reading: 'ふる', meaning: '오래되다', kunReading: 'ふる (후루)', onReading: 'コ (코)', level: 3 },
+                { kanji: '若', reading: 'わか', meaning: '젊다', kunReading: 'わか (와카)', onReading: 'ジャク・ニャク (자쿠·냐쿠)', level: 3 },
+                { kanji: '多', reading: 'おお', meaning: '많다', kunReading: 'おお (오오)', onReading: 'タ (타)', level: 3 },
+                { kanji: '少', reading: 'すく', meaning: '적다', kunReading: 'すく・すこ (스쿠·스코)', onReading: 'ショウ (쇼)', level: 3 },
+                { kanji: '長', reading: 'なが', meaning: '길다', kunReading: 'なが (나가)', onReading: 'チョウ (초)', level: 3 },
+                { kanji: '短', reading: 'みじか', meaning: '짧다', kunReading: 'みじか (미지카)', onReading: 'タン (탄)', level: 3 },
+
+                // ============================================================
+                // 레벨 4 - 고급 한자 (10개)
+                // ============================================================
+                { kanji: '強', reading: 'つよ', meaning: '강하다', kunReading: 'つよ (츠요)', onReading: 'キョウ・ゴウ (교·고)', level: 4 },
+                { kanji: '正', reading: 'ただ', meaning: '바르다', kunReading: 'ただ (타다)', onReading: 'セイ・ショウ (세이·쇼)', level: 4 },
+                { kanji: '美', reading: 'うつく', meaning: '아름답다', kunReading: 'うつく (우츠쿠)', onReading: 'ビ (비)', level: 4 },
+                { kanji: '悪', reading: 'わる', meaning: '나쁘다', kunReading: 'わる (와루)', onReading: 'アク・オ (아쿠·오)', level: 4 },
+                { kanji: '危', reading: 'あぶ', meaning: '위험하다', kunReading: 'あぶ・あや (아부·아야)', onReading: 'キ (키)', level: 4 },
+                { kanji: '安', reading: 'やす', meaning: '안전하다', kunReading: 'やす (야스)', onReading: 'アン (안)', level: 4 },
+                { kanji: '便', reading: 'べん', meaning: '편리하다', kunReading: '없음', onReading: 'ベン・ビン (벤·빈)', level: 4 },
+                { kanji: '利', reading: 'り', meaning: '이익', kunReading: '없음', onReading: 'リ (리)', level: 4 },
+                { kanji: '特', reading: 'とく', meaning: '특별하다', kunReading: '없음', onReading: 'トク (토쿠)', level: 4 },
+                { kanji: '別', reading: 'べつ', meaning: '다르다', kunReading: 'わか (와카)', onReading: 'ベツ (베츠)', level: 4 }
+
+                // ============================================================
+                // 새로운 레벨 추가 방법:
+                // 1. 위의 마지막 줄에 쉼표(,)를 추가
+                // 2. 새로운 레벨 섹션을 추가 (예: // 레벨 5 - 최고급 한자)
+                // 3. 한자 데이터를 추가하되 level: 5로 설정
+                // 4. UI에서는 자동으로 레벨이 인식되지만, 필요시 544-560줄의
+                //    레벨 선택 드롭다운에 option을 추가해야 합니다
+                // ============================================================
+            ];
+
+            const [currentQuestion, setCurrentQuestion] = useState(null);
+            const [options, setOptions] = useState([]);
+            const [selectedAnswer, setSelectedAnswer] = useState(null);
+            const [showResult, setShowResult] = useState(false);
+            const [score, setScore] = useState(0);
+            const [questionCount, setQuestionCount] = useState(0);
+            const [lives, setLives] = useState(3);
+            const [gameOver, setGameOver] = useState(false);
+            const [streak, setStreak] = useState(0);
+            const [maxStreak, setMaxStreak] = useState(0);
+            const [usedQuestions, setUsedQuestions] = useState([]);
+            const [gameCompletionType, setGameCompletionType] = useState('');
+            const [selectedLevel, setSelectedLevel] = useState('all');
+            const [questionType, setQuestionType] = useState('meaning');
+            const [targetQuestionCount, setTargetQuestionCount] = useState(20);
+            const [inputValue, setInputValue] = useState('20');
+
+            // PWA 설치 가능 감지 및 안내
+            useEffect(() => {
+                let deferredPrompt;
+                
+                const handleBeforeInstallPrompt = (e) => {
+                    e.preventDefault();
+                    deferredPrompt = e;
+                    console.log('PWA 설치 가능!');
+                };
+                
+                window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+                
+                // iOS Safari에서 홈 화면 추가 안내
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+                const isStandalone = window.navigator.standalone;
+                
+                if (isIOS && !isStandalone) {
+                    console.log('iOS에서 홈 화면에 추가 가능!');
+                }
+                
+                return () => {
+                    window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+                };
+            }, []);
+
+            // 서비스 워커 등록 (오프라인 지원)
+            useEffect(() => {
+                if ('serviceWorker' in navigator) {
+                    const swCode = `
+                        const CACHE_NAME = 'kanji-quiz-v1';
+                        const urlsToCache = [
+                            './',
+                            'data:text/html;charset=utf-8,' + encodeURIComponent(document.documentElement.outerHTML)
+                        ];
+
+                        self.addEventListener('install', (event) => {
+                            event.waitUntil(
+                                caches.open(CACHE_NAME)
+                                    .then((cache) => cache.addAll(urlsToCache))
+                            );
+                        });
+
+                        self.addEventListener('fetch', (event) => {
+                            event.respondWith(
+                                caches.match(event.request)
+                                    .then((response) => {
+                                        if (response) {
+                                            return response;
+                                        }
+                                        return fetch(event.request);
+                                    })
+                            );
+                        });
+                    `;
+                    
+                    const blob = new Blob([swCode], { type: 'application/javascript' });
+                    const swUrl = URL.createObjectURL(blob);
+                    
+                    navigator.serviceWorker.register(swUrl)
+                        .then((registration) => {
+                            console.log('서비스 워커 등록 성공:', registration);
+                        })
+                        .catch((error) => {
+                            console.log('서비스 워커 등록 실패:', error);
+                        });
+                }
+            }, []);
+
+            // 진동 및 사운드 함수들 (모바일 최적화)
+            const vibrate = (pattern) => {
+                // 진동 지원 여부 확인 및 사용자 상호작용 후에만 실행
+                if ('vibrate' in navigator && navigator.vibrate) {
+                    try {
+                        // 안드로이드는 배열, iOS는 단일 값만 지원
+                        if (Array.isArray(pattern)) {
+                            navigator.vibrate(pattern);
+                        } else {
+                            navigator.vibrate(pattern);
+                        }
+                    } catch (e) {
+                        console.log('진동 실행 실패:', e);
+                    }
+                }
+            };
+
+            // AudioContext 재사용 (메모리 누수 방지)
+            let audioContext = null;
+
+            const playSound = (frequencies) => {
+                try {
+                    if (!audioContext) {
+                        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    }
+                    frequencies.forEach((freq, index) => {
+                        const oscillator = audioContext.createOscillator();
+                        const gainNode = audioContext.createGain();
+
+                        oscillator.connect(gainNode);
+                        gainNode.connect(audioContext.destination);
+
+                        oscillator.frequency.setValueAtTime(freq, audioContext.currentTime + index * 0.1);
+                        gainNode.gain.setValueAtTime(0.2, audioContext.currentTime + index * 0.1);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + index * 0.1 + 0.2);
+
+                        oscillator.start(audioContext.currentTime + index * 0.1);
+                        oscillator.stop(audioContext.currentTime + index * 0.1 + 0.2);
+                    });
+                } catch (e) {
+                    console.log('오디오 재생 불가');
+                }
+            };
+
+            const handleQuestionCountChange = (value) => {
+                setInputValue(value);
+                
+                // 빈 문자열이 아니고 유효한 숫자일 때만 업데이트
+                const numValue = parseInt(value);
+                if (!isNaN(numValue) && numValue >= 1 && numValue <= 100) {
+                    setTargetQuestionCount(numValue);
+                }
+            };
+
+            const handleQuestionCountBlur = () => {
+                // 포커스를 잃을 때 유효성 검사
+                const numValue = parseInt(inputValue);
+                if (isNaN(numValue) || numValue < 1 || numValue > 100) {
+                    // 유효하지 않으면 이전 값으로 복원
+                    setInputValue(targetQuestionCount.toString());
+                } else {
+                    setTargetQuestionCount(numValue);
+                }
+            };
+
+            const getFilteredKanjiData = () => {
+                if (selectedLevel === 'all') return kanjiData;
+                return kanjiData.filter(kanji => kanji.level === parseInt(selectedLevel));
+            };
+
+            // 통합된 문제 생성 함수
+            const generateQuestion = (trackAsUsed = true) => {
+                if (gameOver) return;
+
+                const filteredData = getFilteredKanjiData();
+                const unusedData = filteredData.filter(kanji => !usedQuestions.includes(kanji.kanji));
+
+                // 사용 가능한 문제가 없으면 전체 완료
+                if (unusedData.length === 0) {
+                    setGameOver(true);
+                    setGameCompletionType('complete');
+                    playSound([523.25, 659.25, 783.99, 1046.50]);
+                    vibrate([100, 50, 100, 50, 100, 50, 200]);
+                    return;
+                }
+
+                const randomKanji = unusedData[Math.floor(Math.random() * unusedData.length)];
+                const correctAnswer = questionType === 'meaning' ? randomKanji.meaning : randomKanji.reading;
+
+                const wrongAnswers = kanjiData
+                    .filter(k => k.kanji !== randomKanji.kanji)
+                    .map(k => questionType === 'meaning' ? k.meaning : k.reading)
+                    .filter(answer => answer !== correctAnswer)
+                    .filter((answer, index, arr) => arr.indexOf(answer) === index)
+                    .sort(() => Math.random() - 0.5)
+                    .slice(0, 3);
+
+                const allOptions = [correctAnswer, ...wrongAnswers].sort(() => Math.random() - 0.5);
+
+                setCurrentQuestion(randomKanji);
+                setOptions(allOptions);
+                setSelectedAnswer(null);
+                setShowResult(false);
+
+                // trackAsUsed가 true일 때만 usedQuestions에 추가
+                if (trackAsUsed) {
+                    setUsedQuestions(prev => [...prev, randomKanji.kanji]);
+                }
+            };
+
+            const handleAnswerSelect = (answer) => {
+                if (showResult) return;
+                
+                setSelectedAnswer(answer);
+                setShowResult(true);
+                
+                const correctAnswer = questionType === 'meaning' ? currentQuestion.meaning : currentQuestion.reading;
+                const isCorrect = answer === correctAnswer;
+                
+                const newQuestionCount = questionCount + 1;
+                setQuestionCount(newQuestionCount);
+                
+                if (isCorrect) {
+                    setScore(score + 10);
+                    setStreak(streak + 1);
+                    setMaxStreak(Math.max(maxStreak, streak + 1));
+                    playSound([523.25, 659.25, 783.99]);
+                    vibrate([100, 50, 100]);
+                } else {
+                    setLives(lives - 1);
+                    setStreak(0);
+                    playSound([392.00, 329.63, 261.63]);
+                    vibrate([200]);
+                    
+                    // 생명력 소진 확인 (목표 달성보다 우선)
+                    if (lives <= 1) {
+                        setGameOver(true);
+                        setGameCompletionType('lives');
+                        return;
+                    }
+                }
+                
+                // 목표 문제 수에 도달했는지 확인 (생명력이 남아있을 때만)
+                if (newQuestionCount >= targetQuestionCount) {
+                    setGameOver(true);
+                    setGameCompletionType('target');
+                    playSound([523.25, 659.25, 783.99, 1046.50]);
+                    vibrate([100, 50, 100, 50, 100, 50, 200]);
+                }
+            };
+
+            const nextQuestion = () => {
+                if (gameOver) return;
+                generateQuestion(true); // 새 문제 생성
+            };
+
+            const resetGame = () => {
+                setScore(0);
+                setQuestionCount(0);
+                setLives(3);
+                setGameOver(false);
+                setStreak(0);
+                setSelectedAnswer(null);
+                setShowResult(false);
+                setUsedQuestions([]);
+                setGameCompletionType('');
+                // targetQuestionCount는 사용자 설정값 유지, inputValue 동기화
+                setInputValue(targetQuestionCount.toString());
+                generateQuestion(true); // 새 문제 생성
+            };
+
+            const toggleQuestionType = () => {
+                setQuestionType(questionType === 'meaning' ? 'reading' : 'meaning');
+            };
+
+            useEffect(() => {
+                // 문제 유형이나 레벨이 바뀔 때 진행 상태 리셋
+                setUsedQuestions([]);
+                setQuestionCount(0);
+                setScore(0);
+                setStreak(0);
+                setSelectedAnswer(null);
+                setShowResult(false);
+                generateQuestion(true); // 새 문제 생성
+            }, [questionType, selectedLevel]);
+
+            // inputValue를 targetQuestionCount와 동기화
+            useEffect(() => {
+                setInputValue(targetQuestionCount.toString());
+            }, [targetQuestionCount]);
+
+            if (gameOver) {
+                let completionMessage, completionEmoji;
+                
+                if (gameCompletionType === 'complete') {
+                    completionMessage = '굉장해요! 모든 문제를 다 풀었습니다!';
+                    completionEmoji = '🎉';
+                } else if (gameCompletionType === 'target') {
+                    completionMessage = `목표 달성! ${targetQuestionCount}문제를 완료했습니다!`;
+                    completionEmoji = '🎯';
+                } else {
+                    completionMessage = '이런, 아쉬워요.';
+                    completionEmoji = '😢';
+                }
+                
+                return e('div', {
+                    className: "min-h-screen bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 flex items-center justify-center p-4"
+                }, 
+                    e('div', {
+                        className: "bg-white rounded-2xl shadow-2xl p-6 max-w-md w-full text-center"
+                    },
+                        e('div', { className: "text-6xl mb-4" }, completionEmoji),
+                        e('h2', { className: "text-2xl font-bold text-gray-800 mb-2" }, completionMessage),
+                        e('div', { className: "space-y-2 mb-6" },
+                            e('div', { className: "text-lg text-gray-600" }, 
+                                "최종 점수: ", 
+                                e('span', { className: "font-bold text-purple-600" }, score + "점")
+                            ),
+                            e('div', { className: "text-sm text-gray-600" }, 
+                                "풀이한 문제: " + questionCount + "개 / " + targetQuestionCount + "개 (목표)"
+                            ),
+                            e('div', { className: "text-xs text-gray-500" }, 
+                                "이용 가능한 문제: " + getFilteredKanjiData().length + "개 / 총 " + kanjiData.length + "개"
+                            ),
+                            e('div', { className: "text-sm text-gray-600" }, "최고 연속: " + maxStreak + "개"),
+                            e('div', { className: "text-sm text-gray-600" }, 
+                                "정답률: " + (questionCount > 0 ? Math.round((score / (questionCount * 10)) * 100) : 0) + "%"
+                            )
+                        ),
+                        e('button', {
+                            onClick: resetGame,
+                            className: "bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-xl font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-200 touch-button touch-feedback"
+                        }, "🔄 다시 시작")
+                    )
+                );
+            }
+
+            if (!currentQuestion) {
+                return e('div', {
+                    className: "min-h-screen bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 flex items-center justify-center"
+                },
+                    e('div', { className: "text-white text-xl" }, "문제 준비 중...")
+                );
+            }
+
+            const correctAnswer = questionType === 'meaning' ? currentQuestion.meaning : currentQuestion.reading;
+
+            return e('div', { className: "min-h-screen bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 p-4" },
+                e('div', { className: "max-w-2xl mx-auto" },
+                    e('div', { className: "bg-white/10 backdrop-blur-sm rounded-2xl p-4 mb-6 text-white" },
+                        e('div', { className: "flex justify-between items-center mb-3" },
+                            e('div', { className: "flex items-center gap-4" },
+                                e('div', { className: "flex items-center gap-1" },
+                                    e('span', { className: "text-xl" }, "🏆"),
+                                    e('span', { className: "font-semibold" }, score + "점")
+                                ),
+                                e('div', { className: "flex items-center gap-1" },
+                                    e('span', { className: "text-xl" }, "🧠"),
+                                    e('span', null, "연속 " + streak)
+                                )
+                            ),
+                            e('div', { className: "flex items-center gap-1" },
+                                Array.from({length: 3}, (_, i) => 
+                                    e('span', {
+                                        key: i,
+                                        className: `text-2xl ${i < lives ? 'text-red-400' : 'text-white/30'}`
+                                    }, "❤️")
+                                )
+                            )
+                        ),
+                        e('div', { className: "flex gap-2 flex-wrap text-sm" },
+                            e('select', {
+                                value: selectedLevel,
+                                onChange: (ev) => setSelectedLevel(ev.target.value),
+                                className: "bg-white/20 hover:bg-white/30 px-3 py-1 rounded-lg transition-colors text-white touch-button"
+                            },
+                                e('option', { value: "all", className: "text-gray-800" }, "전체 레벨"),
+                                e('option', { value: "1", className: "text-gray-800" }, "레벨 1 (기초)"),
+                                e('option', { value: "2", className: "text-gray-800" }, "레벨 2 (일상)"),
+                                e('option', { value: "3", className: "text-gray-800" }, "레벨 3 (중급)"),
+                                e('option', { value: "4", className: "text-gray-800" }, "레벨 4 (고급)")
+                            ),
+                            e('input', {
+                                type: "number",
+                                min: "1",
+                                max: "100",
+                                value: inputValue,
+                                onChange: (ev) => handleQuestionCountChange(ev.target.value),
+                                onBlur: handleQuestionCountBlur,
+                                onKeyDown: (ev) => {
+                                    if (ev.key === 'Enter') {
+                                        ev.target.blur(); // Enter 키를 누르면 포커스 해제 (onBlur 트리거)
+                                    }
+                                },
+                                className: "bg-white/20 hover:bg-white/30 px-3 py-1 rounded-lg transition-colors text-white w-20 touch-button",
+                                placeholder: "문제 수"
+                            }),
+                            e('button', {
+                                onClick: toggleQuestionType,
+                                className: "bg-white/20 hover:bg-white/30 px-3 py-1 rounded-lg transition-colors touch-button touch-feedback"
+                            }, questionType === 'meaning' ? '뜻 → 읽기' : '읽기 → 뜻'),
+                            e('button', {
+                                onClick: () => generateQuestion(false), // 문제 바꾸기 (진행도에 추가하지 않음)
+                                disabled: showResult,
+                                className: "bg-white/20 hover:bg-white/30 px-3 py-1 rounded-lg transition-colors disabled:opacity-50 touch-button touch-feedback"
+                            }, "🔀 문제 바꾸기"),
+                            e('div', { className: "text-xs text-white/70 flex items-center gap-1 px-2 py-1" },
+                                "🔊📳",
+                                questionCount + "/" + targetQuestionCount
+                            )
+                        )
+                    ),
+
+                    e('div', { className: "bg-white rounded-2xl shadow-2xl p-8" },
+                        e('div', { className: "text-center mb-8" },
+                            e('div', { className: "bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl p-6 mb-4" },
+                                e('div', { className: "text-6xl font-bold text-gray-800 mb-2" }, currentQuestion.kanji),
+                                e('div', { className: "text-lg text-gray-600" },
+                                    questionType === 'meaning' ? '이 한자의 뜻은?' : '이 한자의 읽기는?'
+                                )
+                            ),
+                            e('div', { className: "text-sm text-gray-500" },
+                                "문제 " + (questionCount + 1) + " / " + targetQuestionCount + " • 레벨 " + currentQuestion.level
+                            )
+                        ),
+
+                        e('div', { className: "grid grid-cols-1 gap-3 mb-6" },
+                            options.map((option, index) => {
+                                let buttonClass = "w-full p-4 rounded-xl border-2 font-medium transition-all duration-200 quiz-option touch-feedback ";
+                                
+                                if (!showResult) {
+                                    buttonClass += "border-gray-200 hover:border-purple-300 hover:bg-purple-50 bg-white";
+                                } else if (option === correctAnswer) {
+                                    buttonClass += "border-green-400 bg-green-50 text-green-700";
+                                } else if (option === selectedAnswer && option !== correctAnswer) {
+                                    buttonClass += "border-red-400 bg-red-50 text-red-700";
+                                } else {
+                                    buttonClass += "border-gray-200 bg-gray-50 text-gray-500";
+                                }
+
+                                return e('button', {
+                                    key: index,
+                                    onClick: () => handleAnswerSelect(option),
+                                    className: buttonClass,
+                                    disabled: showResult
+                                }, option);
+                            })
+                        ),
+
+                        showResult && e('div', { className: "text-center" },
+                            e('div', {
+                                className: `text-lg font-semibold mb-4 ${selectedAnswer === correctAnswer ? 'text-green-600' : 'text-red-600'}`
+                            }, selectedAnswer === correctAnswer ? '정답입니다! 🎉' : '틀렸습니다 😅'),
+                            
+                            e('div', { className: "bg-blue-50 rounded-lg p-4 mb-4 text-sm" },
+                                e('div', { className: "grid grid-cols-1 gap-2" },
+                                    e('div', null,
+                                        e('strong', null, "한자: "),
+                                        e('span', { className: "text-2xl" }, currentQuestion.kanji)
+                                    ),
+                                    e('div', null,
+                                        e('strong', null, "뜻: "),
+                                        currentQuestion.meaning
+                                    ),
+                                    e('div', null,
+                                        e('strong', null, "훈독: "),
+                                        currentQuestion.kunReading === '없음' ? '없음' : currentQuestion.kunReading
+                                    ),
+                                    e('div', null,
+                                        e('strong', null, "음독: "),
+                                        currentQuestion.onReading
+                                    ),
+                                    selectedAnswer !== correctAnswer && e('div', { className: "text-red-600" },
+                                        e('strong', null, "정답: "),
+                                        correctAnswer
+                                    )
+                                )
+                            ),
+                            
+                            e('button', {
+                                onClick: nextQuestion,
+                                className: "bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-xl font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-200 touch-button touch-feedback"
+                            }, "다음 문제")
+                        )
+                    )
+                )
+            );
+        }
+
+        ReactDOM.render(React.createElement(KanjiQuizGame), document.getElementById('root'));
+    </script>
+</body>
+</html>

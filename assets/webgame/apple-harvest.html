@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>🍎 사과 수확 게임</title>
+
+    <!-- PWA 메타 태그 -->
+    <meta name="description" content="숫자를 연결해서 합이 10이 되도록 만드는 퍼즐 게임">
+    <meta name="theme-color" content="#22C55E">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="사과수확">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIuy궗닾 siijd븷 寃뚯엫IiwKICAic2hvcnRfbmFtZSI6ICLsgqzqs7zsiJjtmZUiLAogICJkZXNjcmlwdGlvbiI6ICLsiKvsnpDrpbwg7Je176-EC7hґ7hґ IO2VqO2VvCDqiIbsnbQgMTDsnbQg65GQ64-EIOunceuToOuKlCDtjLzspkDqsozs엫IiwKICAic3RhcnRfdXJsIjogIi4vIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAib3JpZW50YXRpb24iOiAicG9ydHJhaXQiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMyMkM1NUUiLAogICJ0aGVtZV9jb2xvciI6ICIjMjJDNTVFIiwKICAiY2F0ZWdvcmllcyI6IFsiZ2FtZXMiLCAicHV6emxlIl0sCiAgImxhbmciOiAia28iLAogICJpY29ucyI6IFtdCn0=">
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @keyframes fallDown {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(300px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .apple-fall {
+            animation: fallDown 0.8s ease-in forwards;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script>
+        const { useState, useEffect, useRef, createElement: e } = React;
+
+        function NumberTenGame() {
+            const [grid, setGrid] = useState([]);
+            const [selectedCells, setSelectedCells] = useState([]);
+            const [score, setScore] = useState(0);
+            const [dragState, setDragState] = useState({
+                isDragging: false,
+                direction: null,
+                path: []
+            });
+            const [animations, setAnimations] = useState([]);
+            const [timeLeft, setTimeLeft] = useState(120);
+            const [gameOver, setGameOver] = useState(false);
+            const [gameStarted, setGameStarted] = useState(false);
+            const [lastMoveTime, setLastMoveTime] = useState(Date.now());
+            const [hintCells, setHintCells] = useState([]);
+            const [combo, setCombo] = useState(0);
+            const [lastSuccessTime, setLastSuccessTime] = useState(null);
+            const [showCombo, setShowCombo] = useState(false);
+            const timerRef = useRef(null);
+            const hintTimerRef = useRef(null);
+
+            // 10이 되는 조합들
+            const COMBINATIONS = {
+                2: [[1,9], [2,8], [3,7], [4,6], [5,5]],
+                3: [[1,2,7], [1,3,6], [1,4,5], [2,3,5], [2,2,6], [3,3,4], [1,1,8]],
+                4: [[1,2,3,4], [1,1,3,5], [1,2,2,5], [2,2,2,4], [1,1,4,4], [1,1,2,6]],
+                5: [[1,1,1,1,6], [1,1,1,2,5], [1,1,2,2,4], [1,1,1,3,4]],
+                6: [[1,1,1,1,1,5], [1,1,1,1,2,4], [1,1,1,2,2,3]],
+                7: [[1,1,1,1,1,1,4], [1,1,1,1,1,2,3]],
+                8: [[1,1,1,1,1,1,1,3], [1,1,1,1,1,1,2,2]],
+                9: [[1,1,1,1,1,1,1,1,2]]
+            };
+
+            // 라인별로 해결 가능한 숫자 배치 생성
+            const generateLine = (length) => {
+                const line = [];
+                let remaining = length;
+
+                while (remaining > 0) {
+                    const possibleSizes = Object.keys(COMBINATIONS)
+                        .map(Number)
+                        .filter(size => size <= remaining && size <= 9);
+
+                    if (possibleSizes.length === 0) {
+                        line.push(1);
+                        remaining--;
+                    } else {
+                        const weights = possibleSizes.map(size => size <= 3 ? 4 : size <= 5 ? 2 : 1);
+                        const totalWeight = weights.reduce((a, b) => a + b, 0);
+                        let random = Math.random() * totalWeight;
+
+                        let selectedSize = 2;
+                        for (let i = 0; i < possibleSizes.length; i++) {
+                            random -= weights[i];
+                            if (random <= 0) {
+                                selectedSize = possibleSizes[i];
+                                break;
+                            }
+                        }
+
+                        const combos = COMBINATIONS[selectedSize];
+                        const combo = combos[Math.floor(Math.random() * combos.length)];
+                        line.push(...combo);
+                        remaining -= combo.length;
+                    }
+                }
+
+                // 라인 내에서 섞기
+                for (let i = line.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [line[i], line[j]] = [line[j], line[i]];
+
+                    if (i >= 2 && line[i] === line[i-1] && line[i] === line[i-2]) {
+                        const k = Math.floor(Math.random() * line.length);
+                        [line[i], line[k]] = [line[k], line[i]];
+                    }
+                }
+
+                return line;
+            };
+
+            // 균형잡힌 그리드 생성
+            const generateGrid = () => {
+                const grid = [];
+
+                for (let i = 0; i < 15; i++) {
+                    grid[i] = generateLine(15);
+                }
+
+                for (let col = 0; col < 15; col++) {
+                    if (Math.random() < 0.3) {
+                        const columnValues = generateLine(15);
+                        for (let row = 0; row < 15; row++) {
+                            grid[row][col] = columnValues[row];
+                        }
+                    }
+                }
+
+                return grid;
+            };
+
+            // AudioContext 재사용 (메모리 누수 방지)
+            let audioContext = null;
+
+            // 사운드 재생 함수
+            const playSound = (frequencies) => {
+                try {
+                    if (!audioContext) {
+                        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    }
+                    frequencies.forEach((freq, index) => {
+                        const oscillator = audioContext.createOscillator();
+                        const gainNode = audioContext.createGain();
+
+                        oscillator.connect(gainNode);
+                        gainNode.connect(audioContext.destination);
+
+                        oscillator.frequency.setValueAtTime(freq, audioContext.currentTime + index * 0.1);
+                        gainNode.gain.setValueAtTime(0.2, audioContext.currentTime + index * 0.1);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + index * 0.1 + 0.3);
+
+                        oscillator.start(audioContext.currentTime + index * 0.1);
+                        oscillator.stop(audioContext.currentTime + index * 0.1 + 0.3);
+                    });
+                } catch (e) {
+                    console.log('오디오 재생 불가');
+                }
+            };
+
+            // 힌트 찾기 - 가능한 조합 찾기
+            const findHint = () => {
+                if (!grid || grid.length === 0) return;
+
+                // 가로 방향 검색
+                for (let row = 0; row < 15; row++) {
+                    for (let startCol = 0; startCol < 15; startCol++) {
+                        if (grid[row][startCol] === null) continue;
+
+                        let sum = 0;
+                        const path = [];
+
+                        for (let endCol = startCol; endCol < 15 && grid[row][endCol] !== null; endCol++) {
+                            sum += grid[row][endCol];
+                            path.push(`${row}-${endCol}`);
+
+                            if (sum === 10 && path.length >= 2 && path.length <= 9) {
+                                setHintCells(path);
+                                return;
+                            }
+                            if (sum > 10) break;
+                        }
+                    }
+                }
+
+                // 세로 방향 검색
+                for (let col = 0; col < 15; col++) {
+                    for (let startRow = 0; startRow < 15; startRow++) {
+                        if (grid[startRow][col] === null) continue;
+
+                        let sum = 0;
+                        const path = [];
+
+                        for (let endRow = startRow; endRow < 15 && grid[endRow][col] !== null; endRow++) {
+                            sum += grid[endRow][col];
+                            path.push(`${endRow}-${col}`);
+
+                            if (sum === 10 && path.length >= 2 && path.length <= 9) {
+                                setHintCells(path);
+                                return;
+                            }
+                            if (sum > 10) break;
+                        }
+                    }
+                }
+            };
+
+            // 게임 시작/재시작
+            const startGame = () => {
+                setGrid(generateGrid());
+                setScore(0);
+                setSelectedCells([]);
+                setDragState({ isDragging: false, direction: null, path: [] });
+                setAnimations([]);
+                setTimeLeft(120);
+                setGameOver(false);
+                setGameStarted(true);
+                setLastMoveTime(Date.now());
+                setHintCells([]);
+                setCombo(0);
+                setLastSuccessTime(null);
+                setShowCombo(false);
+
+                if (timerRef.current) clearInterval(timerRef.current);
+                if (hintTimerRef.current) clearInterval(hintTimerRef.current);
+            };
+
+            // 타이머 관리
+            useEffect(() => {
+                if (gameStarted && !gameOver && timeLeft > 0) {
+                    timerRef.current = setInterval(() => {
+                        setTimeLeft(prev => {
+                            if (prev <= 1) {
+                                setGameOver(true);
+                                // 게임 오버 사운드 (하강 멜로디)
+                                playSound([392.00, 349.23, 293.66, 261.63]);
+                                return 0;
+                            }
+                            return prev - 1;
+                        });
+                    }, 1000);
+                } else if (timerRef.current) {
+                    clearInterval(timerRef.current);
+                }
+
+                return () => {
+                    if (timerRef.current) clearInterval(timerRef.current);
+                };
+            }, [gameStarted, gameOver, timeLeft]);
+
+            // 힌트 타이머 관리 (15초마다 체크)
+            useEffect(() => {
+                if (gameStarted && !gameOver) {
+                    hintTimerRef.current = setInterval(() => {
+                        const now = Date.now();
+                        if (now - lastMoveTime >= 15000) {
+                            findHint();
+                        }
+                    }, 1000);
+                } else if (hintTimerRef.current) {
+                    clearInterval(hintTimerRef.current);
+                }
+
+                return () => {
+                    if (hintTimerRef.current) clearInterval(hintTimerRef.current);
+                };
+            }, [gameStarted, gameOver, lastMoveTime, grid]);
+
+            // 인접 확인
+            const canConnect = (from, to, direction) => {
+                if (!direction) return from.row === to.row || from.col === to.col;
+
+                if (direction === 'horizontal' && from.row !== to.row) return false;
+                if (direction === 'vertical' && from.col !== to.col) return false;
+
+                if (from.row === to.row) {
+                    const [minCol, maxCol] = [Math.min(from.col, to.col), Math.max(from.col, to.col)];
+                    for (let col = minCol + 1; col < maxCol; col++) {
+                        if (grid[from.row][col] !== null) return false;
+                    }
+                    return true;
+                }
+
+                if (from.col === to.col) {
+                    const [minRow, maxRow] = [Math.min(from.row, to.row), Math.max(from.row, to.row)];
+                    for (let row = minRow + 1; row < maxRow; row++) {
+                        if (grid[row][from.col] !== null) return false;
+                    }
+                    return true;
+                }
+
+                return false;
+            };
+
+            // 드래그 시작
+            const handleDragStart = (row, col) => {
+                if (grid[row][col] === null || gameOver || !gameStarted) return;
+
+                setDragState({
+                    isDragging: true,
+                    direction: null,
+                    path: [{ row, col }]
+                });
+                setSelectedCells([`${row}-${col}`]);
+            };
+
+            // 드래그 중
+            const handleDragMove = (row, col) => {
+                if (!dragState.isDragging || grid[row][col] === null) return;
+
+                const cellKey = `${row}-${col}`;
+                if (selectedCells.includes(cellKey)) return;
+
+                const newCell = { row, col };
+                const lastCell = dragState.path[dragState.path.length - 1];
+
+                let direction = dragState.direction;
+                if (!direction && dragState.path.length === 1) {
+                    if (lastCell.row === newCell.row) direction = 'horizontal';
+                    else if (lastCell.col === newCell.col) direction = 'vertical';
+                    else return;
+                }
+
+                if (canConnect(lastCell, newCell, direction)) {
+                    setDragState({
+                        ...dragState,
+                        direction,
+                        path: [...dragState.path, newCell]
+                    });
+                    setSelectedCells([...selectedCells, cellKey]);
+                }
+            };
+
+            // 드래그 종료
+            const handleDragEnd = () => {
+                if (!dragState.isDragging) return;
+
+                const sum = dragState.path.reduce((acc, cell) => acc + (grid[cell.row][cell.col] || 0), 0);
+
+                if (sum === 10 && dragState.path.length >= 2 && dragState.path.length <= 9) {
+                    const cellKeys = dragState.path.map(cell => `${cell.row}-${cell.col}`);
+                    setAnimations(cellKeys);
+
+                    const length = dragState.path.length;
+                    const now = Date.now();
+
+                    // 콤보 체크 (15초 이내)
+                    let currentCombo = 0;
+                    let comboBonus = 0;
+                    if (lastSuccessTime && now - lastSuccessTime <= 15000) {
+                        currentCombo = combo + 1;
+                        comboBonus = length * 5; // 사과당 +5점
+                        setCombo(currentCombo);
+                        setShowCombo(true);
+                        setTimeout(() => setShowCombo(false), 2000);
+                        // 콤보 사운드 (화려한 4음)
+                        playSound([523.25, 659.25, 783.99, 1046.50]);
+                    } else {
+                        setCombo(0);
+                        // 일반 성공 사운드 (기본 3음)
+                        playSound([523.25, 659.25, 783.99]);
+                    }
+
+                    setLastSuccessTime(now);
+                    setLastMoveTime(now);
+                    setHintCells([]); // 힌트 제거
+
+                    const baseScore = length * 10;
+                    const lengthBonus = length >= 8 ? 50 : length >= 6 ? 30 : length >= 4 ? 10 : 0;
+                    setScore(score + baseScore + lengthBonus + comboBonus);
+
+                    setTimeout(() => {
+                        const newGrid = grid.map(row => [...row]);
+                        dragState.path.forEach(cell => {
+                            newGrid[cell.row][cell.col] = null;
+                        });
+                        setGrid(newGrid);
+                        setAnimations([]);
+                    }, 800);
+                }
+
+                setDragState({ isDragging: false, direction: null, path: [] });
+                setSelectedCells([]);
+            };
+
+            // 터치 이벤트 처리
+            const handleTouchMove = (ev) => {
+                ev.preventDefault();
+                const touch = ev.touches[0];
+                const element = document.elementFromPoint(touch.clientX, touch.clientY);
+                if (element?.dataset.row) {
+                    handleDragMove(parseInt(element.dataset.row), parseInt(element.dataset.col));
+                }
+            };
+
+            const formatTime = (seconds) => {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            };
+
+            return e('div', {
+                className: "flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-green-400 to-green-600 p-4"
+            },
+                e('div', {
+                    className: "bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-6 max-w-5xl relative overflow-hidden"
+                },
+                    e('div', { className: "text-center mb-4" },
+                        e('h1', { className: "text-3xl font-bold text-gray-800 mb-1" }, "🍎 사과 수확 게임"),
+                        e('p', { className: "text-gray-600 text-sm" }, "사과를 드래그해서 합이 10이 되도록 만드세요!")
+                    ),
+
+                    !gameStarted ? e('div', { className: "flex flex-col items-center justify-center py-32" },
+                        e('div', { className: "text-8xl mb-6 animate-bounce" }, "🍎"),
+                        e('h2', { className: "text-2xl font-bold text-gray-800 mb-4" }, "사과 수확 게임을 시작하시겠습니까?"),
+                        e('p', { className: "text-gray-600 mb-2" }, "사과 과수원에서 2분 동안 수확하세요!"),
+                        e('p', { className: "text-gray-500 text-sm mb-2" }, "사과를 가로 또는 세로로 연결할 수 있습니다"),
+                        e('p', { className: "text-gray-500 text-sm mb-2" }, "2개부터 9개까지 연결해서 합이 10이 되면 수확!"),
+                        e('p', { className: "text-gray-400 text-xs mb-8" }, "예: 7+3, 1+2+3+4, 1+1+1+1+1+1+1+1+2"),
+                        e('button', {
+                            onClick: startGame,
+                            className: "flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full transition-all transform hover:scale-105 text-lg font-semibold shadow-lg mb-6"
+                        }, "▶️ 수확 시작"),
+                        e('div', { className: "bg-green-100 rounded-lg p-4 text-sm max-w-md" },
+                            e('h3', { className: "font-semibold mb-2 text-gray-700" }, "🍎 수확 점수:"),
+                            e('ul', { className: "text-gray-600 space-y-1" },
+                                e('li', null, "• 기본: 사과 개수 × 10점"),
+                                e('li', null, "• 4개 이상: +10점 보너스"),
+                                e('li', null, "• 6개 이상: +30점 보너스"),
+                                e('li', null, "• 8개 이상: +50점 대박 보너스!")
+                            )
+                        )
+                    ) : e('div', null,
+                        e('div', { className: "flex justify-between items-center mb-4" },
+                            e('div', { className: "flex items-center gap-3" },
+                                e('div', { className: "flex items-center gap-2 bg-yellow-100 px-3 py-1.5 rounded-full" },
+                                    e('span', { className: "text-lg" }, "🧺"),
+                                    e('span', { className: "text-lg font-bold text-gray-800" }, score + "점")
+                                ),
+                                combo > 0 && e('div', { className: "flex items-center gap-1 bg-orange-100 px-3 py-1.5 rounded-full" },
+                                    e('span', { className: "text-lg" }, "🔥"),
+                                    e('span', { className: "text-lg font-bold text-orange-600" }, combo + " COMBO")
+                                )
+                            ),
+
+                            e('div', {
+                                className: `flex items-center gap-2 px-3 py-1.5 rounded-full ${
+                                    timeLeft < 30 ? 'bg-red-100' : 'bg-green-100'
+                                }`
+                            },
+                                e('span', { className: "text-lg" }, "⏱️"),
+                                e('span', {
+                                    className: `text-lg font-bold ${
+                                        timeLeft < 30 ? 'text-red-600' : 'text-green-600'
+                                    }`
+                                }, formatTime(timeLeft))
+                            ),
+
+                            e('button', {
+                                onClick: startGame,
+                                className: "flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-3 py-1.5 rounded-full transition-colors text-sm"
+                            }, "🔄 새 수확")
+                        ),
+
+                        e('div', {
+                            className: "grid gap-1 p-4 bg-gradient-to-b from-green-50 to-green-100 rounded-2xl select-none relative",
+                            style: { gridTemplateColumns: 'repeat(15, minmax(0, 1fr))', minHeight: '600px' },
+                            onMouseUp: handleDragEnd,
+                            onMouseLeave: handleDragEnd
+                        },
+                            grid.map((row, rowIndex) =>
+                                row.map((value, colIndex) => {
+                                    const cellKey = `${rowIndex}-${colIndex}`;
+                                    const isSelected = selectedCells.includes(cellKey);
+                                    const isAnimating = animations.includes(cellKey);
+                                    const isPath = dragState.path.some(p => p.row === rowIndex && p.col === colIndex);
+                                    const isHint = hintCells.includes(cellKey);
+
+                                    return e('div', {
+                                        key: cellKey,
+                                        'data-row': rowIndex,
+                                        'data-col': colIndex,
+                                        className: `
+                                            relative w-12 h-12 flex items-center justify-center
+                                            cursor-pointer transition-all duration-300
+                                            ${value === null ? '' : 'transform hover:scale-110'}
+                                            ${isSelected ? 'scale-125 z-10' : ''}
+                                            ${isAnimating ? 'apple-fall z-20' : ''}
+                                            ${isHint ? 'animate-pulse ring-2 ring-yellow-400 rounded-lg' : ''}
+                                        `,
+                                        onMouseDown: () => handleDragStart(rowIndex, colIndex),
+                                        onMouseEnter: () => handleDragMove(rowIndex, colIndex),
+                                        onTouchStart: (ev) => {
+                                            ev.preventDefault();
+                                            handleDragStart(rowIndex, colIndex);
+                                        },
+                                        onTouchMove: handleTouchMove,
+                                        onTouchEnd: (ev) => {
+                                            ev.preventDefault();
+                                            handleDragEnd();
+                                        }
+                                    },
+                                        value !== null && e('div', { className: "relative" },
+                                            e('span', {
+                                                className: `text-5xl ${isSelected ? 'brightness-110' : ''}`
+                                            }, "🍎"),
+                                            e('span', {
+                                                className: `
+                                                    absolute inset-0 flex items-center justify-center
+                                                    font-bold text-white text-lg
+                                                    ${isAnimating ? 'opacity-0' : ''}
+                                                `,
+                                                style: {
+                                                    textShadow: '1px 1px 2px rgba(0,0,0,0.8), -1px -1px 2px rgba(0,0,0,0.8)'
+                                                }
+                                            }, !isAnimating && value),
+                                            isPath && !isAnimating && e('div', null,
+                                                e('div', { className: "absolute -top-2 -right-2" },
+                                                    e('span', {
+                                                        className: "text-xl animate-pulse",
+                                                        style: { filter: 'drop-shadow(0 0 3px rgba(255,255,0,0.8))' }
+                                                    }, "⚡")
+                                                ),
+                                                dragState.direction === 'horizontal' && dragState.path.length > 1 &&
+                                                    e('div', { className: "absolute inset-0 flex items-center pointer-events-none" },
+                                                        e('div', { className: "w-full h-1 bg-yellow-400 opacity-50" })
+                                                    ),
+                                                dragState.direction === 'vertical' && dragState.path.length > 1 &&
+                                                    e('div', { className: "absolute inset-0 flex items-center justify-center pointer-events-none" },
+                                                        e('div', { className: "w-1 h-full bg-yellow-400 opacity-50" })
+                                                    )
+                                            )
+                                        )
+                                    );
+                                })
+                            ),
+
+                            showCombo && e('div', {
+                                className: "absolute top-20 left-1/2 -translate-x-1/2 pointer-events-none z-30"
+                            },
+                                e('div', {
+                                    className: "bg-gradient-to-r from-orange-500/80 to-red-500/80 backdrop-blur-sm text-white px-6 py-3 rounded-full shadow-2xl text-2xl font-bold animate-bounce border-2 border-white/50"
+                                }, "🔥 " + (combo + 1) + " COMBO! 🔥")
+                            ),
+
+                            gameOver && e('div', {
+                                className: "absolute inset-0 bg-black/50 backdrop-blur-sm rounded-2xl flex items-center justify-center z-20"
+                            },
+                                e('div', { className: "bg-white rounded-2xl p-8 text-center" },
+                                    e('div', { className: "text-6xl mb-4" }, "🍎"),
+                                    e('h2', { className: "text-3xl font-bold mb-2 text-gray-800" }, "수확 완료!"),
+                                    e('p', { className: "text-2xl mb-4 text-gray-700" },
+                                        "총 수확량: ",
+                                        e('span', { className: "text-green-600 font-bold" }, score + "점")
+                                    ),
+                                    e('button', {
+                                        onClick: startGame,
+                                        className: "bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full transition-all transform hover:scale-105 font-semibold text-lg"
+                                    }, "다시 수확하기")
+                                )
+                            )
+                        ),
+
+                        e('div', { className: "mt-4 text-center text-gray-600" },
+                            e('p', { className: "text-xs mb-1" }, "🍎 팁: 사과를 수확하려면 합이 10이 되도록 연결하세요!"),
+                            e('p', { className: "text-xs" }, "많은 사과를 한번에 수확할수록 보너스 점수!")
+                        ),
+
+                        e('button', {
+                            onClick: () => {
+                                setGameStarted(false);
+                                if (timerRef.current) clearInterval(timerRef.current);
+                                if (hintTimerRef.current) clearInterval(hintTimerRef.current);
+                            },
+                            className: "absolute top-4 left-4 bg-gray-500 hover:bg-gray-600 text-white p-2 rounded-full transition-colors shadow-lg z-30",
+                            title: "시작 메뉴로"
+                        }, "🏠")
+                    )
+                )
+            );
+        }
+
+        ReactDOM.render(React.createElement(NumberTenGame), document.getElementById('root'));
+    </script>
+</body>
+</html>
