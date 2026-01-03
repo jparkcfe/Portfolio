@@ -5,21 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>🍎 사과 수확 게임</title>
 
-    <!-- PWA 메타 태그 -->
     <meta name="description" content="숫자를 연결해서 합이 10이 되도록 만드는 퍼즐 게임">
     <meta name="theme-color" content="#22C55E">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="사과수확">
 
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIuy궗닾 siijd븷 寃뚯엫IiwKICAic2hvcnRfbmFtZSI6ICLsgqzqs7zsiJjtmZUiLAogICJkZXNjcmlwdGlvbiI6ICLsiKvsnpDrpbwg7Je176-EC7hґ7hґ IO2VqO2VvCDqiIbsnbQgMTDsnbQg65GQ64-EIOunceuToOuKlCDtjLzspkDqsozs엫IiwKICAic3RhcnRfdXJsIjogIi4vIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAib3JpZW50YXRpb24iOiAicG9ydHJhaXQiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMyMkM1NUUiLAogICJ0aGVtZV9jb2xvciI6ICIjMjJDNTVFIiwKICAiY2F0ZWdvcmllcyI6IFsiZ2FtZXMiLCAicHV6emxlIl0sCiAgImxhbmciOiAia28iLAogICJpY29ucyI6IFtdCn0=">
-
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             -webkit-user-select: none;
@@ -38,8 +39,492 @@
             }
         }
 
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(-25%);
+                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+            }
+            50% {
+                transform: translateY(0);
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
         .apple-fall {
             animation: fallDown 0.8s ease-in forwards;
+        }
+
+        .animate-bounce {
+            animation: bounce 1s infinite;
+        }
+
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        /* Main container */
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom right, #4ade80, #16a34a);
+            padding: 1rem;
+        }
+
+        /* Game card */
+        .game-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(4px);
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            padding: 1.5rem;
+            max-width: 80rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .game-header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .game-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .game-subtitle {
+            color: #4b5563;
+            font-size: 0.875rem;
+        }
+
+        /* Start screen */
+        .start-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 0;
+        }
+
+        .start-icon {
+            font-size: 6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .start-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .start-desc {
+            color: #4b5563;
+            margin-bottom: 0.5rem;
+        }
+
+        .start-hint {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .start-example {
+            color: #9ca3af;
+            font-size: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Buttons */
+        .btn-start {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #22c55e;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.125rem;
+            font-weight: 600;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            transition: all 0.2s;
+        }
+
+        .btn-start:hover {
+            background-color: #16a34a;
+            transform: scale(1.05);
+        }
+
+        .btn-restart {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #22c55e;
+            color: white;
+            padding: 0.375rem 0.75rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: background-color 0.2s;
+        }
+
+        .btn-restart:hover {
+            background-color: #16a34a;
+        }
+
+        .btn-home {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: #6b7280;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            z-index: 30;
+        }
+
+        .btn-home:hover {
+            background-color: #4b5563;
+        }
+
+        .btn-retry {
+            background-color: #22c55e;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.2s;
+        }
+
+        .btn-retry:hover {
+            background-color: #16a34a;
+            transform: scale(1.05);
+        }
+
+        /* Score info box */
+        .score-info-box {
+            background-color: #dcfce7;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            max-width: 28rem;
+        }
+
+        .score-info-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+
+        .score-info-list {
+            color: #4b5563;
+            list-style: none;
+        }
+
+        .score-info-list li {
+            margin-bottom: 0.25rem;
+        }
+
+        /* Game status bar */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .score-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #fef3c7;
+            padding: 0.375rem 0.75rem;
+            border-radius: 9999px;
+        }
+
+        .score-badge-icon {
+            font-size: 1.125rem;
+        }
+
+        .score-badge-text {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .combo-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            background-color: #ffedd5;
+            padding: 0.375rem 0.75rem;
+            border-radius: 9999px;
+        }
+
+        .combo-badge-icon {
+            font-size: 1.125rem;
+        }
+
+        .combo-badge-text {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #ea580c;
+        }
+
+        .timer-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.375rem 0.75rem;
+            border-radius: 9999px;
+        }
+
+        .timer-badge.normal {
+            background-color: #dcfce7;
+        }
+
+        .timer-badge.warning {
+            background-color: #fee2e2;
+        }
+
+        .timer-badge-icon {
+            font-size: 1.125rem;
+        }
+
+        .timer-badge-text {
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+
+        .timer-badge-text.normal {
+            color: #16a34a;
+        }
+
+        .timer-badge-text.warning {
+            color: #dc2626;
+        }
+
+        /* Game grid */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(15, minmax(0, 1fr));
+            gap: 0.25rem;
+            padding: 1rem;
+            background: linear-gradient(to bottom, #f0fdf4, #dcfce7);
+            border-radius: 1rem;
+            user-select: none;
+            position: relative;
+            min-height: 600px;
+        }
+
+        /* Grid cell */
+        .grid-cell {
+            position: relative;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .grid-cell:not(.empty):hover {
+            transform: scale(1.1);
+        }
+
+        .grid-cell.selected {
+            transform: scale(1.25);
+            z-index: 10;
+        }
+
+        .grid-cell.animating {
+            z-index: 20;
+        }
+
+        .grid-cell.hint {
+            box-shadow: 0 0 0 2px #facc15;
+            border-radius: 0.5rem;
+        }
+
+        .apple-container {
+            position: relative;
+        }
+
+        .apple-emoji {
+            font-size: 3rem;
+        }
+
+        .apple-emoji.bright {
+            filter: brightness(1.1);
+        }
+
+        .apple-number {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 1.125rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8), -1px -1px 2px rgba(0,0,0,0.8);
+        }
+
+        .apple-number.hidden {
+            opacity: 0;
+        }
+
+        /* Path indicator */
+        .path-indicator {
+            position: absolute;
+            top: -0.5rem;
+            right: -0.5rem;
+        }
+
+        .path-indicator-icon {
+            font-size: 1.25rem;
+            filter: drop-shadow(0 0 3px rgba(255, 255, 0, 0.8));
+        }
+
+        .line-horizontal {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        .line-horizontal-inner {
+            width: 100%;
+            height: 0.25rem;
+            background-color: #facc15;
+            opacity: 0.5;
+        }
+
+        .line-vertical {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .line-vertical-inner {
+            width: 0.25rem;
+            height: 100%;
+            background-color: #facc15;
+            opacity: 0.5;
+        }
+
+        /* Combo popup */
+        .combo-popup {
+            position: absolute;
+            top: 5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+            z-index: 30;
+        }
+
+        .combo-popup-inner {
+            background: linear-gradient(to right, rgba(249, 115, 22, 0.8), rgba(239, 68, 68, 0.8));
+            backdrop-filter: blur(4px);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            font-size: 1.5rem;
+            font-weight: 700;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* Game over overlay */
+        .game-over-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+        }
+
+        .game-over-box {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .game-over-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .game-over-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+
+        .game-over-score {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #374151;
+        }
+
+        .game-over-score-value {
+            color: #16a34a;
+            font-weight: 700;
+        }
+
+        /* Footer tips */
+        .footer-tips {
+            margin-top: 1rem;
+            text-align: center;
+            color: #4b5563;
+        }
+
+        .footer-tips p {
+            font-size: 0.75rem;
+            margin-bottom: 0.25rem;
         }
     </style>
 </head>
@@ -419,31 +904,27 @@
                 return `${mins}:${secs.toString().padStart(2, '0')}`;
             };
 
-            return e('div', {
-                className: "flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-green-400 to-green-600 p-4"
-            },
-                e('div', {
-                    className: "bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-6 max-w-5xl relative overflow-hidden"
-                },
-                    e('div', { className: "text-center mb-4" },
-                        e('h1', { className: "text-3xl font-bold text-gray-800 mb-1" }, "🍎 사과 수확 게임"),
-                        e('p', { className: "text-gray-600 text-sm" }, "사과를 드래그해서 합이 10이 되도록 만드세요!")
+            return e('div', { className: "game-container" },
+                e('div', { className: "game-card" },
+                    e('div', { className: "game-header" },
+                        e('h1', { className: "game-title" }, "🍎 사과 수확 게임"),
+                        e('p', { className: "game-subtitle" }, "사과를 드래그해서 합이 10이 되도록 만드세요!")
                     ),
 
-                    !gameStarted ? e('div', { className: "flex flex-col items-center justify-center py-32" },
-                        e('div', { className: "text-8xl mb-6 animate-bounce" }, "🍎"),
-                        e('h2', { className: "text-2xl font-bold text-gray-800 mb-4" }, "사과 수확 게임을 시작하시겠습니까?"),
-                        e('p', { className: "text-gray-600 mb-2" }, "사과 과수원에서 2분 동안 수확하세요!"),
-                        e('p', { className: "text-gray-500 text-sm mb-2" }, "사과를 가로 또는 세로로 연결할 수 있습니다"),
-                        e('p', { className: "text-gray-500 text-sm mb-2" }, "2개부터 9개까지 연결해서 합이 10이 되면 수확!"),
-                        e('p', { className: "text-gray-400 text-xs mb-8" }, "예: 7+3, 1+2+3+4, 1+1+1+1+1+1+1+1+2"),
+                    !gameStarted ? e('div', { className: "start-screen" },
+                        e('div', { className: "start-icon animate-bounce" }, "🍎"),
+                        e('h2', { className: "start-title" }, "사과 수확 게임을 시작하시겠습니까?"),
+                        e('p', { className: "start-desc" }, "사과 과수원에서 2분 동안 수확하세요!"),
+                        e('p', { className: "start-hint" }, "사과를 가로 또는 세로로 연결할 수 있습니다"),
+                        e('p', { className: "start-hint" }, "2개부터 9개까지 연결해서 합이 10이 되면 수확!"),
+                        e('p', { className: "start-example" }, "예: 7+3, 1+2+3+4, 1+1+1+1+1+1+1+1+2"),
                         e('button', {
                             onClick: startGame,
-                            className: "flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full transition-all transform hover:scale-105 text-lg font-semibold shadow-lg mb-6"
+                            className: "btn-start"
                         }, "▶️ 수확 시작"),
-                        e('div', { className: "bg-green-100 rounded-lg p-4 text-sm max-w-md" },
-                            e('h3', { className: "font-semibold mb-2 text-gray-700" }, "🍎 수확 점수:"),
-                            e('ul', { className: "text-gray-600 space-y-1" },
+                        e('div', { className: "score-info-box" },
+                            e('h3', { className: "score-info-title" }, "🍎 수확 점수:"),
+                            e('ul', { className: "score-info-list" },
                                 e('li', null, "• 기본: 사과 개수 × 10점"),
                                 e('li', null, "• 4개 이상: +10점 보너스"),
                                 e('li', null, "• 6개 이상: +30점 보너스"),
@@ -451,40 +932,35 @@
                             )
                         )
                     ) : e('div', null,
-                        e('div', { className: "flex justify-between items-center mb-4" },
-                            e('div', { className: "flex items-center gap-3" },
-                                e('div', { className: "flex items-center gap-2 bg-yellow-100 px-3 py-1.5 rounded-full" },
-                                    e('span', { className: "text-lg" }, "🧺"),
-                                    e('span', { className: "text-lg font-bold text-gray-800" }, score + "점")
+                        e('div', { className: "status-bar" },
+                            e('div', { className: "status-left" },
+                                e('div', { className: "score-badge" },
+                                    e('span', { className: "score-badge-icon" }, "🧺"),
+                                    e('span', { className: "score-badge-text" }, score + "점")
                                 ),
-                                combo > 0 && e('div', { className: "flex items-center gap-1 bg-orange-100 px-3 py-1.5 rounded-full" },
-                                    e('span', { className: "text-lg" }, "🔥"),
-                                    e('span', { className: "text-lg font-bold text-orange-600" }, combo + " COMBO")
+                                combo > 0 && e('div', { className: "combo-badge" },
+                                    e('span', { className: "combo-badge-icon" }, "🔥"),
+                                    e('span', { className: "combo-badge-text" }, combo + " COMBO")
                                 )
                             ),
 
                             e('div', {
-                                className: `flex items-center gap-2 px-3 py-1.5 rounded-full ${
-                                    timeLeft < 30 ? 'bg-red-100' : 'bg-green-100'
-                                }`
+                                className: "timer-badge " + (timeLeft < 30 ? 'warning' : 'normal')
                             },
-                                e('span', { className: "text-lg" }, "⏱️"),
+                                e('span', { className: "timer-badge-icon" }, "⏱️"),
                                 e('span', {
-                                    className: `text-lg font-bold ${
-                                        timeLeft < 30 ? 'text-red-600' : 'text-green-600'
-                                    }`
+                                    className: "timer-badge-text " + (timeLeft < 30 ? 'warning' : 'normal')
                                 }, formatTime(timeLeft))
                             ),
 
                             e('button', {
                                 onClick: startGame,
-                                className: "flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-3 py-1.5 rounded-full transition-colors text-sm"
+                                className: "btn-restart"
                             }, "🔄 새 수확")
                         ),
 
                         e('div', {
-                            className: "grid gap-1 p-4 bg-gradient-to-b from-green-50 to-green-100 rounded-2xl select-none relative",
-                            style: { gridTemplateColumns: 'repeat(15, minmax(0, 1fr))', minHeight: '600px' },
+                            className: "game-grid",
                             onMouseUp: handleDragEnd,
                             onMouseLeave: handleDragEnd
                         },
@@ -496,18 +972,17 @@
                                     const isPath = dragState.path.some(p => p.row === rowIndex && p.col === colIndex);
                                     const isHint = hintCells.includes(cellKey);
 
+                                    let cellClass = "grid-cell";
+                                    if (value === null) cellClass += " empty";
+                                    if (isSelected) cellClass += " selected";
+                                    if (isAnimating) cellClass += " apple-fall animating";
+                                    if (isHint) cellClass += " hint animate-pulse";
+
                                     return e('div', {
                                         key: cellKey,
                                         'data-row': rowIndex,
                                         'data-col': colIndex,
-                                        className: `
-                                            relative w-12 h-12 flex items-center justify-center
-                                            cursor-pointer transition-all duration-300
-                                            ${value === null ? '' : 'transform hover:scale-110'}
-                                            ${isSelected ? 'scale-125 z-10' : ''}
-                                            ${isAnimating ? 'apple-fall z-20' : ''}
-                                            ${isHint ? 'animate-pulse ring-2 ring-yellow-400 rounded-lg' : ''}
-                                        `,
+                                        className: cellClass,
                                         onMouseDown: () => handleDragStart(rowIndex, colIndex),
                                         onMouseEnter: () => handleDragMove(rowIndex, colIndex),
                                         onTouchStart: (ev) => {
@@ -520,34 +995,26 @@
                                             handleDragEnd();
                                         }
                                     },
-                                        value !== null && e('div', { className: "relative" },
+                                        value !== null && e('div', { className: "apple-container" },
                                             e('span', {
-                                                className: `text-5xl ${isSelected ? 'brightness-110' : ''}`
+                                                className: "apple-emoji" + (isSelected ? " bright" : "")
                                             }, "🍎"),
                                             e('span', {
-                                                className: `
-                                                    absolute inset-0 flex items-center justify-center
-                                                    font-bold text-white text-lg
-                                                    ${isAnimating ? 'opacity-0' : ''}
-                                                `,
-                                                style: {
-                                                    textShadow: '1px 1px 2px rgba(0,0,0,0.8), -1px -1px 2px rgba(0,0,0,0.8)'
-                                                }
+                                                className: "apple-number" + (isAnimating ? " hidden" : "")
                                             }, !isAnimating && value),
                                             isPath && !isAnimating && e('div', null,
-                                                e('div', { className: "absolute -top-2 -right-2" },
+                                                e('div', { className: "path-indicator" },
                                                     e('span', {
-                                                        className: "text-xl animate-pulse",
-                                                        style: { filter: 'drop-shadow(0 0 3px rgba(255,255,0,0.8))' }
+                                                        className: "path-indicator-icon animate-pulse"
                                                     }, "⚡")
                                                 ),
                                                 dragState.direction === 'horizontal' && dragState.path.length > 1 &&
-                                                    e('div', { className: "absolute inset-0 flex items-center pointer-events-none" },
-                                                        e('div', { className: "w-full h-1 bg-yellow-400 opacity-50" })
+                                                    e('div', { className: "line-horizontal" },
+                                                        e('div', { className: "line-horizontal-inner" })
                                                     ),
                                                 dragState.direction === 'vertical' && dragState.path.length > 1 &&
-                                                    e('div', { className: "absolute inset-0 flex items-center justify-center pointer-events-none" },
-                                                        e('div', { className: "w-1 h-full bg-yellow-400 opacity-50" })
+                                                    e('div', { className: "line-vertical" },
+                                                        e('div', { className: "line-vertical-inner" })
                                                     )
                                             )
                                         )
@@ -555,35 +1022,31 @@
                                 })
                             ),
 
-                            showCombo && e('div', {
-                                className: "absolute top-20 left-1/2 -translate-x-1/2 pointer-events-none z-30"
-                            },
+                            showCombo && e('div', { className: "combo-popup" },
                                 e('div', {
-                                    className: "bg-gradient-to-r from-orange-500/80 to-red-500/80 backdrop-blur-sm text-white px-6 py-3 rounded-full shadow-2xl text-2xl font-bold animate-bounce border-2 border-white/50"
+                                    className: "combo-popup-inner animate-bounce"
                                 }, "🔥 " + (combo + 1) + " COMBO! 🔥")
                             ),
 
-                            gameOver && e('div', {
-                                className: "absolute inset-0 bg-black/50 backdrop-blur-sm rounded-2xl flex items-center justify-center z-20"
-                            },
-                                e('div', { className: "bg-white rounded-2xl p-8 text-center" },
-                                    e('div', { className: "text-6xl mb-4" }, "🍎"),
-                                    e('h2', { className: "text-3xl font-bold mb-2 text-gray-800" }, "수확 완료!"),
-                                    e('p', { className: "text-2xl mb-4 text-gray-700" },
+                            gameOver && e('div', { className: "game-over-overlay" },
+                                e('div', { className: "game-over-box" },
+                                    e('div', { className: "game-over-icon" }, "🍎"),
+                                    e('h2', { className: "game-over-title" }, "수확 완료!"),
+                                    e('p', { className: "game-over-score" },
                                         "총 수확량: ",
-                                        e('span', { className: "text-green-600 font-bold" }, score + "점")
+                                        e('span', { className: "game-over-score-value" }, score + "점")
                                     ),
                                     e('button', {
                                         onClick: startGame,
-                                        className: "bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full transition-all transform hover:scale-105 font-semibold text-lg"
+                                        className: "btn-retry"
                                     }, "다시 수확하기")
                                 )
                             )
                         ),
 
-                        e('div', { className: "mt-4 text-center text-gray-600" },
-                            e('p', { className: "text-xs mb-1" }, "🍎 팁: 사과를 수확하려면 합이 10이 되도록 연결하세요!"),
-                            e('p', { className: "text-xs" }, "많은 사과를 한번에 수확할수록 보너스 점수!")
+                        e('div', { className: "footer-tips" },
+                            e('p', null, "🍎 팁: 사과를 수확하려면 합이 10이 되도록 연결하세요!"),
+                            e('p', null, "많은 사과를 한번에 수확할수록 보너스 점수!")
                         ),
 
                         e('button', {
@@ -592,7 +1055,7 @@
                                 if (timerRef.current) clearInterval(timerRef.current);
                                 if (hintTimerRef.current) clearInterval(hintTimerRef.current);
                             },
-                            className: "absolute top-4 left-4 bg-gray-500 hover:bg-gray-600 text-white p-2 rounded-full transition-colors shadow-lg z-30",
+                            className: "btn-home",
                             title: "시작 메뉴로"
                         }, "🏠")
                     )
