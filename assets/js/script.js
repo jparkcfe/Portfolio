@@ -451,8 +451,8 @@ const projectData = {
     },
     overview: "노벨피아 플랫폼에서 연재하여 완결한 웹소설입니다. 총 126화 분량으로 약 6개월간 연재되었습니다.",
     concept: [
-      "<strong>서사 구성 능력</strong>을 보여주는 작품",
-      "게임 시나리오 작성의 <strong>기반이 되는 스토리텔링 경험</strong>"
+      "<strong>6개월간 126화 완결</strong> — 장기 프로젝트 완주 경험",
+      "주 5회 연재 일정 준수, <strong>마감 관리 능력</strong> 증명"
     ],
     systems: [],
     externalLink: {
