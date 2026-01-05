@@ -11,11 +11,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```
 portfolio-deploy/
 ├── index.html          # 메인 HTML (전체 콘텐츠 포함)
+├── vercel.json         # Vercel 배포 설정 (보안 헤더)
 └── assets/
     ├── css/style.css   # 전체 스타일시트
     ├── js/script.js    # UI 인터랙션 및 프로젝트 모달 데이터
     ├── images/         # 이미지 리소스
-    └── docs/           # PDF 문서 (역기획서 등)
+    ├── docs/           # PDF 문서 (역기획서 등)
+    └── webgame/        # HTML 기반 미니게임 (한자퀴즈, 사과수확, 슬라이드퍼즐)
 ```
 
 ## 개발 방법
@@ -68,6 +70,8 @@ npx serve .
 
 `data-filter-item`의 `data-category` 속성 값으로 필터링됩니다.
 
+사용 가능한 카테고리: `all`, `unity+ai`, `unreal engine`, `ai prototyping`, `scenario`
+
 ### 반응형 디자인
 
 CSS 미디어 쿼리로 반응형 레이아웃을 구현합니다:
@@ -79,3 +83,9 @@ CSS 미디어 쿼리로 반응형 레이아웃을 구현합니다:
 
 - Google Fonts (Poppins)
 - Ionicons 5.5.2 (아이콘)
+
+## 배포
+
+Vercel에 배포됩니다. `vercel.json`에서 보안 헤더(X-Content-Type-Options, X-Frame-Options 등)를 설정합니다.
+
+git push 시 자동 배포됩니다.
