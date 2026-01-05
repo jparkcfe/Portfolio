@@ -37,11 +37,15 @@ npx serve .
 
 단일 페이지 애플리케이션(SPA) 패턴을 사용합니다. 네비게이션 탭 클릭 시 `data-page` 속성으로 페이지를 전환합니다.
 
-- **About**: 자기소개, 서비스, 교육, 프로젝트 경력, 툴 숙련도
-- **Portfolio**: 프로젝트 갤러리 (카테고리 필터 지원)
-- **게임 분석**: 역기획서 문서 링크
+- **About** (`data-page="about"`): 자기소개, 서비스, 교육, 프로젝트 경력, 툴 숙련도
+- **Portfolio** (`data-page="portfolio"`): 프로젝트 갤러리 (카테고리 필터 지원)
+- **게임 분석** (`data-page="게임 분석"`): 역기획서 문서 링크 (한글 값 사용)
 
-페이지 전환 로직은 `script.js`의 `navigationLinks` 이벤트 핸들러에서 처리됩니다. `data-nav-link` 버튼의 텍스트와 `data-page` 속성을 매칭합니다.
+페이지 전환 로직은 `script.js`의 `navigationLinks` 이벤트 핸들러에서 처리됩니다. `data-nav-link` 버튼의 `innerHTML`(소문자 변환)과 `data-page` 속성을 비교합니다.
+
+새 페이지 추가 시:
+1. `index.html`에 `<article data-page="페이지명">` 추가
+2. `navbar-list`에 `<button data-nav-link>페이지명</button>` 추가 (버튼 텍스트와 data-page 값 일치 필수)
 
 ### 프로젝트 모달 시스템
 
@@ -62,6 +66,12 @@ npx serve .
 - `videos`: YouTube 영상 배열 (title, url)
 - `externalLinks`: 외부 링크 배열 (title, url, icon, isDownload)
 
+### 이미지 네이밍 규칙
+
+- 프로젝트 썸네일: `project-{프로젝트키}.png`
+- 모달 이미지: `modal-{프로젝트키}.png`
+- 툴 아이콘: `tool-{툴명}.svg` 또는 `.png`
+
 ### 포트폴리오 필터 시스템
 
 포트폴리오 페이지의 카테고리 필터는 두 가지 방식으로 작동합니다:
@@ -71,6 +81,14 @@ npx serve .
 `data-filter-item`의 `data-category` 속성 값으로 필터링됩니다.
 
 사용 가능한 카테고리: `all`, `unity+ai`, `unreal engine`, `ai prototyping`, `scenario`
+
+### About 페이지 섹션 클래스
+
+About 페이지의 주요 섹션들:
+- `section.service`: What i'm doing 카드 리스트
+- `section.timeline`: Education/Project Experience 타임라인 (썸네일+링크 지원)
+- `section.tools`: 사용 툴 아이콘 리스트
+- `section.skill`: 툴 숙련도 바
 
 ### 반응형 디자인
 
