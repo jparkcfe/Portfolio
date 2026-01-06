@@ -60,11 +60,12 @@ npx serve .
 - `title`, `tagline`, `modalImage`: 기본 정보
 - `info`: 플랫폼, 엔진, 역할, 팀 구성, 기간, 비고
 - `overview`, `concept`: 프로젝트 설명
-- `target`: 타겟 유저 분석 (who, what, why, how)
+- `target`: 타겟 유저 분석 (who, what, why, how) - what은 배열 가능
 - `systems`: 핵심 시스템 설명 배열 (title, why, how, what)
 - `teamwork`: 팀 협업 사례 배열 (title, problem, solution, result)
 - `videos`: YouTube 영상 배열 (title, url)
-- `externalLinks`: 외부 링크 배열 (title, url, icon, isDownload)
+- `externalLink`: 단일 외부 링크 (title, url) - 웹소설 등에서 사용
+- `externalLinks`: 다중 외부 링크 배열 (title, url, icon, isDownload)
 
 ### 이미지 네이밍 규칙
 
@@ -85,10 +86,17 @@ npx serve .
 ### About 페이지 섹션 클래스
 
 About 페이지의 주요 섹션들:
+- `section.about-text`: 자기소개 및 역할 태그
 - `section.service`: What i'm doing 카드 리스트
-- `section.timeline`: Education/Project Experience 타임라인 (썸네일+링크 지원)
+- `section.timeline`: Education/Project Experience/Analysis 타임라인 (썸네일+링크 지원)
 - `section.tools`: 사용 툴 아이콘 리스트
 - `section.skill`: 툴 숙련도 바
+
+### 게임 분석 페이지 섹션 클래스
+
+게임 분석 페이지(`data-page="게임 분석"`)의 섹션들:
+- `section.game-analysis`: 역기획서 문서 카드 리스트
+- `section.devlog`: 개발 일지 아코디언 (주석 처리, 영상 확보 후 활성화 예정)
 
 ### 반응형 디자인
 

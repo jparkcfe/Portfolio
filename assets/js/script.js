@@ -449,6 +449,7 @@ const projectData = {
       period: "2024.10.01 ~ 2025.03.31",
       note: "총 126화 (에필로그, 프롤로그 포함)"
     },
+    overviewTitle: "소설 개요",
     overview: "노벨피아 플랫폼에서 연재하여 완결한 웹소설입니다. 총 126화 분량으로 약 6개월간 연재되었습니다.",
     concept: [
       "<strong>6개월간 126화 완결</strong> — 장기 프로젝트 완주 경험",
@@ -635,23 +636,34 @@ function generateModalContent(project) {
     `;
   }
 
+  // 외부 링크 버튼들을 이미지 하단에 배치
+  let buttonsHTML = externalLinkHTML + externalLinksHTML;
+
   let modalImageHTML = '';
   if (project.modalImage) {
     modalImageHTML = `
-      <div class="modal-image">
-        <img src="${project.modalImage}" alt="${project.title}" loading="lazy">
+      <div class="modal-image-container">
+        <div class="modal-image">
+          <img src="${project.modalImage}" alt="${project.title}" loading="lazy">
+        </div>
+        ${buttonsHTML ? `<div class="modal-image-buttons">${buttonsHTML}</div>` : ''}
       </div>
     `;
+  } else if (buttonsHTML) {
+    // 이미지가 없어도 버튼은 표시
+    modalImageHTML = `<div class="modal-image-buttons no-image">${buttonsHTML}</div>`;
   }
 
-  return `
-    <div class="modal-header">
-      <h2 class="modal-title">${project.title}</h2>
-      <p class="modal-tagline">"${project.tagline}"</p>
-    </div>
+  // 웹소설의 경우 개발 환경 행 제거
+  const showEngine = project.info.engine && project.info.engine !== "-";
 
-    ${modalImageHTML}
+  // 개요 제목 (웹소설은 '소설 개요', 나머지는 '게임 개요')
+  const overviewTitle = project.overviewTitle || "게임 개요";
 
+  // 테이블 HTML 생성
+  let infoTableHTML = '';
+  if (showEngine) {
+    infoTableHTML = `
     <table class="modal-info-table">
       <tr>
         <th>플랫폼</th>
@@ -671,10 +683,41 @@ function generateModalContent(project) {
         <th>비고</th>
         <td>${project.info.note}</td>
       </tr>
-    </table>
+    </table>`;
+  } else {
+    infoTableHTML = `
+    <table class="modal-info-table">
+      <tr>
+        <th>플랫폼</th>
+        <td>${project.info.platform}</td>
+        <th>담당 역할</th>
+        <td>${project.info.role}</td>
+      </tr>
+      <tr>
+        <th>팀 구성</th>
+        <td>${project.info.team}</td>
+        <th>기간</th>
+        <td>${project.info.period}</td>
+      </tr>
+      <tr>
+        <th>비고</th>
+        <td colspan="3">${project.info.note}</td>
+      </tr>
+    </table>`;
+  }
+
+  return `
+    <div class="modal-header">
+      <h2 class="modal-title">${project.title}</h2>
+      <p class="modal-tagline">"${project.tagline}"</p>
+    </div>
+
+    ${modalImageHTML}
+
+    ${infoTableHTML}
 
     <div class="modal-section">
-      <h3 class="modal-section-title">게임 개요</h3>
+      <h3 class="modal-section-title">${overviewTitle}</h3>
       <p class="modal-text">${project.overview}</p>
     </div>
 
@@ -689,8 +732,6 @@ function generateModalContent(project) {
     ${systemsHTML}
     ${teamworkHTML}
     ${videosHTML}
-    ${externalLinkHTML}
-    ${externalLinksHTML}
   `;
 }
 

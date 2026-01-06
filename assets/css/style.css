@@ -1797,13 +1797,21 @@ main {
   margin-bottom: 15px;
 }
 
-/* Modal Image */
-.modal-image {
+/* Modal Image Container */
+.modal-image-container {
   width: 100%;
   max-width: 100%;
   margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-image {
+  width: 100%;
+  max-width: 100%;
   border-radius: 14px;
   overflow: hidden;
   border: 1px solid var(--jet);
@@ -1815,6 +1823,29 @@ main {
   display: block;
   object-fit: contain;
   max-height: 400px;
+}
+
+/* Modal Image Buttons */
+.modal-image-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.modal-image-buttons.no-image {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.modal-image-buttons .modal-external-link {
+  margin-top: 0;
+}
+
+.modal-image-buttons .modal-external-links {
+  margin-top: 0;
+  justify-content: center;
 }
 
 /* Modal Info Table */
@@ -2280,7 +2311,7 @@ main {
 
 /* Responsive Modal */
 @media (min-width: 450px) {
-  .modal-image {
+  .modal-image-container {
     max-width: 90%;
     margin-bottom: 25px;
   }
@@ -2299,7 +2330,7 @@ main {
     padding: 40px;
   }
 
-  .modal-image {
+  .modal-image-container {
     max-width: 85%;
   }
 
@@ -2313,7 +2344,7 @@ main {
     font-size: var(--fs-5);
   }
 
-  .modal-image {
+  .modal-image-container {
     max-width: 80%;
   }
 
@@ -2323,7 +2354,7 @@ main {
 }
 
 @media (min-width: 1024px) {
-  .modal-image {
+  .modal-image-container {
     max-width: 75%;
   }
 
