@@ -58,14 +58,15 @@ npx serve .
 
 `projectData` 객체 구조:
 - `title`, `tagline`, `modalImage`: 기본 정보
-- `info`: 플랫폼, 엔진, 역할, 팀 구성, 기간, 비고
+- `info`: 플랫폼, 엔진, 역할, 팀 구성, 기간, 비고 (엔진이 `-`이면 테이블에서 해당 행 숨김)
+- `overviewTitle`: 개요 섹션 제목 (기본값: '게임 개요', 웹소설은 '소설 개요' 사용)
 - `overview`, `concept`: 프로젝트 설명
 - `target`: 타겟 유저 분석 (who, what, why, how) - what은 배열 가능
 - `systems`: 핵심 시스템 설명 배열 (title, why, how, what)
 - `teamwork`: 팀 협업 사례 배열 (title, problem, solution, result)
 - `videos`: YouTube 영상 배열 (title, url)
 - `externalLink`: 단일 외부 링크 (title, url) - 웹소설 등에서 사용
-- `externalLinks`: 다중 외부 링크 배열 (title, url, icon, isDownload)
+- `externalLinks`: 다중 외부 링크 배열 (title, url, icon, isDownload) - 모달 이미지 하단에 표시됨
 
 ### 이미지 네이밍 규칙
 
@@ -91,6 +92,11 @@ About 페이지의 주요 섹션들:
 - `section.timeline`: Education/Project Experience/Analysis 타임라인 (썸네일+링크 지원)
 - `section.tools`: 사용 툴 아이콘 리스트
 - `section.skill`: 툴 숙련도 바
+
+타임라인 항목 유형:
+- 기본 항목: `li.timeline-item` + `a.timeline-project-link[data-project-btn][data-project="키"]`
+- 복합 항목: `li.timeline-item.timeline-item-multi` - 하위 프로젝트가 있는 경우 (AI 웹게임처럼)
+  - 내부에 `div.timeline-multi-projects` 안에 `a.timeline-mini-project` 배치
 
 ### 게임 분석 페이지 섹션 클래스
 
