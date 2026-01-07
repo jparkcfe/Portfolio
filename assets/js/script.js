@@ -201,7 +201,7 @@ const projectData = {
         icon: "document-text-outline"
       },
       {
-        title: "기획서 다운로드",
+        title: "기획서 다운로드 (Excel Sheet)",
         url: "./assets/docs/UndeadSurvivor_기획서_박진.xlsx",
         icon: "download-outline",
         isDownload: true

@@ -44,8 +44,9 @@ npx serve .
 페이지 전환 로직은 `script.js`의 `navigationLinks` 이벤트 핸들러에서 처리됩니다. `data-nav-link` 버튼의 `innerHTML`(소문자 변환)과 `data-page` 속성을 비교합니다.
 
 새 페이지 추가 시:
-1. `index.html`에 `<article data-page="페이지명">` 추가
-2. `navbar-list`에 `<button data-nav-link>페이지명</button>` 추가 (버튼 텍스트와 data-page 값 일치 필수)
+1. `index.html`에 `<article class="페이지클래스" data-page="페이지명">` 추가
+2. `navbar-list`에 `<button class="navbar-link" data-nav-link>페이지명</button>` 추가
+3. 버튼의 `innerHTML`(소문자 변환)과 `data-page` 속성 값이 일치해야 함 (예: 버튼 텍스트 "게임 분석" → `data-page="게임 분석"`)
 
 ### 프로젝트 모달 시스템
 
@@ -57,16 +58,50 @@ npx serve .
 3. 해당 이미지 파일을 `assets/images/`에 추가
 
 `projectData` 객체 구조:
-- `title`, `tagline`, `modalImage`: 기본 정보
-- `info`: 플랫폼, 엔진, 역할, 팀 구성, 기간, 비고 (엔진이 `-`이면 테이블에서 해당 행 숨김)
-- `overviewTitle`: 개요 섹션 제목 (기본값: '게임 개요', 웹소설은 '소설 개요' 사용)
-- `overview`, `concept`: 프로젝트 설명
-- `target`: 타겟 유저 분석 (who, what, why, how) - what은 배열 가능
-- `systems`: 핵심 시스템 설명 배열 (title, why, how, what)
-- `teamwork`: 팀 협업 사례 배열 (title, problem, solution, result)
-- `videos`: YouTube 영상 배열 (title, url)
-- `externalLink`: 단일 외부 링크 (title, url) - 웹소설 등에서 사용
-- `externalLinks`: 다중 외부 링크 배열 (title, url, icon, isDownload) - 모달 이미지 하단에 표시됨
+```javascript
+{
+  title: "프로젝트명",
+  tagline: "한 줄 설명 (따옴표로 감싸서 표시됨)",
+  modalImage: "./assets/images/modal-{프로젝트키}.png",
+  info: {
+    platform: "PC, 모바일 등",
+    engine: "Unity, UE5 등 (값이 '-'이면 테이블에서 해당 행 숨김)",
+    role: "담당 역할",
+    team: "팀 구성 (예: 4인)",
+    period: "기간",
+    note: "비고"
+  },
+  overviewTitle: "게임 개요",  // 선택 (기본값: '게임 개요', 웹소설은 '소설 개요')
+  overview: "프로젝트 설명 텍스트",
+  concept: ["컨셉 키워드 1", "컨셉 키워드 2"],  // <strong> 태그 사용 가능
+  target: {  // 선택
+    who: "타겟 유저",
+    what: ["핵심 재미 1", "핵심 재미 2"],  // 문자열 또는 배열
+    why: "이유",  // 선택
+    how: "핵심 공식"
+  },
+  systems: [{  // 선택
+    title: "시스템명",
+    why: "설계 의도",
+    how: "구현 방법",
+    what: "결과물"
+  }],
+  teamwork: [{  // 선택
+    title: "에피소드 제목",
+    problem: "문제 상황",
+    solution: "해결 과정",
+    result: "결과"
+  }],
+  videos: [{ title: "영상 제목", url: "YouTube URL" }],  // 선택
+  externalLink: { title: "링크 제목", url: "URL" },  // 단일 링크 (선택)
+  externalLinks: [{  // 다중 링크 (선택, 모달 이미지 하단에 표시)
+    title: "링크 제목",
+    url: "URL",
+    icon: "ionicons 아이콘명",  // 예: "document-text-outline"
+    isDownload: false  // true면 다운로드 링크로 동작
+  }]
+}
+```
 
 ### 이미지 네이밍 규칙
 
@@ -98,11 +133,30 @@ About 페이지의 주요 섹션들:
 - 복합 항목: `li.timeline-item.timeline-item-multi` - 하위 프로젝트가 있는 경우 (AI 웹게임처럼)
   - 내부에 `div.timeline-multi-projects` 안에 `a.timeline-mini-project` 배치
 
+### Portfolio 페이지 섹션 클래스
+
+Portfolio 페이지(`data-page="portfolio"`)의 섹션들:
+- `section.projects`: 프로젝트 갤러리 컨테이너
+- `ul.filter-list`: 데스크탑용 카테고리 필터 버튼
+- `div.filter-select-box`: 모바일용 드롭다운 필터
+- `ul.project-list`: 프로젝트 카드 그리드
+
 ### 게임 분석 페이지 섹션 클래스
 
 게임 분석 페이지(`data-page="게임 분석"`)의 섹션들:
 - `section.game-analysis`: 역기획서 문서 카드 리스트
 - `section.devlog`: 개발 일지 아코디언 (주석 처리, 영상 확보 후 활성화 예정)
+
+### 모달 섹션 클래스
+
+프로젝트 모달(`div.project-modal`)의 주요 구성요소:
+- `div.modal-header`: 제목과 태그라인
+- `div.modal-image-container`: 이미지 + 외부 링크 버튼
+- `table.modal-info-table`: 프로젝트 정보 테이블
+- `div.modal-section`: 개요, 컨셉, 3W1H 등 각 섹션
+- `div.modal-systems`: 핵심 시스템 아코디언 (`<details>` 사용)
+- `div.modal-teamwork`: 팀 협업 사례 아코디언
+- `div.modal-video`: YouTube 임베드
 
 ### 반응형 디자인
 
@@ -116,8 +170,23 @@ CSS 미디어 쿼리로 반응형 레이아웃을 구현합니다:
 - Google Fonts (Poppins)
 - Ionicons 5.5.2 (아이콘)
 
+## 주요 JavaScript 함수
+
+`script.js`의 핵심 함수들:
+- `elementToggleFunc(elem)`: CSS 클래스 "active" 토글
+- `filterFunc(selectedValue)`: 포트폴리오 카테고리 필터링
+- `generateModalContent(project)`: projectData 기반 모달 HTML 생성
+- `openProjectModal(projectId)` / `closeProjectModal()`: 모달 열기/닫기
+- `getYouTubeId(url)`: YouTube URL에서 영상 ID 추출
+
 ## 배포
 
 Vercel에 배포됩니다. `vercel.json`에서 보안 헤더(X-Content-Type-Options, X-Frame-Options 등)를 설정합니다.
 
 git push 시 자동 배포됩니다.
+
+## 주의사항
+
+- 프로젝트 키는 영문 소문자만 사용 (예: `roguelike`, `babysanta`)
+- `data-project` 속성값과 `projectData` 객체 키가 정확히 일치해야 모달이 열림
+- Ionicons 아이콘은 https://ionic.io/ionicons 에서 이름 확인 가능
