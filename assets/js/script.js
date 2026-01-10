@@ -334,19 +334,19 @@ const projectData = {
 
   kanji: {
     title: "한자 낱말 퀴즈",
-    tagline: "AI 기획-구현 싸이클 1단계: 기본 게임 루프 설계",
+    tagline: "AI 바이브 코딩 1단계: 기본 게임 루프 설계",
     modalImage: "./assets/images/modal-kanji.png",
     info: {
       platform: "PC, 모바일",
       engine: "Claude Code, Cursor",
-      role: "기획 & AI 활용 개발",
+      role: "기획 & AI 바이브 코딩",
       team: "1인",
       period: "2025.07.02 ~ 2025.07.10",
-      note: "AI 프로토타이핑 학습 [1/3]"
+      note: "AI 바이브 코딩 학습 [1/3]"
     },
-    overview: "로그라이트 프로젝트 착수 전, AI 도구를 활용한 기획-구현 흐름을 검증하기 위해 시작한 첫 번째 프로젝트입니다. 가장 단순한 게임 루프(입력→판정→피드백)를 설계하고 구현했습니다.",
+    overview: "로그라이트 프로젝트 착수 전, AI 바이브 코딩으로 기획-구현 흐름을 검증하기 위해 시작한 첫 번째 프로젝트입니다. 가장 단순한 게임 루프(입력→판정→피드백)를 설계하고 구현했습니다.",
     concept: [
-      "AI 도구(Claude Code)로 기획부터 구현까지 직접 진행한 <strong>첫 프로젝트</strong>",
+      "AI 바이브 코딩(Claude Code)으로 기획부터 구현까지 직접 진행한 <strong>첫 프로젝트</strong>",
       "가장 단순한 게임 루프인 <strong>'입력→판정→피드백'</strong> 구조 설계",
       "이후 로그라이트의 카드 선택 시스템을 설계할 때 기반이 됨"
     ],
@@ -369,15 +369,15 @@ const projectData = {
 
   apple: {
     title: "사과 수확 게임",
-    tagline: "AI 기획-구현 싸이클 2단계: 숫자 퍼즐과 콤보 시스템",
+    tagline: "AI 바이브 코딩 2단계: 숫자 퍼즐과 콤보 시스템",
     modalImage: "./assets/images/modal-apple.png",
     info: {
       platform: "PC, 모바일",
       engine: "Claude Code, Cursor",
-      role: "기획 & AI 활용 개발",
+      role: "기획 & AI 바이브 코딩",
       team: "1인",
       period: "2025.08.11 ~ 2025.08.14",
-      note: "AI 프로토타이핑 학습 [2/3]"
+      note: "AI 바이브 코딩 학습 [2/3]"
     },
     overview: "퀴즈 게임에서 한 단계 나아가, 숫자 조합 퍼즐과 콤보 시스템을 경험한 프로젝트입니다. '합이 10이 되는 조합 찾기'라는 규칙 위에 시간 제한과 콤보 보너스를 설계했습니다.",
     concept: [
@@ -404,17 +404,17 @@ const projectData = {
 
   puzzle: {
     title: "슬라이드 퍼즐 게임",
-    tagline: "AI 기획-구현 싸이클 3단계: 문제 해결 프로세스 경험",
+    tagline: "AI 바이브 코딩 3단계: 문제 해결 프로세스 경험",
     modalImage: "./assets/images/modal-puzzle.png",
     info: {
       platform: "PC, 모바일",
       engine: "Claude Code, Cursor",
-      role: "기획 & AI 활용 개발",
+      role: "기획 & AI 바이브 코딩",
       team: "1인",
       period: "2025.10.03 ~ 2025.10.06",
-      note: "AI 프로토타이핑 학습 [3/3]"
+      note: "AI 바이브 코딩 학습 [3/3]"
     },
-    overview: "AI 프로토타이핑 학습의 마지막 단계로, '문제 발생 → 원인 분석 → 시스템적 해결' 프로세스를 경험한 프로젝트입니다. 랜덤 생성 시 해결 불가능한 퍼즐이 나오는 문제를 역생성 알고리즘으로 해결했습니다.",
+    overview: "AI 바이브 코딩 학습의 마지막 단계로, '문제 발생 → 원인 분석 → 시스템적 해결' 프로세스를 경험한 프로젝트입니다. 랜덤 생성 시 해결 불가능한 퍼즐이 나오는 문제를 역생성 알고리즘으로 해결했습니다.",
     concept: [
       "랜덤 생성 시 <strong>'풀 수 없는 퍼즐'</strong>이 나오는 문제에 직면",
       "원인 분석 후 <strong>역생성 알고리즘</strong>으로 해결 — 완성 상태에서 역으로 섞어 항상 해결 가능 보장",
