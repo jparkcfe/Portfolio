@@ -133,21 +133,21 @@ for (let i = 0; i < navigationLinks.length; i++) {
 const projectData = {
   roguelike: {
     title: "Undead Survivor: Farmer's Fury",
-    tagline: "빠른 반복으로 검증한 로그라이트 시스템 설계",
+    tagline: "AI 바이브 코딩으로 6일 만에 완성한 로그라이트 시스템",
     modalImage: "./assets/images/modal-roguelike.png",
     info: {
       platform: "PC",
       engine: "Unity, C#",
-      role: "시스템 기획 & 개발",
+      role: "시스템 기획 & AI 바이브 코딩",
       team: "1인",
       period: "2025.12 (6일)",
       note: "개인 프로젝트"
     },
-    overview: "로그라이트 장르의 성장 시스템을 분석하고, 3경로 성장 구조를 설계한 프로젝트입니다. 기획, 구현, 테스트, 밸런싱을 반복하며 시스템 설계 의도를 플레이 테스트로 검증했습니다.",
+    overview: "AI 바이브 코딩으로 타이틀부터 엔딩까지 6일 만에 1인 구현한 로그라이트 게임입니다. 3경로 성장 시스템을 설계하고, 50건 테스트로 보상-비용 균형을 검증했습니다 (오차 0.6%).",
     concept: [
-      "<strong>3중 성장 구조</strong> (레벨업 + 상점 + 클리어 보상) 설계 및 구현",
-      "<strong>50건 이상의 테스트 기록</strong>을 바탕으로 밸런스 조정",
-      "<strong>경제 밸런싱</strong>: 웨이브 1-9 총 보상 5,490G / 스탯 만렙 비용 5,457G 균형 달성"
+      "<strong>AI 바이브 코딩</strong>: Claude 활용하여 타이틀~엔딩 전체 구현 (6일 완성)",
+      "<strong>3경로 성장 시스템</strong> 설계 (레벨업 / 상점 / 클리어 보상)",
+      "<strong>경제 밸런싱</strong>: 50건 테스트로 보상-비용 균형 검증 (5,490G ↔ 5,457G, 오차 0.6%)"
     ],
     target: {
       who: "로그라이트 게임을 즐기고, 반복 플레이를 통한 점진적 성장을 좋아하는 플레이어",
