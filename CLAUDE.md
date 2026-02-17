@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 프로젝트 개요
 
-게임 시스템 기획자 포트폴리오 웹사이트입니다. 빌드 도구나 패키지 매니저 없이 순수 HTML/CSS/JavaScript로 구성된 정적 사이트입니다.
+게임 시스템 기획자 포트폴리오 웹사이트입니다. 빌드 도구나 패키지 매니저 없이 순수 HTML/CSS/JavaScript로 구성된 정적 사이트입니다. CSS는 @codewithsadee의 vCard 템플릿을 기반으로 커스터마이징한 것입니다.
 
 ## 프로젝트 구조
 
@@ -13,11 +13,11 @@ portfolio-deploy/
 ├── index.html          # 메인 HTML (전체 콘텐츠 포함)
 ├── vercel.json         # Vercel 배포 설정 (보안 헤더)
 └── assets/
-    ├── css/style.css   # 전체 스타일시트
+    ├── css/style.css   # 전체 스타일시트 (CSS 변수 기반 다크 테마)
     ├── js/script.js    # UI 인터랙션 및 프로젝트 모달 데이터
     ├── images/         # 이미지 리소스
-    ├── docs/           # PDF 문서 (역기획서 등)
-    └── webgame/        # HTML 기반 미니게임 (한자퀴즈, 사과수확, 슬라이드퍼즐)
+    ├── docs/           # PDF/Excel 문서 (역기획서, 기획서 등)
+    └── webgame/        # 독립형 HTML 미니게임 (메인 사이트 CSS/JS와 무관)
 ```
 
 ## 개발 방법
@@ -30,6 +30,8 @@ python -m http.server 8000
 # 또는
 npx serve .
 ```
+
+배포: Vercel에 연결되어 있으며, `git push` 시 자동 배포됩니다.
 
 ## 아키텍처
 
@@ -52,10 +54,15 @@ npx serve .
 
 `script.js`의 `projectData` 객체에 각 프로젝트 상세 정보가 정의되어 있습니다. 프로젝트 클릭 시 `generateModalContent()` 함수가 HTML을 동적으로 생성합니다.
 
+현재 등록된 프로젝트 키: `roguelike`, `babysanta`, `maeil`, `kanji`, `apple`, `puzzle`, `novel`
+
+프로젝트 버튼 클릭은 **이벤트 위임(Event Delegation)** 패턴으로 처리됩니다. `document`에 한 번만 리스너를 등록하므로, 새 프로젝트 추가 시 별도 이벤트 바인딩이 필요 없습니다.
+
 새 프로젝트 추가 시:
 1. `projectData` 객체에 프로젝트 키와 데이터 추가
 2. `index.html`에 프로젝트 카드 추가 (`data-project="키"` 속성 필수)
 3. 해당 이미지 파일을 `assets/images/`에 추가
+4. About 페이지 타임라인에도 항목 추가 (선택)
 
 `projectData` 객체 구조:
 ```javascript
@@ -119,6 +126,8 @@ npx serve .
 
 사용 가능한 카테고리: `all`, `unity+ai`, `unreal engine`, `ai prototyping`, `scenario`
 
+새 카테고리 추가 시 `filter-list`(데스크탑)와 `filter-select-box`(모바일) 양쪽 모두 항목을 추가해야 합니다.
+
 ### About 페이지 섹션 클래스
 
 About 페이지의 주요 섹션들:
@@ -158,17 +167,28 @@ Portfolio 페이지(`data-page="portfolio"`)의 섹션들:
 - `div.modal-teamwork`: 팀 협업 사례 아코디언
 - `div.modal-video`: YouTube 임베드
 
-### 반응형 디자인
+### 웹게임 (assets/webgame/)
 
-CSS 미디어 쿼리로 반응형 레이아웃을 구현합니다:
-- 450px, 580px, 768px, 1024px, 1250px 브레이크포인트
+각 웹게임은 **독립형 HTML 파일**로, 메인 사이트의 `style.css`나 `script.js`와 무관합니다. CSS/JS가 각 HTML 파일 내에 인라인으로 포함되어 있습니다.
+- `kanji-quiz.html`: 한자 낱말 퀴즈
+- `apple-harvest.html`: 사과 수확 게임
+- `slide-puzzle-game.html`: 슬라이드 퍼즐 게임
+
+모달에서 `externalLinks`의 URL로 연결됩니다.
+
+### CSS 테마 및 반응형
+
+CSS 커스텀 프로퍼티(`:root` 변수)로 다크 테마 색상을 관리합니다. 색상 변경 시 `style.css` 상단의 `:root` 블록을 수정합니다.
+
+미디어 쿼리 브레이크포인트:
+- 450px, 580px, 768px, 1024px, 1250px
 - 1250px 이상: 사이드바가 왼쪽에 고정되는 2컬럼 레이아웃
 - 그 이하: 단일 컬럼 레이아웃
 
 ### 외부 의존성
 
 - Google Fonts (Poppins)
-- Ionicons 5.5.2 (아이콘)
+- Ionicons 5.5.2 (아이콘) — 이름 확인: https://ionic.io/ionicons
 
 ## 주요 JavaScript 함수
 
@@ -179,14 +199,10 @@ CSS 미디어 쿼리로 반응형 레이아웃을 구현합니다:
 - `openProjectModal(projectId)` / `closeProjectModal()`: 모달 열기/닫기
 - `getYouTubeId(url)`: YouTube URL에서 영상 ID 추출
 
-## 배포
-
-Vercel에 배포됩니다. `vercel.json`에서 보안 헤더(X-Content-Type-Options, X-Frame-Options 등)를 설정합니다.
-
-git push 시 자동 배포됩니다.
-
 ## 주의사항
 
 - 프로젝트 키는 영문 소문자만 사용 (예: `roguelike`, `babysanta`)
 - `data-project` 속성값과 `projectData` 객체 키가 정확히 일치해야 모달이 열림
-- Ionicons 아이콘은 https://ionic.io/ionicons 에서 이름 확인 가능
+- 페이지 전환에서 `innerHTML.toLowerCase()`와 `data-page` 값을 비교하므로, 한글 페이지명(예: `"게임 분석"`)은 버튼 텍스트와 정확히 일치해야 함
+- `vercel.json`의 보안 헤더(X-Frame-Options: DENY 등)가 iframe 임베딩을 차단하므로, 외부 사이트에서 이 사이트를 iframe으로 불러올 수 없음
+- 게임 분석 페이지의 `devlog` 섹션은 현재 주석 처리 상태 (영상 확보 후 활성화 예정)
