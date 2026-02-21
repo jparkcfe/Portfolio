@@ -194,7 +194,7 @@
             <span class="role-tag-small">#시스템설계</span>
             <span class="role-tag-small">#수치밸런싱</span>
             <span class="role-tag-small">#레퍼런스분석</span>
-            <span class="role-tag-small">#AI바이브코딩</span>
+            <span class="role-tag-small">#AI프로토타이핑</span>
             <span class="role-tag-small">#팀협업조율</span>
           </div>
 
@@ -595,6 +595,16 @@
             </li>
 
             <li class="tools-item">
+              <img src="./assets/images/chatgpt-codex-icon.png" alt="GPT Codex">
+              <span class="tools-item-name">GPT Codex</span>
+            </li>
+
+            <li class="tools-item">
+              <img src="./assets/images/google-antigravity-logo-icon.png" alt="Anti-Gravity">
+              <span class="tools-item-name">Anti-Gravity</span>
+            </li>
+
+            <li class="tools-item">
               <img src="./assets/images/HD Unreal Engine Logo.png" alt="Unreal Engine 5" class="invert-icon">
               <span class="tools-item-name">UE5</span>
             </li>
@@ -619,6 +629,56 @@
 
           <ul class="skills-list content-card">
 
+            <li class="skills-category">게임 엔진</li>
+
+            <li class="skills-item skills-item-clickable" data-video-btn
+                data-video-url="https://www.youtube.com/watch?v=38E2_dDgu4U">
+              <div class="title-wrapper">
+                <h5 class="h5">Unreal Engine 5</h5>
+                <span class="skill-level level-mid">중</span>
+              </div>
+              <p class="skill-video-hint"><ion-icon name="play-circle-outline"></ion-icon> 클릭 시 영상 재생</p>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Unity</h5>
+                <span class="skill-level level-mid">중</span>
+              </div>
+            </li>
+
+            <li class="skills-category">AI 도구</li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Claude Code</h5>
+                <span class="skill-level level-high">상</span>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Cursor</h5>
+                <span class="skill-level level-mid">중</span>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">GPT Codex</h5>
+                <span class="skill-level level-mid">중</span>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Anti-Gravity</h5>
+                <span class="skill-level level-mid">중</span>
+              </div>
+            </li>
+
+            <li class="skills-category">문서</li>
+
             <li class="skills-item">
               <div class="title-wrapper">
                 <h5 class="h5">Microsoft Word</h5>
@@ -637,34 +697,6 @@
               <div class="title-wrapper">
                 <h5 class="h5">Microsoft PowerPoint</h5>
                 <span class="skill-level level-high">상</span>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Cursor</h5>
-                <span class="skill-level level-mid">중</span>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Claude Code</h5>
-                <span class="skill-level level-high">상</span>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Unreal Engine 5</h5>
-                <span class="skill-level level-mid">중</span>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Unity</h5>
-                <span class="skill-level level-mid">중</span>
               </div>
             </li>
 
@@ -891,6 +923,21 @@
         - #PROJECT MODAL
       -->
 
+      <!--
+        - #VIDEO LIGHTBOX
+      -->
+
+      <div class="video-lightbox" data-video-lightbox>
+        <div class="video-lightbox-overlay" data-video-lightbox-overlay></div>
+        <div class="video-lightbox-content">
+          <button class="modal-close-btn" data-video-lightbox-close>
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+          <div class="video-lightbox-embed" data-video-lightbox-embed></div>
+        </div>
+      </div>
+
+
       <div class="project-modal" data-project-modal>
         <div class="modal-overlay" data-modal-overlay></div>
         <div class="modal-content">
@@ -1063,6 +1110,18 @@
     </div>
 
   </main>
+
+  <!--
+    - #SCROLL FAB BUTTONS
+  -->
+  <div class="scroll-fab-group">
+    <button class="scroll-fab" data-scroll-top aria-label="맨 위로">
+      <ion-icon name="chevron-up-outline"></ion-icon>
+    </button>
+    <button class="scroll-fab" data-scroll-bottom aria-label="맨 아래로">
+      <ion-icon name="chevron-down-outline"></ion-icon>
+    </button>
+  </div>
 
 
 

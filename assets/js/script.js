@@ -779,6 +779,66 @@ document.addEventListener("keydown", function (e) {
 
 
 
+// Video Lightbox
+const videoLightbox = document.querySelector("[data-video-lightbox]");
+const videoLightboxOverlay = document.querySelector("[data-video-lightbox-overlay]");
+const videoLightboxClose = document.querySelector("[data-video-lightbox-close]");
+const videoLightboxEmbed = document.querySelector("[data-video-lightbox-embed]");
+
+function openVideoLightbox(youtubeUrl) {
+  const videoId = getYouTubeId(youtubeUrl);
+  if (!videoId) return;
+  videoLightboxEmbed.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>`;
+  videoLightbox.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeVideoLightbox() {
+  videoLightboxEmbed.innerHTML = "";
+  videoLightbox.classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+document.addEventListener("click", function (e) {
+  const videoBtn = e.target.closest("[data-video-btn]");
+  if (videoBtn) {
+    e.preventDefault();
+    openVideoLightbox(videoBtn.dataset.videoUrl);
+  }
+});
+
+videoLightboxClose.addEventListener("click", closeVideoLightbox);
+videoLightboxOverlay.addEventListener("click", closeVideoLightbox);
+
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" && videoLightbox.classList.contains("active")) {
+    closeVideoLightbox();
+  }
+});
+
+
+// Scroll FAB Buttons
+const scrollFabGroup = document.querySelector(".scroll-fab-group");
+const scrollTopBtn = document.querySelector("[data-scroll-top]");
+const scrollBottomBtn = document.querySelector("[data-scroll-bottom]");
+
+window.addEventListener("scroll", function () {
+  if (window.scrollY > 300) {
+    scrollFabGroup.classList.add("visible");
+  } else {
+    scrollFabGroup.classList.remove("visible");
+  }
+});
+
+scrollTopBtn.addEventListener("click", function () {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+scrollBottomBtn.addEventListener("click", function () {
+  window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+});
+
+
 // Devlog Accordion Toggle
 const devlogToggles = document.querySelectorAll("[data-devlog-toggle]");
 

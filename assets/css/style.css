@@ -1525,7 +1525,94 @@ main {
   color: #9E9E9E;
 }
 
+/* Skills Category Header */
+.skills-category {
+  grid-column: 1 / -1;
+  font-size: var(--fs-6);
+  font-weight: var(--fw-600);
+  color: var(--orange-yellow-crayola);
+  padding: 0 2px;
+  margin-top: 6px;
+  list-style: none;
+}
 
+.skills-category:first-child {
+  margin-top: 0;
+}
+
+/* Clickable Skill Item (Video) */
+.skills-item-clickable {
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.skills-item-clickable:hover {
+  background: var(--bg-gradient-yellow);
+}
+
+.skill-video-hint {
+  font-size: 12px;
+  color: var(--light-gray-70);
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.skill-video-hint ion-icon {
+  font-size: 14px;
+  color: var(--orange-yellow-crayola);
+}
+
+/* Video Lightbox */
+.video-lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 25;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.video-lightbox.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.video-lightbox-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: hsla(0, 0%, 0%, 0.85);
+}
+
+.video-lightbox-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 30px);
+  max-width: 800px;
+}
+
+.video-lightbox-embed {
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--eerie-black-1);
+}
+
+.video-lightbox-embed iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+}
 
 
 
@@ -2557,6 +2644,55 @@ textarea.form-input::-webkit-resizer { display: none; }
 .form-btn:disabled:hover::before { background: var(--bg-gradient-jet); }
 
 
+
+
+
+/*-----------------------------------*\
+  #SCROLL FAB
+\*-----------------------------------*/
+
+.scroll-fab-group {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 15;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.scroll-fab-group.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.scroll-fab {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--eerie-black-2);
+  border: 1px solid var(--jet);
+  color: var(--light-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  box-shadow: var(--shadow-2);
+}
+
+.scroll-fab:hover {
+  background: var(--orange-yellow-crayola);
+  color: var(--smoky-black);
+}
+
+.scroll-fab ion-icon {
+  font-size: 20px;
+  --ionicon-stroke-width: 48px;
+}
 
 
 
