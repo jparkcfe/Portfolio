@@ -133,7 +133,7 @@ for (let i = 0; i < navigationLinks.length; i++) {
 const projectData = {
   roguelike: {
     title: "Undead Survivor: Farmer's Fury",
-    tagline: "3경로 성장 × 경제 밸런싱 — 보상과 비용의 오차 0.6%로 설계한 로그라이트",
+    tagline: "3경로 성장과 경제 밸런싱 — 보상과 비용의 오차 0.6%를 달성한 로그라이트",
     modalImage: "./assets/images/modal-roguelike.png",
     info: {
       platform: "PC",
@@ -154,7 +154,7 @@ const projectData = {
       what: [
         "3중 성장 구조(레벨업/상점/클리어 보상)를 활용한 전략적 빌드 구성의 재미",
         "4종 무기(삽/화염/얼음/번개)의 차별화된 플레이 스타일 선택",
-        "반복 플레이를 통해 상점 업그레이드로 더 강해지는 성장의 재미",
+        "한정된 골드로 매 판 다른 빌드를 시도하는 전략적 선택의 재미",
         "보스전에서 돌진·탄막 패턴을 회피하며 긴장감 있는 전투를 즐기는 재미"
       ],
       how: "로그라이트 + 3경로 성장 + 다양한 무기 = 전략적 반복 플레이 게임"
@@ -181,8 +181,8 @@ const projectData = {
       {
         title: "특수 무기 시스템",
         why: "성장 시스템만으로는 '숫자가 커지는 재미'에 그침. 무기별 부가효과로 '플레이 방식 자체가 달라지는 재미'를 추가하여 빌드 다양성 확보",
-        how: "4종 무기의 기본 데미지를 낮추고 부가효과로 역할 차별화. 순수 화력(삽) vs 지속 피해(화염) vs 군중 제어(얼음) vs 범위 확산(번개)",
-        what: "삽: 순수 데미지 특화 / 화염: 초당 1의 화상 피해가 3초간 지속 / 얼음: 이동속도 10% 감소가 2초간 지속 / 번개: 주변 적에게 50% 데미지 전이. 테스트 시 4종 무기 선택 비율이 골고루 분포됨을 확인"
+        how: "4종 무기의 기본 대미지를 낮추고 부가효과로 역할 차별화. 순수 화력(삽) vs 지속 피해(화염) vs 군중 제어(얼음) vs 범위 확산(번개)",
+        what: "삽: 순수 대미지 특화 / 화염: 초당 1의 화상 피해가 3초간 지속 / 얼음: 이동속도 10% 감소가 2초간 지속 / 번개: 주변 적에게 50% 대미지 전이"
       },
       {
         title: "보스 시스템",
@@ -211,7 +211,7 @@ const projectData = {
 
   babysanta: {
     title: "Baby Santa Run",
-    tagline: "웹툰 IP를 캐주얼 게임으로 — 단순 조작 × 수집 목표 설계",
+    tagline: "웹툰 IP를 캐주얼 게임으로 — 단순 조작과 수집 목표 설계",
     modalImage: "./assets/images/modal-babysanta.png",
     info: {
       platform: "모바일, PC",
@@ -368,7 +368,7 @@ const projectData = {
 
   apple: {
     title: "사과 수확 게임",
-    tagline: "시간 압박 × 콤보 보상 — 단순 규칙 위에 긴장감과 동기를 설계",
+    tagline: "시간 압박과 콤보 보상 — 단순 규칙 위에 긴장감과 동기를 설계",
     modalImage: "./assets/images/modal-apple.png",
     info: {
       platform: "PC, 모바일",
