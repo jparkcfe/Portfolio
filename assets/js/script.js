@@ -116,10 +116,16 @@ for (let i = 0; i < navigationLinks.length; i++) {
     for (let j = 0; j < pages.length; j++) {
       if (this.innerHTML.toLowerCase() === pages[j].dataset.page) {
         pages[j].classList.add("active");
-        navigationLinks[j].classList.add("active");
         window.scrollTo(0, 0);
       } else {
         pages[j].classList.remove("active");
+      }
+    }
+
+    for (let j = 0; j < navigationLinks.length; j++) {
+      if (navigationLinks[j] === this) {
+        navigationLinks[j].classList.add("active");
+      } else {
         navigationLinks[j].classList.remove("active");
       }
     }
@@ -218,7 +224,7 @@ const projectData = {
       engine: "Unreal Engine 5",
       role: "웹툰 시놉시스 기획 & 데모 게임 기획 & 개발",
       team: "4인",
-      period: "2024.11.01 —2024.12.19",
+      period: "2024.11.01 — 2024.12.19",
       note: "NCA 장기과정 1학기 | 웹툰 IP 기반 캐주얼 게임"
     },
     overview: "웹툰 IP의 세계관을 게임으로 확장할 때, '웹툰 감상 직후 플레이'라는 상황을 고려해 피로도가 낮은 캐주얼 러닝 장르를 선택했습니다. 방향 조정과 점프만으로 조작하며, 맵 곳곳에 숨겨진 선물을 수집하는 게임입니다.",
@@ -265,7 +271,7 @@ const projectData = {
       engine: "Unreal Engine 5",
       role: "기획 & 사운드 디자인 & 서브 PM",
       team: "6인 (기획 2인 + 개발 3인 + 아트 1인)",
-      period: "2025.03.17 —2025.08.20",
+      period: "2025.03.17 — 2025.08.20",
       note: "NCA 장기과정 2기 쇼케이스 전시"
     },
     overview: "'보는 것 위주라 VR 장점이 없다'는 초기 피드백을 받고, 상호작용 5종을 기획·제안하여 모두 반영. '보는 VR'에서 '참여하는 VR'로 경험을 전환한 몰입형 VR 힐링 게임입니다.",
@@ -315,7 +321,7 @@ const projectData = {
       },
       {
         title: "기획-아트 리소스 조율",
-        problem: "기획(맵 7개) vs 아트(일정상 불가) 충돌. 원 기획 플레이 타임 20분 초과, 목표는 10분",
+        problem: "기획(맵 7개) vs 아트(일정상 불가) 충돌. 원 기획 플레이 타임 20분 초과, 목표는 10분 이내",
         solution: "플레이 타임 기준으로 논의 재구성 + 설득 논리 4가지 제시 (전시 회전율, NPC 구현 리스크, 리소스 과중, 연출 대안 존재)",
         result: "맵 7개 → 5개, NPC 제거 합의. 최종 플레이 타임 8~9분"
       },
@@ -341,7 +347,7 @@ const projectData = {
       engine: "Claude Code, Cursor",
       role: "기획 & AI 바이브 코딩",
       team: "1인",
-      period: "2025.07.02 —2025.07.10",
+      period: "2025.07.02 — 2025.07.10",
       note: "AI 바이브 코딩 학습 [1/3]"
     },
     overview: "한자 읽기를 4지선다 퀴즈로 만든 첫 프로젝트입니다. '입력→판정→피드백'이라는 가장 단순한 게임 루프를 직접 설계·구현했습니다.",
@@ -375,7 +381,7 @@ const projectData = {
       engine: "Claude Code, Cursor",
       role: "기획 & AI 바이브 코딩",
       team: "1인",
-      period: "2025.08.11 —2025.08.14",
+      period: "2025.08.11 — 2025.08.14",
       note: "AI 바이브 코딩 학습 [2/3]"
     },
     overview: "'합이 10이 되는 조합 찾기'라는 단순한 규칙 하에, 2분 제한과 콤보 보상을 연결해 긴장감을 유도한 게임입니다.",
@@ -410,7 +416,7 @@ const projectData = {
       engine: "Claude Code, Cursor",
       role: "기획 & AI 바이브 코딩",
       team: "1인",
-      period: "2025.10.03 —2025.10.06",
+      period: "2025.10.03 — 2025.10.06",
       note: "AI 바이브 코딩 학습 [3/3]"
     },
     overview: "랜덤 셔플로 퍼즐을 생성하면 50% 확률로 '풀 수 없는 퍼즐'이 만들어지는 문제를 발견하고, 역생성 알고리즘(완성→역섞기)으로 구조적으로 해결한 프로젝트입니다.",
@@ -444,7 +450,7 @@ const projectData = {
       engine: "-",
       role: "작가",
       team: "1인",
-      period: "2024.10.01 —2025.03.31",
+      period: "2024.10.01 — 2025.03.31",
       note: "총 126화 (프롤로그, 에필로그 포함)"
     },
     overviewTitle: "소설 개요",
@@ -551,6 +557,7 @@ function generateModalContent(project) {
         <h4 class="modal-video-title">프로젝트 영상</h4>
         ${project.videos.map(video => {
           const videoId = getYouTubeId(video.url);
+          if (!videoId) return '';
           return `
             <div class="modal-video-item">
               <p class="modal-video-label">${video.title}</p>
@@ -835,69 +842,4 @@ scrollTopBtn.addEventListener("click", function () {
 scrollBottomBtn.addEventListener("click", function () {
   window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
 });
-
-
-// Devlog Accordion Toggle
-const devlogToggles = document.querySelectorAll("[data-devlog-toggle]");
-
-for (let i = 0; i < devlogToggles.length; i++) {
-  devlogToggles[i].addEventListener("click", function () {
-    const devlogItem = this.closest(".devlog-item");
-
-    // Close other open items (optional: remove this block to allow multiple open)
-    const allDevlogItems = document.querySelectorAll(".devlog-item");
-    for (let j = 0; j < allDevlogItems.length; j++) {
-      if (allDevlogItems[j] !== devlogItem) {
-        allDevlogItems[j].classList.remove("active");
-      }
-    }
-
-    // Toggle current item
-    devlogItem.classList.toggle("active");
-  });
-}
-
-
-// Devlog Feature Video Toggle (YouTube Embed)
-const featureToggles = document.querySelectorAll("[data-feature-toggle]");
-
-for (let i = 0; i < featureToggles.length; i++) {
-  featureToggles[i].addEventListener("click", function () {
-    const featureItem = this.closest(".devlog-feature-item");
-    const videoContainer = featureItem.querySelector(".devlog-feature-video");
-    const youtubeId = videoContainer.dataset.youtube;
-
-    // Close other open items and remove their iframes
-    const allFeatureItems = document.querySelectorAll(".devlog-feature-item");
-    for (let j = 0; j < allFeatureItems.length; j++) {
-      if (allFeatureItems[j] !== featureItem) {
-        allFeatureItems[j].classList.remove("active");
-        // Remove iframe when closing
-        const otherContainer = allFeatureItems[j].querySelector(".devlog-feature-video");
-        if (otherContainer) {
-          otherContainer.innerHTML = "";
-        }
-      }
-    }
-
-    // Toggle current item
-    featureItem.classList.toggle("active");
-
-    // Add or remove YouTube iframe
-    if (featureItem.classList.contains("active") && youtubeId) {
-      videoContainer.innerHTML = `
-        <iframe
-          src="https://www.youtube.com/embed/${youtubeId}?rel=0"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
-      `;
-    } else {
-      videoContainer.innerHTML = "";
-    }
-  });
-}
-
-
 
