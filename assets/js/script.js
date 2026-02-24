@@ -113,14 +113,14 @@ const pages = document.querySelectorAll("[data-page]");
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
 
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
+    for (let j = 0; j < pages.length; j++) {
+      if (this.innerHTML.toLowerCase() === pages[j].dataset.page) {
+        pages[j].classList.add("active");
+        navigationLinks[j].classList.add("active");
         window.scrollTo(0, 0);
       } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
+        pages[j].classList.remove("active");
+        navigationLinks[j].classList.remove("active");
       }
     }
 
@@ -572,7 +572,7 @@ function generateModalContent(project) {
   let externalLinkHTML = '';
   if (project.externalLink) {
     externalLinkHTML = `
-      <a href="${project.externalLink.url}" target="_blank" class="modal-external-link">
+      <a href="${project.externalLink.url}" target="_blank" rel="noopener noreferrer" class="modal-external-link">
         <ion-icon name="open-outline"></ion-icon>
         ${project.externalLink.title}
       </a>
@@ -586,7 +586,7 @@ function generateModalContent(project) {
       <div class="modal-external-links">
         ${project.externalLinks.map(link => {
           const downloadAttr = link.isDownload ? 'download' : '';
-          const targetAttr = link.isDownload ? '' : 'target="_blank"';
+          const targetAttr = link.isDownload ? '' : 'target="_blank" rel="noopener noreferrer"';
           const icon = link.icon || 'open-outline';
           return `
             <a href="${link.url}" ${targetAttr} ${downloadAttr} class="modal-external-link">
