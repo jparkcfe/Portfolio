@@ -163,10 +163,6 @@
             <button class="navbar-link" data-nav-link>Portfolio</button>
           </li>
 
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>게임 분석</button>
-          </li>
-
         </ul>
 
       </nav>
@@ -218,80 +214,94 @@
 
 
         <!--
-          - service
+          - Project Experience (Main / Sub)
         -->
 
-        <section class="service">
+        <section class="timeline">
 
-          <h3 class="h3 service-title">주요 역량</h3>
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="game-controller-outline"></ion-icon>
+            </div>
 
-          <ul class="service-list">
+            <h3 class="h3">Project Experience</h3>
+          </div>
 
-            <li class="service-item">
+          <ol class="timeline-list">
 
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-design.svg" alt="design icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">시스템 설계</h4>
-
-                <p class="service-item-text">
-                  게임 시스템의 구조와 흐름을 설계하고, 게임 루프에서 각 시스템의 역할을 정의합니다.
-                </p>
-              </div>
-
+            <li class="timeline-item">
+              <a href="#" class="timeline-project-link" data-project-btn data-project="roguelike">
+                <div class="timeline-thumbnail">
+                  <img src="./assets/images/project-roguelike.png" alt="로그라이트 게임" loading="lazy">
+                  <div class="timeline-thumbnail-overlay">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                </div>
+                <div class="timeline-content">
+                  <h4 class="h4 timeline-item-title">로그라이트 게임 — 시스템 기획 & 밸런싱</h4>
+                  <span class="timeline-period">2025.12 | 개인 프로젝트 | Unity | AI 바이브 코딩</span>
+                  <p class="timeline-text">
+                    레벨업·상점·클리어 보상으로 나뉜 3경로 성장과 경제 밸런싱을 설계한 로그라이트 게임.<br>
+                    <strong>[기여]</strong> 3경로 성장 구조 설계 / 특수 무기 4종 역할 차별화 / AI 바이브 코딩으로 타이틀~엔딩 1인 구현<br>
+                    <strong>[성과]</strong> 50건 플레이 테스트로 보상-비용 오차 0.6% 달성 / 6일 완성
+                  </p>
+                </div>
+              </a>
             </li>
 
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">수치 밸런싱</h4>
-
-                <p class="service-item-text">
-                  플레이 테스트 데이터 기반으로 보상과 비용의 균형을 조정하고, 조정 근거를 문서화합니다.
-                </p>
-              </div>
-
+            <li class="timeline-item">
+              <a href="./assets/docs/SlayTheSpire_코스트 체계 역기획서_박진.pdf" target="_blank" class="timeline-project-link">
+                <div class="timeline-thumbnail">
+                  <img src="./assets/images/SlaytheSpire.png" alt="Slay the Spire">
+                </div>
+                <div class="timeline-content">
+                  <h4 class="h4 timeline-item-title">Slay the Spire — 코스트 체계 역기획서</h4>
+                  <span class="timeline-period">2026.01.21 — 2026.02.16 | 코스트 체계 역기획서</span>
+                  <p class="timeline-text">
+                    • 코스트 체계 설계 의도 분석<br>
+                    • 개선안 제안 및 검증
+                  </p>
+                </div>
+              </a>
             </li>
 
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <ion-icon name="library-outline" style="font-size: 40px; color: #FFBC5E;"></ion-icon>
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">레퍼런스 분석</h4>
-
-                <p class="service-item-text">
-                  레퍼런스 게임의 시스템을 분석하고, 설계 의도와 개선안을 문서화합니다.
-                </p>
-              </div>
-
+            <li class="timeline-item">
+              <a href="./assets/docs/스텔라블레이드_역기획서_박진.pdf" target="_blank" class="timeline-project-link">
+                <div class="timeline-thumbnail">
+                  <img src="./assets/images/StellarBlade.png" alt="Stellar Blade">
+                </div>
+                <div class="timeline-content">
+                  <h4 class="h4 timeline-item-title">Stellar Blade — 방어 액션 시스템 역기획서</h4>
+                  <span class="timeline-period">2025.12.03 — 2026.01.02 | 방어 액션 시스템 역기획서</span>
+                  <p class="timeline-text">
+                    • 4종 방어 액션 설계 의도 분석<br>
+                    • 개선안 2가지 제안
+                  </p>
+                </div>
+              </a>
             </li>
 
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <ion-icon name="game-controller-outline" style="font-size: 40px; color: #FFBC5E;"></ion-icon>
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">프로토타입 검증</h4>
-
-                <p class="service-item-text">
-                  AI 바이브 코딩으로 기획을 직접 구현하고, 테스트 결과로 설계를 수정합니다.
-                </p>
-              </div>
-
+            <li class="timeline-item">
+              <a href="#" class="timeline-project-link" data-project-btn data-project="maeil">
+                <div class="timeline-thumbnail">
+                  <img src="./assets/images/project-maeil.png" alt="매일 보관함" loading="lazy">
+                  <div class="timeline-thumbnail-overlay">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                </div>
+                <div class="timeline-content">
+                  <h4 class="h4 timeline-item-title">매일 보관함 — 시스템 기획 & 서브 PM</h4>
+                  <span class="timeline-period">2025.03 — 2025.08 | NCA 장기과정 2기 쇼케이스 전시 | 6인 팀 | UE5</span>
+                  <p class="timeline-text">
+                    '보는 VR'을 '참여하는 VR'로 전환한 몰입형 VR 힐링 게임.<br>
+                    <strong>[기여]</strong> VR 상호작용 5종 기획·제안, 전체 채택 / 기획-아트-개발 간 리소스 조율 (맵 7개→5개 합의)<br>
+                    <strong>[성과]</strong> 제안한 상호작용 5종 구현 완료 / 목표 플레이타임 달성 (8~9분)
+                  </p>
+                </div>
+              </a>
             </li>
 
-          </ul>
+          </ol>
 
         </section>
 
@@ -355,352 +365,73 @@
 
 
         <!--
-          - Project Experience
-        -->
-
-        <section class="timeline">
-
-          <div class="title-wrapper">
-            <div class="icon-box">
-              <ion-icon name="game-controller-outline"></ion-icon>
-            </div>
-
-            <h3 class="h3">Project Experience</h3>
-          </div>
-
-          <ol class="timeline-list">
-
-            <li class="timeline-item">
-              <a href="#" class="timeline-project-link" data-project-btn data-project="roguelike">
-                <div class="timeline-thumbnail">
-                  <img src="./assets/images/project-roguelike.png" alt="로그라이트 게임" loading="lazy">
-                  <div class="timeline-thumbnail-overlay">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                </div>
-                <div class="timeline-content">
-                  <h4 class="h4 timeline-item-title">로그라이트 게임 — 시스템 기획 & 밸런싱</h4>
-                  <span class="timeline-period">2025.12 | 개인 프로젝트 | Unity | AI 바이브 코딩</span>
-                  <p class="timeline-text">
-                    레벨업·상점·클리어 보상으로 나뉜 3경로 성장과 경제 밸런싱을 설계한 로그라이트 게임.<br>
-                    <strong>[기여]</strong> 3경로 성장 구조 설계 / 특수 무기 4종 역할 차별화 / AI 바이브 코딩으로 타이틀~엔딩 1인 구현<br>
-                    <strong>[성과]</strong> 50건 플레이 테스트로 보상-비용 오차 0.6% 달성 / 6일 완성
-                  </p>
-                </div>
-              </a>
-            </li>
-
-            <li class="timeline-item">
-              <a href="#" class="timeline-project-link" data-project-btn data-project="maeil">
-                <div class="timeline-thumbnail">
-                  <img src="./assets/images/project-maeil.png" alt="매일 보관함" loading="lazy">
-                  <div class="timeline-thumbnail-overlay">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                </div>
-                <div class="timeline-content">
-                  <h4 class="h4 timeline-item-title">매일 보관함 — 시스템 기획 & 서브 PM</h4>
-                  <span class="timeline-period">2025.03 — 2025.08 | NCA 장기과정 2기 쇼케이스 전시 | 6인 팀 | UE5</span>
-                  <p class="timeline-text">
-                    '보는 VR'을 '참여하는 VR'로 전환한 몰입형 VR 힐링 게임.<br>
-                    <strong>[기여]</strong> VR 상호작용 5종 기획·제안, 전체 채택 / 기획-아트-개발 간 리소스 조율 (맵 7개→5개 합의)<br>
-                    <strong>[성과]</strong> 제안한 상호작용 5종 구현 완료 / 목표 플레이타임 달성 (8~9분)
-                  </p>
-                </div>
-              </a>
-            </li>
-
-            <li class="timeline-item timeline-item-multi">
-              <div class="timeline-content">
-                <h4 class="h4 timeline-item-title">웹게임 프로토타이핑 — 기획→구현→검증 사이클 3회 반복</h4>
-                <span class="timeline-period">2025.07 — 2025.10 | 개인 프로젝트 | AI 바이브 코딩</span>
-                <p class="timeline-text">
-                  <strong>[목표]</strong> 3개의 웹게임을 만들며 설계 복잡도를 단계적으로 높이고, 기획→구현→검증 사이클을 체득<br>
-                  <strong>[성과]</strong> 3종 구현 완료 / AI 바이브 코딩 워크플로우를 체득하여 로그라이트 6일 완성의 기반 마련
-                </p>
-
-                <div class="timeline-multi-projects">
-                  <a href="#" class="timeline-mini-project" data-project-btn data-project="kanji">
-                    <div class="timeline-mini-thumbnail">
-                      <img src="./assets/images/project-kanji.png" alt="한자 낱말 퀴즈" loading="lazy">
-                      <div class="timeline-thumbnail-overlay">
-                        <ion-icon name="eye-outline"></ion-icon>
-                      </div>
-                    </div>
-                    <div class="timeline-mini-info">
-                      <span class="timeline-mini-title">[1/3] 한자 낱말 퀴즈</span>
-                      <span class="timeline-mini-concept">게임 루프 설계 (입력→판정→피드백)</span>
-                    </div>
-                  </a>
-
-                  <a href="#" class="timeline-mini-project" data-project-btn data-project="apple">
-                    <div class="timeline-mini-thumbnail">
-                      <img src="./assets/images/project-apple.png" alt="사과 수확 게임" loading="lazy">
-                      <div class="timeline-thumbnail-overlay">
-                        <ion-icon name="eye-outline"></ion-icon>
-                      </div>
-                    </div>
-                    <div class="timeline-mini-info">
-                      <span class="timeline-mini-title">[2/3] 사과 수확 게임</span>
-                      <span class="timeline-mini-concept">시간 압박 × 콤보 보상 설계</span>
-                    </div>
-                  </a>
-
-                  <a href="#" class="timeline-mini-project" data-project-btn data-project="puzzle">
-                    <div class="timeline-mini-thumbnail">
-                      <img src="./assets/images/project-puzzle.png" alt="슬라이드 퍼즐 게임" loading="lazy">
-                      <div class="timeline-thumbnail-overlay">
-                        <ion-icon name="eye-outline"></ion-icon>
-                      </div>
-                    </div>
-                    <div class="timeline-mini-info">
-                      <span class="timeline-mini-title">[3/3] 슬라이드 퍼즐 게임</span>
-                      <span class="timeline-mini-concept">구조적 문제 해결 (역생성 알고리즘)</span>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </li>
-
-            <li class="timeline-item">
-              <a href="#" class="timeline-project-link" data-project-btn data-project="babysanta">
-                <div class="timeline-thumbnail">
-                  <img src="./assets/images/project-babysanta.png" alt="Baby Santa Run" loading="lazy">
-                  <div class="timeline-thumbnail-overlay">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                </div>
-                <div class="timeline-content">
-                  <h4 class="h4 timeline-item-title">Baby Santa Run — 게임 기획 & 개발</h4>
-                  <span class="timeline-period">2024.11 — 2024.12 | NCA 장기과정 1학기 | 4인 팀 | UE5</span>
-                  <p class="timeline-text">
-                    웹툰 IP 기반 캐주얼 러닝 게임. 단순 조작과 선물 수집 목표를 중심으로 설계.<br>
-                    <strong>[기여]</strong> 웹툰 시놉시스 기획 / 게임 시스템 3종 설계 (조작/수집/리스폰) / TP 리스폰 시스템 직접 구현<br>
-                    <strong>[성과]</strong> TP 리스폰 설계를 통한 맵 이탈 및 진행 불가 문제 해결
-                  </p>
-                </div>
-              </a>
-            </li>
-
-            <li class="timeline-item">
-              <a href="#" class="timeline-project-link" data-project-btn data-project="novel">
-                <div class="timeline-thumbnail">
-                  <img src="./assets/images/project-novel.png" alt="웹소설 연재" loading="lazy">
-                  <div class="timeline-thumbnail-overlay">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                </div>
-                <div class="timeline-content">
-                  <h4 class="h4 timeline-item-title">웹소설 연재 (완결) — 에피소드 기획 및 집필</h4>
-                  <span class="timeline-period">2024.10 — 2025.03 | 노벨피아</span>
-                  <p class="timeline-text">
-                    <strong>[기여]</strong> 6개월간 126화 기획 및 집필 / 장편 서사 구조 설계 (회차별 전개, 복선 배치) / 주 5회 연재 일정 준수<br>
-                    <strong>[성과]</strong> 장기 프로젝트 중단 없이 완주 / 마감 관리와 서사 설계 능력 증명
-                  </p>
-                </div>
-              </a>
-            </li>
-
-          </ol>
-
-        </section>
-
-
-        <!--
-          - Analysis
-        -->
-
-        <section class="timeline">
-
-          <div class="title-wrapper">
-            <div class="icon-box">
-              <ion-icon name="analytics-outline"></ion-icon>
-            </div>
-
-            <h3 class="h3">Analysis</h3>
-          </div>
-
-          <ol class="timeline-list">
-
-            <li class="timeline-item">
-              <a href="./assets/docs/SlayTheSpire_코스트 체계 역기획서_박진.pdf" target="_blank" class="timeline-project-link">
-                <div class="timeline-thumbnail">
-                  <img src="./assets/images/SlaytheSpire.png" alt="Slay the Spire">
-                </div>
-                <div class="timeline-content">
-                  <h4 class="h4 timeline-item-title">Slay the Spire</h4>
-                  <span class="timeline-period">2026.01.21 — 2026.02.16 | 코스트 체계 역기획서</span>
-                  <p class="timeline-text">
-                    • 코스트 체계 설계 의도 분석<br>
-                    • 개선안 제안 및 검증
-                  </p>
-                </div>
-              </a>
-            </li>
-
-            <li class="timeline-item">
-              <a href="./assets/docs/스텔라블레이드_역기획서_박진.pdf" target="_blank" class="timeline-project-link">
-                <div class="timeline-thumbnail">
-                  <img src="./assets/images/StellarBlade.png" alt="Stellar Blade">
-                </div>
-                <div class="timeline-content">
-                  <h4 class="h4 timeline-item-title">Stellar Blade</h4>
-                  <span class="timeline-period">2025.12.03 — 2026.01.02 | 방어 액션 시스템 역기획서</span>
-                  <p class="timeline-text">
-                    • 4종 방어 액션 설계 의도 분석<br>
-                    • 개선안 2가지 제안
-                  </p>
-                </div>
-              </a>
-            </li>
-
-          </ol>
-
-        </section>
-
-
-        <!--
-          - Tools
+          - Tools (아이콘 + 숙련도 통합)
         -->
 
         <section class="tools">
 
           <h3 class="h3 tools-title">사용 툴</h3>
 
-          <ul class="tools-list">
+          <div class="tools-grid content-card">
 
-            <li class="tools-item">
-              <img src="./assets/images/tool-word.svg" alt="Microsoft Word">
-              <span class="tools-item-name">Word</span>
-            </li>
-
-            <li class="tools-item">
-              <img src="./assets/images/tool-excel.svg" alt="Microsoft Excel">
-              <span class="tools-item-name">Excel</span>
-            </li>
-
-            <li class="tools-item">
-              <img src="./assets/images/tool-powerpoint.svg" alt="Microsoft PowerPoint">
-              <span class="tools-item-name">PowerPoint</span>
-            </li>
-
-            <li class="tools-item">
-              <img src="./assets/images/cursor-ai-code-icon.png" alt="Cursor AI">
-              <span class="tools-item-name">Cursor</span>
-            </li>
-
-            <li class="tools-item">
-              <img src="./assets/images/icons8-클로드-아이-100.png" alt="Claude Code">
-              <span class="tools-item-name">Claude Code</span>
-            </li>
-
-            <li class="tools-item">
-              <img src="./assets/images/chatgpt-codex-icon.png" alt="GPT Codex">
-              <span class="tools-item-name">GPT Codex</span>
-            </li>
-
-            <li class="tools-item">
-              <img src="./assets/images/google-antigravity-logo-icon.png" alt="Anti-Gravity">
-              <span class="tools-item-name">Anti-Gravity</span>
-            </li>
-
-            <li class="tools-item">
-              <img src="./assets/images/HD Unreal Engine Logo.png" alt="Unreal Engine 5" class="invert-icon">
-              <span class="tools-item-name">UE5</span>
-            </li>
-
-            <li class="tools-item">
-              <img src="./assets/images/UnityIcon.png" alt="Unity">
-              <span class="tools-item-name">Unity</span>
-            </li>
-
-          </ul>
-
-        </section>
-
-
-        <!--
-          - Skills (Tool Proficiency)
-        -->
-
-        <section class="skill">
-
-          <h3 class="h3 skills-title">툴 숙련도</h3>
-
-          <ul class="skills-list content-card">
-
-            <li class="skills-category">게임 엔진</li>
-
-            <li class="skills-item skills-item-clickable" data-video-btn
-                data-video-url="https://www.youtube.com/watch?v=38E2_dDgu4U">
-              <div class="title-wrapper">
-                <h5 class="h5">Unreal Engine 5</h5>
+            <h4 class="tools-category-label">게임 엔진</h4>
+            <ul class="tools-list">
+              <li class="tools-item" data-video-btn data-video-url="https://www.youtube.com/watch?v=38E2_dDgu4U">
+                <img src="./assets/images/HD Unreal Engine Logo.png" alt="Unreal Engine 5" class="invert-icon">
+                <span class="tools-item-name">Unreal Engine 5 <ion-icon name="play-circle-outline" class="tools-video-icon"></ion-icon></span>
                 <span class="skill-level level-mid">중</span>
-              </div>
-              <p class="skill-video-hint"><ion-icon name="play-circle-outline"></ion-icon> 클릭 시 영상 재생</p>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Unity</h5>
+              </li>
+              <li class="tools-item">
+                <img src="./assets/images/UnityIcon.png" alt="Unity">
+                <span class="tools-item-name">Unity</span>
                 <span class="skill-level level-mid">중</span>
-              </div>
-            </li>
+              </li>
+            </ul>
 
-            <li class="skills-category">AI 도구</li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Claude Code</h5>
+            <h4 class="tools-category-label">AI 도구</h4>
+            <ul class="tools-list">
+              <li class="tools-item">
+                <img src="./assets/images/icons8-클로드-아이-100.png" alt="Claude Code">
+                <span class="tools-item-name">Claude Code</span>
                 <span class="skill-level level-high">상</span>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Cursor</h5>
+              </li>
+              <li class="tools-item">
+                <img src="./assets/images/cursor-ai-code-icon.png" alt="Cursor AI">
+                <span class="tools-item-name">Cursor</span>
                 <span class="skill-level level-mid">중</span>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">GPT Codex</h5>
+              </li>
+              <li class="tools-item">
+                <img src="./assets/images/chatgpt-codex-icon.png" alt="GPT Codex">
+                <span class="tools-item-name">GPT Codex</span>
                 <span class="skill-level level-mid">중</span>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Anti-Gravity</h5>
+              </li>
+              <li class="tools-item">
+                <img src="./assets/images/google-antigravity-logo-icon.png" alt="Anti-Gravity">
+                <span class="tools-item-name">Anti-Gravity</span>
                 <span class="skill-level level-mid">중</span>
-              </div>
-            </li>
+              </li>
+            </ul>
 
-            <li class="skills-category">문서</li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Microsoft Word</h5>
+            <h4 class="tools-category-label">문서</h4>
+            <ul class="tools-list">
+              <li class="tools-item">
+                <img src="./assets/images/tool-word.svg" alt="Microsoft Word">
+                <span class="tools-item-name">Word</span>
                 <span class="skill-level level-high">상</span>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Microsoft Excel</h5>
+              </li>
+              <li class="tools-item">
+                <img src="./assets/images/tool-excel.svg" alt="Microsoft Excel">
+                <span class="tools-item-name">Excel</span>
                 <span class="skill-level level-mid">중</span>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Microsoft PowerPoint</h5>
+              </li>
+              <li class="tools-item">
+                <img src="./assets/images/tool-powerpoint.svg" alt="Microsoft PowerPoint">
+                <span class="tools-item-name">PowerPoint</span>
                 <span class="skill-level level-high">상</span>
-              </div>
-            </li>
+              </li>
+            </ul>
 
-          </ul>
+          </div>
 
         </section>
 
@@ -730,6 +461,10 @@
 
             <li class="filter-item">
               <button data-filter-btn>Unity+AI</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Analysis</button>
             </li>
 
             <li class="filter-item">
@@ -769,6 +504,10 @@
               </li>
 
               <li class="select-item">
+                <button data-select-item>Analysis</button>
+              </li>
+
+              <li class="select-item">
                 <button data-select-item>Unreal Engine</button>
               </li>
 
@@ -786,6 +525,7 @@
 
           <ul class="project-list">
 
+            <!-- 1. 로그라이트 -->
             <li class="project-item active" data-filter-item data-category="unity+ai">
               <a href="#" data-project-btn data-project="roguelike">
 
@@ -804,25 +544,45 @@
               </a>
             </li>
 
-            <li class="project-item active" data-filter-item data-category="unreal engine">
-              <a href="#" data-project-btn data-project="babysanta">
+            <!-- 2. Slay the Spire 역기획서 -->
+            <li class="project-item active" data-filter-item data-category="analysis">
+              <a href="./assets/docs/SlayTheSpire_코스트 체계 역기획서_박진.pdf" target="_blank">
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
+                    <ion-icon name="document-text-outline"></ion-icon>
                   </div>
 
-                  <img src="./assets/images/project-babysanta.png" alt="Baby Santa Run" loading="lazy">
+                  <img src="./assets/images/SlaytheSpire.png" alt="Slay the Spire" loading="lazy">
                 </figure>
 
-                <h3 class="project-title">Baby Santa Run</h3>
+                <h3 class="project-title">Slay the Spire</h3>
 
-                <p class="project-category">Unreal Engine 5 | 캐주얼 러닝</p>
+                <p class="project-category">Analysis | 코스트 체계 역기획서</p>
 
               </a>
             </li>
 
-            <!-- 매일 보관함 -->
+            <!-- 3. Stellar Blade 역기획서 -->
+            <li class="project-item active" data-filter-item data-category="analysis">
+              <a href="./assets/docs/스텔라블레이드_역기획서_박진.pdf" target="_blank">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="document-text-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/StellarBlade.png" alt="Stellar Blade" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Stellar Blade</h3>
+
+                <p class="project-category">Analysis | 방어 액션 시스템 역기획서</p>
+
+              </a>
+            </li>
+
+            <!-- 4. 매일 보관함 -->
             <li class="project-item active" data-filter-item data-category="unreal engine">
               <a href="#" data-project-btn data-project="maeil">
 
@@ -841,6 +601,7 @@
               </a>
             </li>
 
+            <!-- 5. AI 프로토타이핑 - 한자 -->
             <li class="project-item active" data-filter-item data-category="ai prototyping">
               <a href="#" data-project-btn data-project="kanji">
 
@@ -859,6 +620,7 @@
               </a>
             </li>
 
+            <!-- 6. AI 프로토타이핑 - 사과 -->
             <li class="project-item active" data-filter-item data-category="ai prototyping">
               <a href="#" data-project-btn data-project="apple">
 
@@ -877,6 +639,7 @@
               </a>
             </li>
 
+            <!-- 7. AI 프로토타이핑 - 퍼즐 -->
             <li class="project-item active" data-filter-item data-category="ai prototyping">
               <a href="#" data-project-btn data-project="puzzle">
 
@@ -895,6 +658,26 @@
               </a>
             </li>
 
+            <!-- 8. Baby Santa Run -->
+            <li class="project-item active" data-filter-item data-category="unreal engine">
+              <a href="#" data-project-btn data-project="babysanta">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/project-babysanta.png" alt="Baby Santa Run" loading="lazy">
+                </figure>
+
+                <h3 class="project-title">Baby Santa Run</h3>
+
+                <p class="project-category">Unreal Engine 5 | 캐주얼 러닝</p>
+
+              </a>
+            </li>
+
+            <!-- 9. 웹소설 -->
             <li class="project-item active" data-filter-item data-category="scenario">
               <a href="#" data-project-btn data-project="novel">
 
@@ -954,158 +737,6 @@
 
 
 
-
-      <!--
-        - #ANALYSIS
-      -->
-
-      <article class="analysis" data-page="게임 분석">
-
-        <header>
-          <h2 class="h2 article-title">게임 분석</h2>
-        </header>
-
-
-        <!-- 영상 확보 후 주석 해제 예정
-        <section class="devlog">
-
-          <h3 class="h3 devlog-title">AI 시스템</h3>
-
-          <ul class="devlog-list">
-
-            <li class="devlog-item">
-              <button class="devlog-header" data-devlog-toggle>
-                <div class="devlog-header-left">
-                  <div class="devlog-icon-box">
-                    <ion-icon name="hardware-chip-outline"></ion-icon>
-                  </div>
-                  <div class="devlog-header-info">
-                    <h4 class="devlog-item-title">AI 시스템 구현</h4>
-                    <p class="devlog-subtitle">Behavior Tree 기반 적 AI 설계</p>
-                  </div>
-                </div>
-                <div class="devlog-toggle-icon">
-                  <ion-icon name="chevron-down-outline"></ion-icon>
-                </div>
-              </button>
-              <div class="devlog-content">
-                <div class="devlog-content-inner">
-
-                  <a href="#" target="_blank" class="devlog-notion-link">
-                    <ion-icon name="document-text-outline"></ion-icon>
-                    <span>전체 개발일지 보기 (Notion)</span>
-                  </a>
-
-                  <p class="devlog-text">
-                    적 AI의 상태머신(State Machine)을 Behavior Tree로 구현했습니다.
-                    Patrol, Chase, Strafe, Attack 네 가지 상태를 순환하며, 플레이어 감지 시 자연스럽게 전환됩니다.
-                  </p>
-
-                  <ul class="devlog-feature-list">
-                    <li class="devlog-feature-item">
-                      <button class="devlog-feature-header" data-feature-toggle>
-                        <div class="devlog-feature-info">
-                          <span class="devlog-feature-title">순찰 기능 (Patrol)</span>
-                          <span class="devlog-feature-desc">Spline 경로를 따라 이동하는 AI 구현</span>
-                        </div>
-                        <ion-icon name="play-circle-outline" class="devlog-feature-icon"></ion-icon>
-                      </button>
-                      <div class="devlog-feature-video" data-youtube="YOUR_VIDEO_ID_HERE">
-                      </div>
-                    </li>
-                    <li class="devlog-feature-item">
-                      <button class="devlog-feature-header" data-feature-toggle>
-                        <div class="devlog-feature-info">
-                          <span class="devlog-feature-title">추적 기능 (Chase)</span>
-                          <span class="devlog-feature-desc">AI Perception을 활용한 플레이어 감지 및 추적</span>
-                        </div>
-                        <ion-icon name="play-circle-outline" class="devlog-feature-icon"></ion-icon>
-                      </button>
-                      <div class="devlog-feature-video" data-youtube="YOUR_VIDEO_ID_HERE">
-                      </div>
-                    </li>
-                    <li class="devlog-feature-item">
-                      <button class="devlog-feature-header" data-feature-toggle>
-                        <div class="devlog-feature-info">
-                          <span class="devlog-feature-title">측면 이동 (Strafe)</span>
-                          <span class="devlog-feature-desc">플레이어를 주시하며 좌우로 이동하는 전투 준비 동작</span>
-                        </div>
-                        <ion-icon name="play-circle-outline" class="devlog-feature-icon"></ion-icon>
-                      </button>
-                      <div class="devlog-feature-video" data-youtube="YOUR_VIDEO_ID_HERE">
-                      </div>
-                    </li>
-                    <li class="devlog-feature-item">
-                      <button class="devlog-feature-header" data-feature-toggle>
-                        <div class="devlog-feature-info">
-                          <span class="devlog-feature-title">공격 기능 (Attack)</span>
-                          <span class="devlog-feature-desc">거리 기반 공격 판정 및 애니메이션 연동</span>
-                        </div>
-                        <ion-icon name="play-circle-outline" class="devlog-feature-icon"></ion-icon>
-                      </button>
-                      <div class="devlog-feature-video" data-youtube="YOUR_VIDEO_ID_HERE">
-                      </div>
-                    </li>
-                  </ul>
-
-                  <div class="devlog-tags">
-                    <span class="devlog-tag">Blueprint</span>
-                    <span class="devlog-tag">Behavior Tree</span>
-                    <span class="devlog-tag">AI Perception</span>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-          </ul>
-
-        </section>
-        -->
-
-
-        <section class="game-analysis">
-
-          <h3 class="h3 game-analysis-title">역기획서</h3>
-
-          <ul class="game-analysis-list">
-
-            <li class="game-analysis-item">
-              <a href="./assets/docs/SlayTheSpire_코스트 체계 역기획서_박진.pdf" target="_blank">
-                <div class="game-analysis-thumbnail">
-                  <img src="./assets/images/SlaytheSpire.png" alt="Slay the Spire">
-                </div>
-                <div class="game-analysis-content">
-                  <h4 class="game-analysis-name">Slay the Spire</h4>
-                  <p class="game-analysis-desc">코스트 체계 분석</p>
-                  <span class="game-analysis-tag">시스템 분석</span>
-                </div>
-                <div class="game-analysis-icon">
-                  <ion-icon name="document-text-outline"></ion-icon>
-                </div>
-              </a>
-            </li>
-
-            <li class="game-analysis-item">
-              <a href="./assets/docs/스텔라블레이드_역기획서_박진.pdf" target="_blank">
-                <div class="game-analysis-thumbnail">
-                  <img src="./assets/images/StellarBlade.png" alt="Stellar Blade">
-                </div>
-                <div class="game-analysis-content">
-                  <h4 class="game-analysis-name">Stellar Blade</h4>
-                  <p class="game-analysis-desc">방어 액션 시스템 분석</p>
-                  <span class="game-analysis-tag">시스템 분석</span>
-                </div>
-                <div class="game-analysis-icon">
-                  <ion-icon name="document-text-outline"></ion-icon>
-                </div>
-              </a>
-            </li>
-
-          </ul>
-
-        </section>
-
-      </article>
 
     </div>
 

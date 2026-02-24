@@ -39,9 +39,8 @@ npx serve .
 
 단일 페이지 애플리케이션(SPA) 패턴을 사용합니다. 네비게이션 탭 클릭 시 `data-page` 속성으로 페이지를 전환합니다.
 
-- **About** (`data-page="about"`): 자기소개, 서비스, 교육, 프로젝트 경력, 툴 숙련도
-- **Portfolio** (`data-page="portfolio"`): 프로젝트 갤러리 (카테고리 필터 지원)
-- **게임 분석** (`data-page="게임 분석"`): 역기획서 문서 링크 (한글 값 사용)
+- **About** (`data-page="about"`): 자기소개, 프로젝트 경험(Main/Sub), 교육, 사용 툴(아이콘+숙련도 통합)
+- **Portfolio** (`data-page="portfolio"`): 프로젝트 갤러리 (카테고리 필터 지원, Analysis 카테고리 포함)
 
 페이지 전환 로직은 `script.js`의 `navigationLinks` 이벤트 핸들러에서 처리됩니다. `data-nav-link` 버튼의 `innerHTML`(소문자 변환)과 `data-page` 속성을 비교합니다.
 
@@ -114,7 +113,7 @@ npx serve .
 
 - 프로젝트 썸네일: `project-{프로젝트키}.png`
 - 모달 이미지: `modal-{프로젝트키}.png`
-- 툴 아이콘: `tool-{툴명}.svg` 또는 `.png`
+- 툴 아이콘: `tool-{툴명}.svg` (Word, Excel, PowerPoint, UE5 등) 또는 개별 파일명 (`cursor-ai-code-icon.png`, `icons8-클로드-아이-100.png`, `chatgpt-codex-icon.png`, `google-antigravity-logo-icon.png` 등)
 
 ### 포트폴리오 필터 시스템
 
@@ -124,21 +123,33 @@ npx serve .
 
 `data-filter-item`의 `data-category` 속성 값으로 필터링됩니다.
 
-사용 가능한 카테고리: `all`, `unity+ai`, `unreal engine`, `ai prototyping`, `scenario`
+사용 가능한 카테고리: `all`, `unity+ai`, `unreal engine`, `ai prototyping`, `scenario`, `analysis`
 
 새 카테고리 추가 시 `filter-list`(데스크탑)와 `filter-select-box`(모바일) 양쪽 모두 항목을 추가해야 합니다.
 
 ### About 페이지 섹션 클래스
 
-About 페이지의 주요 섹션들:
+About 페이지의 주요 섹션들 (순서대로):
 - `section.about-text`: 자기소개 및 역할 태그
-- `section.service`: What i'm doing 카드 리스트
-- `section.timeline`: Education/Project Experience/Analysis 타임라인 (썸네일+링크 지원)
-- `section.tools`: 사용 툴 아이콘 리스트
-- `section.skill`: 툴 숙련도 바
+- `section.timeline` (Project Experience): Main/Sub 위계로 분리된 프로젝트 타임라인
+- `section.timeline` (Education & Experience): 학력/경력 타임라인
+- `section.tools`: 사용 툴 아이콘 + 숙련도 통합 그리드
+
+Project Experience 위계:
+- `h4.timeline-subheading`: Main/Sub 서브헤딩 라벨
+- Main: 로그라이트 게임, Slay the Spire 역기획서(PDF 링크), Stellar Blade 역기획서(PDF 링크)
+- Sub: 웹게임 프로토타이핑(multi), 매일 보관함
+
+통합 툴 섹션 구조:
+- `div.tools-grid.content-card`: 전체 컨테이너
+- `h4.tools-category-label`: 카테고리 구분 헤더 (게임 엔진, AI 도구, 문서)
+- `ul.tools-list > li.tools-item`: 아이콘 + 이름 + `.skill-level` 스팬으로 상/중/하 표시
+  - `.level-high` (상), `.level-mid` (중), `.level-low` (하)
+- UE5 항목에 `data-video-btn` + `data-video-url` (비디오 라이트박스 연동)
 
 타임라인 항목 유형:
 - 기본 항목: `li.timeline-item` + `a.timeline-project-link[data-project-btn][data-project="키"]`
+- PDF 링크 항목: `li.timeline-item` + `a.timeline-project-link[href="PDF URL"][target="_blank"]` (data-project-btn 없음)
 - 복합 항목: `li.timeline-item.timeline-item-multi` - 하위 프로젝트가 있는 경우 (AI 웹게임처럼)
   - 내부에 `div.timeline-multi-projects` 안에 `a.timeline-mini-project` 배치
 
@@ -150,11 +161,22 @@ Portfolio 페이지(`data-page="portfolio"`)의 섹션들:
 - `div.filter-select-box`: 모바일용 드롭다운 필터
 - `ul.project-list`: 프로젝트 카드 그리드
 
-### 게임 분석 페이지 섹션 클래스
+### 비디오 라이트박스
 
-게임 분석 페이지(`data-page="게임 분석"`)의 섹션들:
-- `section.game-analysis`: 역기획서 문서 카드 리스트
-- `section.devlog`: 개발 일지 아코디언 (주석 처리, 영상 확보 후 활성화 예정)
+모달 외부에서 YouTube 영상을 전체 화면 오버레이로 재생하는 시스템. 현재 About 페이지의 UE5 스킬 항목에서 사용.
+
+- `data-video-btn` + `data-video-url="YouTube URL"` 속성을 가진 요소 클릭 시 라이트박스 열림
+- ESC 키 또는 오버레이/닫기 버튼 클릭으로 닫힘
+- HTML 구조: `div.video-lightbox[data-video-lightbox]` (index.html의 Portfolio 섹션 뒤에 위치)
+
+### 스크롤 FAB
+
+페이지 하단 우측에 고정된 플로팅 버튼 그룹. 300px 이상 스크롤 시 표시됨.
+
+- `div.scroll-fab-group`: 컨테이너 (`.visible` 클래스로 표시/숨김)
+- `button[data-scroll-top]`: 맨 위로 스크롤
+- `button[data-scroll-bottom]`: 맨 아래로 스크롤
+- HTML 위치: `</main>` 바로 앞
 
 ### 모달 섹션 클래스
 
@@ -198,11 +220,12 @@ CSS 커스텀 프로퍼티(`:root` 변수)로 다크 테마 색상을 관리합�
 - `generateModalContent(project)`: projectData 기반 모달 HTML 생성
 - `openProjectModal(projectId)` / `closeProjectModal()`: 모달 열기/닫기
 - `getYouTubeId(url)`: YouTube URL에서 영상 ID 추출
+- `openVideoLightbox(youtubeUrl)` / `closeVideoLightbox()`: 비디오 라이트박스 열기/닫기
 
 ## 주의사항
 
 - 프로젝트 키는 영문 소문자만 사용 (예: `roguelike`, `babysanta`)
 - `data-project` 속성값과 `projectData` 객체 키가 정확히 일치해야 모달이 열림
-- 페이지 전환에서 `innerHTML.toLowerCase()`와 `data-page` 값을 비교하므로, 한글 페이지명(예: `"게임 분석"`)은 버튼 텍스트와 정확히 일치해야 함
+- 페이지 전환에서 `innerHTML.toLowerCase()`와 `data-page` 값을 비교하므로, 페이지명은 버튼 텍스트와 정확히 일치해야 함
 - `vercel.json`의 보안 헤더(X-Frame-Options: DENY 등)가 iframe 임베딩을 차단하므로, 외부 사이트에서 이 사이트를 iframe으로 불러올 수 없음
-- 게임 분석 페이지의 `devlog` 섹션은 현재 주석 처리 상태 (영상 확보 후 활성화 예정)
+- Portfolio의 Analysis 카테고리 카드는 PDF 직접 링크(`href` + `target="_blank"`)이며, `data-project-btn`이 없으므로 모달이 열리지 않음
