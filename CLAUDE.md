@@ -113,7 +113,7 @@ npx serve .
 
 - 프로젝트 썸네일: `project-{프로젝트키}.png`
 - 모달 이미지: `modal-{프로젝트키}.png`
-- 툴 아이콘: `tool-{툴명}.svg` (Word, Excel, PowerPoint, UE5 등) 또는 개별 파일명 (`cursor-ai-code-icon.png`, `icons8-클로드-아이-100.png`, `chatgpt-codex-icon.png`, `google-antigravity-logo-icon.png` 등)
+- 툴 아이콘: `tool-{툴명}.svg` (Word, Excel, PowerPoint만 해당) 또는 개별 파일명 (`HD Unreal Engine Logo.png`, `UnityIcon.png`, `cursor-ai-code-icon.png`, `icons8-클로드-아이-100.png`, `chatgpt-codex-icon.png`, `google-antigravity-logo-icon.png`)
 
 ### 포트폴리오 필터 시스템
 
@@ -131,14 +131,15 @@ npx serve .
 
 About 페이지의 주요 섹션들 (순서대로):
 - `section.about-text`: 자기소개 및 역할 태그
-- `section.timeline` (Project Experience): Main/Sub 위계로 분리된 프로젝트 타임라인
+- `section.timeline` (Project Experience): 프로젝트 타임라인 (플랫 리스트)
 - `section.timeline` (Education & Experience): 학력/경력 타임라인
 - `section.tools`: 사용 툴 아이콘 + 숙련도 통합 그리드
 
-Project Experience 위계:
-- `h4.timeline-subheading`: Main/Sub 서브헤딩 라벨
-- Main: 로그라이트 게임, Slay the Spire 역기획서(PDF 링크), Stellar Blade 역기획서(PDF 링크)
-- Sub: 웹게임 프로토타이핑(multi), 매일 보관함
+Project Experience 항목 (순서대로):
+- 로그라이트 게임 (모달 링크)
+- Slay the Spire 역기획서 (PDF 직접 링크)
+- Stellar Blade 역기획서 (PDF 직접 링크)
+- 매일 보관함 (모달 링크)
 
 통합 툴 섹션 구조:
 - `div.tools-grid.content-card`: 전체 컨테이너
@@ -148,10 +149,8 @@ Project Experience 위계:
 - UE5 항목에 `data-video-btn` + `data-video-url` (비디오 라이트박스 연동)
 
 타임라인 항목 유형:
-- 기본 항목: `li.timeline-item` + `a.timeline-project-link[data-project-btn][data-project="키"]`
+- 모달 항목: `li.timeline-item` + `a.timeline-project-link[data-project-btn][data-project="키"]`
 - PDF 링크 항목: `li.timeline-item` + `a.timeline-project-link[href="PDF URL"][target="_blank"]` (data-project-btn 없음)
-- 복합 항목: `li.timeline-item.timeline-item-multi` - 하위 프로젝트가 있는 경우 (AI 웹게임처럼)
-  - 내부에 `div.timeline-multi-projects` 안에 `a.timeline-mini-project` 배치
 
 ### Portfolio 페이지 섹션 클래스
 
@@ -176,7 +175,7 @@ Portfolio 페이지(`data-page="portfolio"`)의 섹션들:
 - `div.scroll-fab-group`: 컨테이너 (`.visible` 클래스로 표시/숨김)
 - `button[data-scroll-top]`: 맨 위로 스크롤
 - `button[data-scroll-bottom]`: 맨 아래로 스크롤
-- HTML 위치: `</main>` 바로 앞
+- HTML 위치: `</main>` 바로 뒤 (main 요소 외부)
 
 ### 모달 섹션 클래스
 
