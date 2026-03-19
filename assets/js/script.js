@@ -338,75 +338,6 @@ const projectData = {
     ]
   },
 
-  kanji: {
-    title: "한자 낱말 퀴즈",
-    tagline: "입력→판정→피드백, 게임의 최소 루프를 설계·구현한 첫 프로젝트",
-    modalImage: "./assets/images/modal-kanji.png",
-    info: {
-      platform: "PC, 모바일",
-      engine: "Claude Code, Cursor",
-      role: "기획 & AI 바이브 코딩",
-      team: "1인",
-      period: "2025.07.02 — 2025.07.10",
-      note: "AI 바이브 코딩 학습 [1/3]"
-    },
-    overview: "한자 읽기를 4지선다 퀴즈로 만든 첫 프로젝트입니다. '입력→판정→피드백'이라는 가장 단순한 게임 루프를 직접 설계·구현했습니다.",
-    concept: [
-      "<strong>'입력→판정→피드백'</strong> 단일 루프만으로 게임 전체를 구성 — 최소 구조에서 플레이 동기가 유지되는지 확인",
-      "콤보 보너스 설계로 <strong>'연속 성공'이라는 단기 목표</strong>를 부여 — 단순 반복을 동기 부여 루프로 전환"
-    ],
-    systems: [
-      {
-        title: "퀴즈 루프 시스템",
-        why: "게임의 최소 단위인 '입력→판정→피드백' 루프를 설계하고, 이 루프만으로 플레이 동기가 유지되는지 검증",
-        how: "문제 출제 → 4지선다 입력 → 정답 판정 → 즉각 피드백 → 다음 문제. 연속 정답 시 콤보 보너스로 '끊지 않고 계속하고 싶은' 동기 설계",
-        what: "정답/오답 즉각 피드백 + 콤보 보너스. 단순한 루프지만 '한 문제 더'를 유도하는 구조"
-      }
-    ],
-    externalLinks: [
-      {
-        title: "게임 플레이",
-        url: "./assets/webgame/kanji-quiz.html",
-        icon: "game-controller-outline"
-      }
-    ]
-  },
-
-  apple: {
-    title: "사과 수확 게임",
-    tagline: "시간 압박과 콤보 보상 — 단순 규칙 위에 긴장감과 동기를 설계",
-    modalImage: "./assets/images/modal-apple.png",
-    info: {
-      platform: "PC, 모바일",
-      engine: "Claude Code, Cursor",
-      role: "기획 & AI 바이브 코딩",
-      team: "1인",
-      period: "2025.08.11 — 2025.08.14",
-      note: "AI 바이브 코딩 학습 [2/3]"
-    },
-    overview: "'합이 10이 되는 조합 찾기'라는 단순한 규칙 하에, 2분 제한과 콤보 보상을 연결해 긴장감을 유도한 게임입니다.",
-    concept: [
-      "<strong>'합이 10' 단일 규칙</strong> 위에 시간 압박(2분)과 콤보 보상을 얹어 — 규칙은 단순하되, 경험은 풍부하게",
-      "연속 성공 시 <strong>콤보 보너스</strong>로 '끊기 싫은' 동기 설계 + 정체 시 <strong>힌트 자동 표시</strong>로 이탈 방지",
-      "이전 퀴즈 프로젝트에서는 정답이 하나였지만, 이번에는 <strong>여러 조합 중 고르는 판단</strong>이 추가되어 설계 난이도를 한 단계 높임"
-    ],
-    systems: [
-      {
-        title: "숫자 조합 퍼즐 시스템",
-        why: "퀴즈에서는 정답이 하나지만, 숫자 조합에서는 정답이 여러 개. 같은 보드에서도 플레이어마다 다른 조합을 선택하는 재미를 검증",
-        how: "15×15 그리드에서 가로/세로 연결로 합 10 조합 수확. 2분 제한으로 시간 압박, 연속 수확 시 콤보 배율 증가",
-        what: "콤보 보너스(연속 성공 유도) + 힌트 시스템(정체 시 자동 표시)으로 '몰입 유지'와 '이탈 방지' 양립"
-      }
-    ],
-    externalLinks: [
-      {
-        title: "게임 플레이",
-        url: "./assets/webgame/apple-harvest.html",
-        icon: "game-controller-outline"
-      }
-    ]
-  },
-
   puzzle: {
     title: "슬라이드 퍼즐 게임",
     tagline: "풀 수 없는 퍼즐 문제를 역생성 알고리즘으로 구조적 해결",
@@ -441,31 +372,6 @@ const projectData = {
     ]
   },
 
-  novel: {
-    title: "웹소설 연재(완결)",
-    tagline: "6개월간 126화 완결 — 주 5회 마감을 끝까지 지킨 장기 프로젝트",
-    modalImage: "./assets/images/modal-novel.png",
-    info: {
-      platform: "노벨피아",
-      engine: "-",
-      role: "작가",
-      team: "1인",
-      period: "2024.10.01 — 2025.03.31",
-      note: "총 126화 (프롤로그, 에필로그 포함)"
-    },
-    overviewTitle: "소설 개요",
-    overview: "노벨피아 플랫폼에서 6개월간 126화를 연재하여 완결한 웹소설입니다. 주 5회 연재 일정을 끝까지 준수하며, 에피소드 단위의 구조 설계와 장기 프로젝트 관리를 경험했습니다.",
-    concept: [
-      "<strong>6개월간 126화 완결</strong> — 장기 프로젝트를 중단 없이 완주한 경험",
-      "주 5회 연재 일정 준수 — <strong>마감 관리 능력</strong>과 자기 규율 증명",
-      "에피소드 단위 <strong>서사 구조 설계</strong> — 회차별 전개 구성, 복선 배치, 장편 스토리 관리"
-    ],
-    systems: [],
-    externalLink: {
-      title: "노벨피아에서 보기",
-      url: "https://novelpia.com/novel/308225"
-    }
-  }
 };
 
 
