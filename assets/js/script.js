@@ -82,29 +82,6 @@ for (let i = 0; i < filterBtn.length; i++) {
 
 
 
-// contact form variables (optional - form may not exist)
-const form = document.querySelector("[data-form]");
-const formInputs = document.querySelectorAll("[data-form-input]");
-const formBtn = document.querySelector("[data-form-btn]");
-
-// add event to all form input field (only if form exists)
-if (form && formBtn) {
-  for (let i = 0; i < formInputs.length; i++) {
-    formInputs[i].addEventListener("input", function () {
-
-      // check form validation
-      if (form.checkValidity()) {
-        formBtn.removeAttribute("disabled");
-      } else {
-        formBtn.setAttribute("disabled", "");
-      }
-
-    });
-  }
-}
-
-
-
 // page navigation variables
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
@@ -438,15 +415,15 @@ function generateModalContent(project) {
             </summary>
             <div class="teamwork-content">
               <div class="teamwork-step">
-                <span class="teamwork-label teamwork-label-problem">문제</span>
+                <span class="teamwork-label">문제</span>
                 <p class="teamwork-text">${episode.problem}</p>
               </div>
               <div class="teamwork-step">
-                <span class="teamwork-label teamwork-label-solution">해결</span>
+                <span class="teamwork-label">해결</span>
                 <p class="teamwork-text">${episode.solution}</p>
               </div>
               <div class="teamwork-step">
-                <span class="teamwork-label teamwork-label-result">결과</span>
+                <span class="teamwork-label">결과</span>
                 <p class="teamwork-text">${episode.result}</p>
               </div>
             </div>

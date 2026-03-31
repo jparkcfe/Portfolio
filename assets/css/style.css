@@ -1390,9 +1390,6 @@ main {
   gap: 15px;
 }
 
-.modal-3w1h-item {
-}
-
 .modal-3w1h-label {
   color: var(--orange-yellow-crayola);
   font-size: var(--fs-5);
@@ -1425,45 +1422,6 @@ main {
   position: absolute;
   left: 0;
   top: 0;
-}
-
-/* Modal System Box */
-.modal-system-box {
-  background: var(--bg-gradient-jet);
-  border: 1px solid var(--jet);
-  border-radius: 14px;
-  padding: 20px;
-  margin-bottom: 15px;
-}
-
-.modal-system-title {
-  color: var(--white-2);
-  font-size: var(--fs-5);
-  font-weight: var(--fw-500);
-  margin-bottom: 15px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--jet);
-}
-
-.modal-system-item {
-  margin-bottom: 15px;
-}
-
-.modal-system-item:last-child {
-  margin-bottom: 0;
-}
-
-.modal-system-label {
-  color: var(--orange-yellow-crayola);
-  font-size: var(--fs-7);
-  font-weight: var(--fw-500);
-  margin-bottom: 5px;
-}
-
-.modal-system-desc {
-  color: var(--light-gray);
-  font-size: var(--fs-6);
-  line-height: 1.6;
 }
 
 /* Modal Systems Section (Accordion) */
@@ -1665,19 +1623,6 @@ main {
   border-radius: 4px;
   min-width: 45px;
   text-align: center;
-}
-
-.teamwork-label-problem {
-  background: var(--orange-yellow-crayola);
-  color: var(--smoky-black);
-}
-
-.teamwork-label-solution {
-  background: var(--orange-yellow-crayola);
-  color: var(--smoky-black);
-}
-
-.teamwork-label-result {
   background: var(--orange-yellow-crayola);
   color: var(--smoky-black);
 }
