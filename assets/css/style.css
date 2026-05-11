@@ -437,6 +437,53 @@ main {
 
 .contact-info address { font-style: normal; }
 
+.sidebar-downloads {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.sidebar-download-item { min-width: 100%; }
+
+.sidebar-download-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px;
+  background: var(--border-gradient-onyx);
+  border-radius: 10px;
+  border: 1px solid var(--jet);
+  transition: var(--transition-1);
+}
+
+.sidebar-download-link:hover {
+  border-color: var(--orange-yellow-crayola);
+}
+
+.sidebar-download-link .icon-box {
+  flex-shrink: 0;
+}
+
+.sidebar-download-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.sidebar-download-title {
+  color: var(--white-2);
+  font-size: var(--fs-7);
+  font-weight: var(--fw-400);
+}
+
+.sidebar-download-ext {
+  color: var(--light-gray-70);
+  font-size: var(--fs-8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 .social-list {
   display: flex;
   justify-content: flex-start;
@@ -1062,6 +1109,45 @@ main {
 }
 
 .project-item > a { width: 100%; }
+
+/* Featured project card */
+.project-hero { grid-column: 1 / -1; }
+
+/* Featured badge and tagline */
+.project-featured-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--orange-yellow-crayola);
+  color: var(--smoky-black);
+  font-size: var(--fs-7);
+  font-weight: var(--fw-600);
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+.project-featured-badge ion-icon {
+  font-size: 14px;
+}
+
+.project-featured-tagline {
+  margin-left: 10px;
+  margin-top: 6px;
+  color: var(--light-gray);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-300);
+  line-height: 1.5;
+}
+
+.project-featured .project-title {
+  font-size: var(--fs-4);
+  font-weight: var(--fw-500);
+}
 
 .project-img {
   position: relative;
