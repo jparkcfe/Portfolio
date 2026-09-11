@@ -823,6 +823,40 @@ main {
   cursor: pointer;
 }
 
+.tools-grid .tool-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+}
+
+.tools-grid .tool-icon :is(img, ion-icon) {
+  width: 28px;
+  height: 28px;
+  margin: 0;
+}
+
+.tools-grid .tools-item-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.tools-grid .tools-item-name {
+  display: block;
+  white-space: normal;
+}
+
+.tools-grid .tools-item-description {
+  display: block;
+  margin-top: 4px;
+  color: var(--light-gray-70);
+  font-size: var(--fs-8);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
 .tools-grid .tools-item .skill-level {
   font-size: var(--fs-8);
   padding: 2px 8px;
@@ -1260,6 +1294,8 @@ main {
 }
 
 .modal-content {
+  /* Keep the close button above the scrollable body. */
+  padding-top: 70px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1411,6 +1447,28 @@ main {
 .modal-info-table td {
   color: var(--light-gray);
   background: var(--eerie-black-1);
+}
+
+@media (max-width: 767px) {
+  .modal-info-table,
+  .modal-info-table tbody {
+    display: block;
+  }
+
+  .modal-info-table tr {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+  }
+
+  .modal-info-table th,
+  .modal-info-table td {
+    min-width: 0;
+  }
+
+  .modal-info-table td {
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
 }
 
 /* Modal Section */
@@ -1872,6 +1930,12 @@ main {
 .scroll-fab-group.visible {
   opacity: 1;
   visibility: visible;
+}
+
+@media (max-width: 580px) {
+  .scroll-fab-group {
+    display: none;
+  }
 }
 
 .scroll-fab {
