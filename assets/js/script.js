@@ -126,7 +126,7 @@ const projectData = {
       period: "2025.12 (6일)",
       note: "개인 프로젝트"
     },
-    overview: "성장·보상·재화 구조를 설계하고, 직접 플레이하며 후반 성장과 전투 흐름을 반복적으로 조정한 1인 제작 프로젝트입니다.",
+    overview: "성장·보상·재화 구조를 설계하고, 직접 플레이하며 후반 성장과 전투 흐름을 조정한 1인 개발 프로젝트입니다.",
     concept: [
       "<strong>3경로 성장 구조</strong>: 레벨업은 기본 성장, 상점은 원하는 스탯의 선택적 특화, 클리어 보상은 특수 능력을 통한 전략 확장으로 역할을 구분했습니다.",
       "<strong>특수 무기 역할 분리</strong>: 대미지 차이만 있던 무기 구성에 화상·슬로우·체인 등 고유 효과를 추가해 선택에 따라 플레이 방식이 달라지도록 조정했습니다.",
@@ -150,7 +150,7 @@ const projectData = {
       },
       {
         title: "상점 / 보상 구조",
-        why: "상점 업그레이드 비용과 웨이브 보상의 관계가 맞지 않으면 성장 선택의 의미가 약해질 수 있어, 보상과 비용의 관계를 함께 조정할 필요가 있었습니다.",
+        why: "초기에는 웨이브 보상에 비해 상점 업그레이드 비용이 높아, 플레이로 얻은 골드만으로 성장하기 어려웠습니다.",
         how: "상점 비용 증가율과 웨이브별 골드 보상을 여러 값으로 조정하며 플레이 과정에서 사용할 수 있는 성장 자원의 범위를 맞췄습니다.",
         what: "상점과 클리어 보상이 각자 다른 성장 선택으로 기능하도록 비용과 보상 구조를 조정했습니다."
       },
@@ -188,7 +188,7 @@ const projectData = {
 
   slaythespire: {
     overviewTitle: "분석 개요",
-    conceptTitle: "분석 포인트",
+    conceptTitle: "분석 기준",
     systemsTitle: "핵심 분석",
     title: "Slay the Spire — 코스트 체계 역기획서",
     tagline: "아이언클래드 공격 카드의 비용과 효과를 기준에 따라 비교하고, 비용 구조를 유형별로 정리",
@@ -204,21 +204,20 @@ const projectData = {
     overview: "Slay the Spire 아이언클래드의 공격 카드를 대상으로 기본 카드인 타격의 1코스트 / 6대미지를 기준선으로 두고, 카드별 대미지와 부가효과의 관계를 비교했습니다. 이후 비용 구조를 유형별로 분류하고, 구성 차이를 바탕으로 신규 카드안을 제안했습니다.",
     concept: [
       "<strong>기준선 설정</strong>: 타격의 1코스트 / 6대미지를 비교 기준으로 두고 공격 카드의 비용과 효과를 살펴봤습니다.",
-      "<strong>비용 구조 분류</strong>: 대미지와 부가효과, 조건, 시너지 등 카드가 비용을 사용하는 방식을 유형별로 정리했습니다.",
-      "<strong>구성 차이에서 신규 카드 제안</strong>: HP를 비용으로 사용하는 공격 카드의 구성 폭이 제한적인 점을 확인하고, 해당 유형에 새로운 선택지를 추가하는 카드안을 제안했습니다."
+      "<strong>비용 구조 분류</strong>: 대미지와 부가효과, 조건, 시너지 등 카드가 비용을 사용하는 방식을 유형별로 정리했습니다."
     ],
     systems: [
       {
         title: "비용 구조 분석",
         why: "카드마다 비용과 효과가 달라 동일한 기준에서 비교할 수 있는 출발점이 필요했습니다.",
         how: "기본 카드 타격의 1코스트 / 6대미지를 기준으로 카드의 대미지, 부가효과, 조건과 시너지 요소를 비교했습니다.",
-        what: "공격 카드가 비용을 사용하는 방식을 유형별로 정리하고 설계 패턴을 문서화했습니다."
+        what: "공격 카드의 비용 구조를 대미지와 부가효과, 조건, 시너지에 따라 5가지 유형으로 분류했습니다."
       },
       {
         title: "HP 소모 카드 제안",
-        why: "HP를 비용으로 직접 대미지를 얻는 공격 카드가 제한적이어서, 같은 비용 유형 안에서 리스크 수준을 선택할 여지가 적다고 판단했습니다.",
+        why: "HP를 비용으로 사용하는 공격 카드의 구성 폭이 제한적이어서, 해당 유형의 선택지를 넓히는 카드안을 검토했습니다.",
         how: "기존 HP 소모 카드와 2코스트 카드의 수치를 비교해, 2코스트 / 25대미지 / HP 4 소모의 신규 카드안 피의 계약을 제안했습니다.",
-        what: "기존 카드군과 비교해 제안값의 위치를 검토하고, 분석에서 신규 카드 제안까지의 과정을 문서화했습니다."
+        what: "기존 HP 소모 카드와 2코스트 공격 카드군을 비교해 제안값의 위치를 검토했습니다."
       }
     ],
     externalLinks: [
@@ -233,7 +232,7 @@ const projectData = {
 
   stellarblade: {
     overviewTitle: "분석 개요",
-    conceptTitle: "분석 포인트",
+    conceptTitle: "분석 기준",
     systemsTitle: "핵심 분석",
     title: "Stellar Blade — 방어 액션 시스템 역기획서",
     tagline: "4종 방어 액션의 대응 조건과 보상을 분석하고, 세키로·P의 거짓과 비교",
@@ -249,21 +248,20 @@ const projectData = {
     overview: "Stellar Blade의 회피, 패링, 블링크, 리펄스 4종 방어 액션을 대상으로 각각의 대응 조건과 성공 보상을 정리했습니다. 이후 세키로와 P의 거짓의 방어 구조를 비교해 작품별 선택 방식의 차이를 분석하고, 전투 상황과 UI에서 확인한 문제에 대한 개선안을 제안했습니다.",
     concept: [
       "<strong>방어 액션 비교</strong>: 4종 방어 액션이 어떤 공격에 대응하고 성공 시 어떤 보상을 제공하는지 비교했습니다.",
-      "<strong>유사 장르 비교</strong>: 세키로와 P의 거짓의 방어 구조를 함께 살펴보며 각 게임이 플레이어에게 요구하는 판단과 선택의 차이를 정리했습니다.",
-      "<strong>문제 발견과 개선안</strong>: 다수전에서의 피격 상황과 스킬트리 정보 전달 방식에 대해 개선 방향을 제안했습니다."
+      "<strong>유사 장르 비교</strong>: 세키로와 P의 거짓의 방어 구조를 함께 살펴보며 각 게임이 플레이어에게 요구하는 판단과 선택의 차이를 정리했습니다."
     ],
     systems: [
       {
         title: "방어 액션 구조 분석",
         why: "4종 방어 액션이 비슷한 회피 수단이 아니라, 공격 유형과 성공 보상에 따라 서로 다른 선택지로 기능하는지 확인하고자 했습니다.",
         how: "회피, 패링, 블링크, 리펄스의 사용 조건과 성공 시 발생하는 회피·반격 기회·에너지 획득 등의 보상을 비교했습니다.",
-        what: "공격 신호와 대응 액션, 성공 보상의 관계를 정리해 각 방어 방식의 역할 차이를 문서화했습니다."
+        what: "일반·노랑·파랑·보라 공격 신호에 따라 대응 액션이 나뉘고, 패리는 베타 에너지, 회피·블링크·리펄스는 버스트 에너지를 얻도록 보상이 분리된 구조를 확인했습니다."
       },
       {
         title: "비교 분석과 개선안",
-        why: "한 게임의 구조만 보는 것보다 유사 장르의 다른 방어 방식을 함께 비교하면 각 시스템의 선택과 트레이드오프를 더 명확히 볼 수 있다고 판단했습니다.",
-        how: "세키로와 P의 거짓의 방어 구조를 Stellar Blade와 비교하고, 다수전 피격 상황과 스킬트리 정보 전달에서 확인한 문제를 별도로 정리했습니다.",
-        what: "다수전 피격 상황에는 짧은 슬로우 연출을, 스킬트리에는 학습 순서를 더 명확하게 전달하는 UI 개선 방향을 제안했습니다."
+        why: "세키로·P의 거짓과 비교해, Stellar Blade가 여러 방어 선택지를 제공하면서도 색상 신호와 방어 실패 시 안전망으로 학습 부담을 낮추는 차이를 확인하고자 했습니다.",
+        how: "세 게임의 핵심 방어 방식, 실패 페널티, 성공 보상, 시각 신호를 비교하고, Stellar Blade의 다수전 피격 상황과 스킬트리 정보 전달 문제를 별도로 분석했습니다.",
+        what: "블링크·리펄스 성공 후 다른 적에게 피격돼 성공 피드백이 끊기는 상황에는 성공 직후 0.3~0.5초 적 슬로우를 제안했습니다. 스킬트리에서는 공격 계열이 먼저 노출돼 생존 스킬의 중요성이 가려지는 문제에 대해 생존 트리 우선 노출과 추천 표시를 제안했습니다."
       }
     ],
     externalLinks: [
@@ -339,20 +337,20 @@ const projectData = {
       period: "2025.03.17 — 2025.08.20",
       note: "NCA 장기과정 2기 쇼케이스 전시"
     },
-    overview: "플레이타임과 개발 제약을 기준으로 구현 범위를 조정하고, VR 상호작용을 보완하는 방향을 제안해 프로젝트에 반영했습니다.",
+    overview: "6인 팀에서 시스템 기획과 서브 PM을 맡았습니다. 초기 기획의 플레이타임과 제작 범위를 줄이는 방안을 제안하고, VR에서 직접 참여할 수 있는 상호작용 5종을 기획해 프로젝트에 반영했습니다.",
     concept: [
       "초기 피드백을 바탕으로 VR 레퍼런스를 조사하고, 플레이어가 직접 개입할 수 있는 상호작용 5종을 기획·제안해 프로젝트에 반영했습니다.",
-      "VR 초보 사용자도 상호작용 대상을 식별하기 쉽도록 윤곽선 강조, 관대한 판정, 자동 완성 방식 등을 적용했습니다.",
-      "플레이어의 사진을 게임 안에 반영하는 개인화 시스템을 기획해 엔딩 경험과 연결했습니다."
+      "VR 초보 사용자도 쉽게 조작할 수 있도록 상호작용 대상을 윤곽선으로 표시하고, 버스카드 퍼즐은 목표 위치의 인식 범위를 넓혀 조작 부담을 낮췄습니다.",
+      "플레이어가 업로드한 사진을 게임 안에 반영하는 기능을 기획해 엔딩 경험과 연결했습니다."
     ],
     target: {
       who: "반복되는 일상 속에서 무기력함을 느끼는 사람",
       what: [
-        "플레이어의 사진이 게임 속에 반영되는 개인화 경험",
+        "플레이어가 업로드한 사진이 게임 속에 등장하는 경험",
         "색을 되찾는 과정에서 시각적 변화가 발생하는 연출",
         "상호작용을 통해 이야기를 진행하는 경험"
       ],
-      why: "감정과 일상의 소중함을 다루는 이야기를 단순히 감상하는 방식이 아니라, 플레이어의 상호작용을 통해 진행하도록 구성하고자 했습니다.",
+      why: "감정과 일상의 소중함을 다루는 이야기를 단순히 감상하는 방식이 아니라, 플레이어가 직접 상호작용하고 자신의 사진을 마주하며, 게임 속 이야기를 자신의 이야기처럼 느낄 수 있도록 구성하고자 했습니다.",
       how: "VR + 인터랙티브 무비 + 게임 = 몰입형 VR 힐링 게임"
     },
     systems: [
@@ -362,23 +360,23 @@ const projectData = {
       },
       {
         title: "상호작용 강조 시스템",
-        how: "상호작용 대상과 다음 행동을 식별하기 쉽도록 윤곽선과 연계 대상 강조 피드백을 적용했습니다."
+        how: "상호작용 가능한 오브젝트에는 윤곽선을 표시해 무엇을 만질 수 있는지 알 수 있도록 했습니다."
       },
       {
         title: "버스 카드 퍼즐 시스템",
-        why: "플레이어가 직접 행동해 진행한다는 감각을 주되, 퍼즐 난도가 힐링 톤을 방해하지 않도록 조작 부담을 낮출 필요가 있었습니다.",
-        how: "카드 조각과 목적지를 가까운 위치에 배치하고 판정 범위를 넓혀, 조작 실패로 진행이 막히는 상황을 줄였습니다.",
+        why: "플레이어가 직접 행동해 진행한다는 감각을 주되, 조작 난이도가 게임의 흐름을 방해하지 않도록 난도를 낮출 필요가 있었습니다.",
+        how: "카드 조각과 목적지를 가까운 위치에 배치하고, 카드를 목표 위치에 놓을 때 인식되는 범위를 넓혀 조작 실패를 줄였습니다.",
         what: "카드를 목표 위치에 가져가면 자동으로 완성되도록 구성해 상호작용 과정은 유지하면서 진행 부담을 낮췄습니다."
       },
       {
         title: "사진 업로드 & 입체화 시스템",
-        how: "플레이어가 업로드한 사진을 게임 속 요소로 반영해 개인화된 엔딩 경험을 구성하고자 했습니다."
+        how: "플레이어가 업로드한 사진이 엔딩에 등장하도록 기획해, 게임 속 이야기를 자신의 이야기처럼 느낄 수 있도록 했습니다."
       }
     ],
     teamwork: [
       {
         title: "상호작용 기획 추가",
-        problem: "“상호작용이 적고 보는 것 위주라 VR 장점이 부족하다”는 피드백",
+        problem: "“상호작용이 적고 보는 것 위주라 VR로 할 필요가 없다”는 피드백",
         solution: "VR 레퍼런스를 조사하고 버스카드 퍼즐, 창문 낙서, 버스 태그, 사진 업로드, 사진 감상 등 상호작용 5종을 기획·제안했습니다.",
         result: "제안한 상호작용 5종이 프로젝트에 반영됐습니다."
       },
@@ -389,9 +387,9 @@ const projectData = {
         result: "팀 합의로 맵을 7개에서 5개로 줄이고 NPC를 제외했으며, 최종 플레이타임을 8~9분으로 조정했습니다."
       },
       {
-        title: "기술 제약 대응",
+        title: "Meta Quest 환경에 맞춘 전환 연출 변경",
         problem: "기존에 계획한 전환 연출을 Meta Quest 환경에서 구현하기 어려워 대안을 검토해야 했습니다.",
-        solution: "기획 의도의 핵심을 '변화를 직접 체험하는 감각'으로 정리하고, 기존 전환 방식 대신 2D에서 3D로 변화하는 연출을 대안으로 제안했습니다.",
+        solution: "기존 전환 연출에서 유지해야 할 핵심을 2D 화면에서 3D 공간으로 넘어가는 변화로 정리하고, Meta Quest에서 구현 가능한 전환 연출을 대안으로 제안했습니다.",
         result: "팀 합의를 거쳐 대안 연출을 적용했습니다."
       }
     ],
@@ -472,34 +470,35 @@ const projectBtns = document.querySelectorAll("[data-project-btn]");
 
 // Generate modal content HTML
 function generateModalContent(project) {
+  const isAnalysis = project === projectData.slaythespire || project === projectData.stellarblade;
+  const teamworkFirst = project === projectData.maeil;
   let systemsHTML = '';
   if (project.systems && project.systems.length > 0) {
     systemsHTML = `
       <div class="modal-section modal-systems">
         <h3 class="modal-section-title">${project.systemsTitle || "핵심 시스템"}</h3>
-        ${project.systems.map((system, index) => `
+        ${project.systems.map(system => `
           <details class="system-episode">
             <summary class="system-summary">
-              <span class="system-episode-num">System ${index + 1}</span>
               <span class="system-episode-title">${system.title}</span>
               <span class="system-toggle-icon"></span>
             </summary>
             <div class="system-content">
 ${system.why ? `
               <div class="system-step">
-                <span class="system-label">Why</span>
+                <span class="system-label">${isAnalysis ? "분석 목적" : "배경"}</span>
                 <p class="system-text">${system.why}</p>
               </div>
               ` : ''}
 ${system.how ? `
               <div class="system-step">
-                <span class="system-label">How</span>
+                <span class="system-label">${isAnalysis ? "분석 방법" : "설계·조정"}</span>
                 <p class="system-text">${system.how}</p>
               </div>
               ` : ''}
 ${system.what ? `
               <div class="system-step">
-                <span class="system-label">What</span>
+                <span class="system-label">${isAnalysis ? "발견·제안" : "적용"}</span>
                 <p class="system-text">${system.what}</p>
               </div>
               ` : ''}
@@ -515,10 +514,9 @@ ${system.what ? `
     teamworkHTML = `
       <div class="modal-section modal-teamwork">
         <h3 class="modal-section-title">팀 협업 사례</h3>
-        ${project.teamwork.map((episode, index) => `
+        ${project.teamwork.map(episode => `
           <details class="teamwork-episode">
             <summary class="teamwork-summary">
-              <span class="teamwork-episode-num">Episode ${index + 1}</span>
               <span class="teamwork-episode-title">${episode.title}</span>
               <span class="teamwork-toggle-icon"></span>
             </summary>
@@ -528,7 +526,7 @@ ${system.what ? `
                 <p class="teamwork-text">${episode.problem}</p>
               </div>
               <div class="teamwork-step">
-                <span class="teamwork-label">해결</span>
+                <span class="teamwork-label">대응</span>
                 <p class="teamwork-text">${episode.solution}</p>
               </div>
               <div class="teamwork-step">
@@ -613,22 +611,18 @@ ${system.what ? `
         <h3 class="modal-section-title">기획 방향</h3>
         <div class="modal-3w1h">
           <div class="modal-3w1h-item">
-            <h4 class="modal-3w1h-label">Who</h4>
+            <h4 class="modal-3w1h-label">대상 플레이어</h4>
             <ul class="modal-3w1h-list"><li>${project.target.who}</li></ul>
           </div>
           <div class="modal-3w1h-item">
-            <h4 class="modal-3w1h-label">What</h4>
+            <h4 class="modal-3w1h-label">핵심 경험</h4>
             <ul class="modal-3w1h-list">${whatItems}</ul>
           </div>
           ${project.target.why ? `
           <div class="modal-3w1h-item">
-            <h4 class="modal-3w1h-label">Why</h4>
+            <h4 class="modal-3w1h-label">기획 의도</h4>
             <ul class="modal-3w1h-list"><li>${project.target.why}</li></ul>
           </div>` : ''}
-          <div class="modal-3w1h-item">
-            <h4 class="modal-3w1h-label">How</h4>
-            <ul class="modal-3w1h-list"><li>${project.target.how}</li></ul>
-          </div>
         </div>
       </div>
     `;
@@ -720,15 +714,16 @@ ${system.what ? `
     </div>
 
     <div class="modal-section">
-      <h3 class="modal-section-title">${project.conceptTitle || "컨셉 키워드"}</h3>
+      <h3 class="modal-section-title">${project.conceptTitle || "핵심 기획"}</h3>
       <ul class="modal-list">
         ${project.concept.map(item => `<li>${item}</li>`).join('')}
       </ul>
     </div>
 
+    ${teamworkFirst ? teamworkHTML : ''}
     ${targetHTML}
     ${systemsHTML}
-    ${teamworkHTML}
+    ${teamworkFirst ? '' : teamworkHTML}
     ${videosHTML}
   `;
 }

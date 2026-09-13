@@ -565,6 +565,14 @@ main {
 
 .about-text p { margin-bottom: 15px; }
 
+.about-text .slogan { word-break: keep-all; }
+
+.about-principle-list { padding-left: 16px; }
+
+.about-principle-list > li { list-style: disc outside; }
+
+.about-principle-list > li + li { margin-top: 6px; }
+
 
 /* Slogan */
 .slogan {
@@ -677,6 +685,35 @@ main {
   font-weight: var(--fw-300);
   line-height: 1.6;
 }
+
+.experience-detail-list {
+  margin-top: 8px;
+  padding-left: 18px;
+  color: var(--light-gray);
+  font-weight: var(--fw-300);
+  line-height: 1.6;
+}
+
+.experience-detail-item { list-style: disc outside; }
+
+.experience-detail-item + .experience-detail-item { margin-top: 10px; }
+
+.experience-detail-title {
+  display: block;
+  font-weight: var(--fw-600);
+}
+
+.education-detail-list {
+  margin-top: 8px;
+  padding-left: 18px;
+  color: var(--light-gray);
+  font-weight: var(--fw-300);
+  line-height: 1.6;
+}
+
+.education-detail-item { list-style: disc outside; }
+
+.education-detail-item + .education-detail-item { margin-top: 10px; }
 
 .timeline-highlight {
   display: block;
