@@ -114,6 +114,42 @@ for (let i = 0; i < navigationLinks.length; i++) {
 
 // Project Modal Data
 const projectData = {
+  puzzledungeon: {
+    title: "퍼즐 던전",
+    tagline: "환경 단서로 해법을 유도한 퍼즐 던전",
+    summarySections: [
+      {
+        title: "프로젝트 개요",
+        text: "환경 단서를 관찰해 규칙을 추론하고, 기믹을 직접 조작해 탈출하도록 설계·구현한 방탈출형 퍼즐 던전입니다."
+      },
+      {
+        title: "작업 범위",
+        items: ["던전 기획", "기믹 구현", "직접 플레이 확인"]
+      },
+      {
+        title: "핵심 설계",
+        items: [
+          "환경 단서 → 규칙 추론 → 행동으로 이어지는 플레이 흐름",
+          "버튼 A/B 상태와 돌기둥·출구의 상태 연동",
+          "철판을 이용한 가시함정 파훼"
+        ]
+      },
+      {
+        title: "문제 해결/개선",
+        items: [
+          "기믹 기능 스폰 범위 문제를 추적·수정",
+          "왕복 발판 방식에서 환경 요소를 직접 활용하는 방식으로 변경"
+        ]
+      }
+    ],
+    externalLinks: [
+      {
+        title: "기획서 PDF 보기",
+        url: "./assets/docs/퍼즐 던전 콘텐츠 기획서_박진.pdf",
+        icon: "document-text-outline"
+      }
+    ]
+  },
   roguelike: {
     title: "Undead Survivor: Farmer's Fury",
     tagline: "Unity 기반 2D 로그라이트 1인 기획·개발",
@@ -647,7 +683,7 @@ ${system.what ? `
   }
 
   // 웹소설의 경우 엔진/도구 행 제거
-  const showEngine = project.info.engine && project.info.engine !== "-";
+  const showEngine = project.info && project.info.engine && project.info.engine !== "-";
 
   // 프로젝트별 개요 제목, 기본값은 '게임 개요'
   const overviewTitle = project.overviewTitle || "게임 개요";
@@ -676,7 +712,7 @@ ${system.what ? `
         <td>${project.info.note}</td>
       </tr>
     </table>`;
-  } else {
+  } else if (project.info) {
     infoTableHTML = `
     <table class="modal-info-table">
       <tr>
@@ -706,6 +742,13 @@ ${system.what ? `
 
     ${modalImageHTML}
 
+    ${project.summarySections ? project.summarySections.map(section => `
+    <div class="modal-section">
+      <h3 class="modal-section-title">${section.title}</h3>
+      ${section.text ? `<p class="modal-text">${section.text}</p>` : ''}
+      ${section.items ? `<ul class="modal-list">${section.items.map(item => `<li>${item}</li>`).join('')}</ul>` : ''}
+    </div>
+    `).join('') : `
     ${infoTableHTML}
 
     <div class="modal-section">
@@ -719,6 +762,8 @@ ${system.what ? `
         ${project.concept.map(item => `<li>${item}</li>`).join('')}
       </ul>
     </div>
+
+    `}
 
     ${teamworkFirst ? teamworkHTML : ''}
     ${targetHTML}
