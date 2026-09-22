@@ -117,6 +117,7 @@ const projectData = {
   puzzledungeon: {
     title: "퍼즐 던전",
     tagline: "환경 단서로 해법을 유도한 퍼즐 던전",
+    modalImage: "./assets/images/project-puzzledungeon.png",
     summarySections: [
       {
         title: "프로젝트 개요",
