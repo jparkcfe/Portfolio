@@ -1220,6 +1220,13 @@ main {
   font-weight: var(--fw-500);
 }
 
+/* New project highlight */
+.project-new .project-img {
+  box-shadow: 0 0 0 2px var(--orange-yellow-crayola), 0 0 24px hsla(45, 100%, 72%, 0.25);
+}
+
+.project-new-badge { letter-spacing: 1px; }
+
 .project-img {
   position: relative;
   width: 100%;
